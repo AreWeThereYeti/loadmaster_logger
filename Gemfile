@@ -7,6 +7,9 @@ require 'mongo'
 gem 'rails', '4.0.0.rc1'
 gem "mongo_mapper"
 
+gem 'mongoid', '< 3.0.0'
+gem "bson_ext"
+gem "bcrypt-ruby", :require => "bcrypt"
 
 # Use SCSS for stylesheets
 #gem 'sass-rails', '~> 4.0.0.rc1'
