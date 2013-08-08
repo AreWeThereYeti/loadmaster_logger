@@ -1,14 +1,16 @@
-source 'http://gemcutter.org'
+source 'http://rubygems.org/'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 require 'rubygems'
-require 'mongo'
+#require 'mongo'
 
-gem 'rails', '4.0.0.rc1'
+gem 'rails', '4.0.0'
 gem "mongo_mapper"
 
-gem 'mongoid', '< 3.0.0'
-gem "bson_ext"
+gem 'mongoid', github: 'mongoid/mongoid'
+#gem 'mongoid', git: 'https://github.com/mongoid/mongoid.git'
+#gem "bson", "~> 1.9.1"
+#gem 'bson_ext', '~> 1.8.6'
 gem "bcrypt-ruby", :require => "bcrypt"
 
 # Use SCSS for stylesheets
