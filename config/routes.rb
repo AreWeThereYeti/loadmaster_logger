@@ -1,4 +1,6 @@
 LoadmasterLogger::Application.routes.draw do
+  resources :trips
+
   resources :users
 
   resources :homes
