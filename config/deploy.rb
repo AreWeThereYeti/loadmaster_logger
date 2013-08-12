@@ -1,5 +1,6 @@
 require 'capistrano/ext/multistage'
 require "rvm/capistrano"
+require "bundler/capistrano"
 
 set :application, "loadmaster_logger"
 set :repository,  "set your repository location here"
