@@ -11,7 +11,7 @@ gem 'mongoid', github: 'mongoid/mongoid'
 #gem 'mongoid', git: 'https://github.com/mongoid/mongoid.git'
 #gem "bson", "~> 1.9.1"
 #gem 'bson_ext', '~> 1.8.6'
-gem "bcrypt-ruby", :require => "bcrypt"
+#gem "bcrypt-ruby", :require => "bcrypt"
 
 # Use SCSS for stylesheets
 #gem 'sass-rails', '~> 4.0.0.rc1'
