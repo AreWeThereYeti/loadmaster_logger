@@ -24,10 +24,14 @@ set :rails_env, "production"
 
 # Passenger
 namespace :deploy do
-  task :start do 
-     puts '!starting app!'
-     run "rails s -e production"
+  task :start ; do 
   end
+  
+  task :start_rails do
+    puts '!starting app!'
+    run "rails s -e production"
+  end
+  
   task :stop do ; end
   task :restart, :roles => :app, :except => { :no_release => true } do
     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
