@@ -9,7 +9,8 @@ gem "mongo_mapper"
 
 gem 'mongoid', github: 'mongoid/mongoid'
 #gem 'mongoid', git: 'https://github.com/mongoid/mongoid.git'
-#gem "bson", "~> 1.9.1"
+#gem "bson", "~> 1.8.6"
+
 #gem 'bson_ext', '~> 1.8.6'
 #gem "bcrypt-ruby", :require => "bcrypt"
 

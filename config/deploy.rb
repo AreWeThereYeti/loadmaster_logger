@@ -14,8 +14,10 @@ set :user, "sprotte"
 set :stages, ["staging", "production"]
 set :default_stage, "staging"
 
-#default_run_options[:pty] = true
+default_run_options[:pty] = true
 
 set :use_sudo, false
 
 load 'deploy/assets'
+
+set :rails_env, "production"
