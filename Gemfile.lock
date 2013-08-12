@@ -139,6 +139,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootstrap-rails-engine
+  execjs
   jbuilder (~> 1.0.1)
   jquery-rails
   less
