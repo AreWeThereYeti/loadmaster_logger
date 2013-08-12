@@ -22,20 +22,14 @@ load 'deploy/assets'
 
 set :rails_env, "production"
 
-# Passenger
-namespace :deploy do
-  task :start do ; end
-  
-  task :start_rails do
-    puts '!starting app!'
-    run "rails s -e production"
-  end
-  
-  task :stop do ; end
-  task :restart, :roles => :app, :except => { :no_release => true } do
-    run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
-  end
+set :deploy_via, :remote_cache
 
+# Passenger
+namespace :passenger do
+  desc "Restart Application"
+  task :restart do
+    run "touch #{current_path}/tmp/restart.txt"
+  end
 end
 
-after "deploy", "deploy:start_rails" 
+after "deploy", "passenger:restart" 
