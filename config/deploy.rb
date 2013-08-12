@@ -24,8 +24,7 @@ set :rails_env, "production"
 
 # Passenger
 namespace :deploy do
-  task :start ; do 
-  end
+  task :start do ; end
   
   task :start_rails do
     puts '!starting app!'
