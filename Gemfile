@@ -44,6 +44,9 @@ gem 'bootstrap-rails-engine'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.0.1'
 
+gem 'devise', '3.0.0.rc'
+gem 'cancan', '~> 1.6.10'
+
 group :assets do
   gem 'less'
 end
