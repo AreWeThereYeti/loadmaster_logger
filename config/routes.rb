@@ -1,4 +1,5 @@
 LoadmasterLogger::Application.routes.draw do
+  get "users/index"
   devise_for :users
   resources :trips
 
@@ -9,6 +10,11 @@ LoadmasterLogger::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root :to => 'home#index'
+  
+  namespace :admin do
+  	get '/' => 'users#index'
+  	resources :users
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

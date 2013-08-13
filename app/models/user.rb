@@ -1,6 +1,9 @@
 class User
   include Mongoid::Document
   ## Database authenticatable
+  
+  has_and_belongs_to_many :roles
+  
   field :email,              :type => String, :default => ""
   field :encrypted_password, :type => String, :default => ""
   
