@@ -1,8 +1,6 @@
 LoadmasterLogger::Application.routes.draw do
   resources :trips
 
-  resources :users
-
   resources :homes
 
   # The priority is based upon order of creation: first created -> highest priority.
