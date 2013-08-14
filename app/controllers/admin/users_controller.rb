@@ -1,10 +1,8 @@
 class Admin::UsersController < ApplicationController
-  #load_and_authorize_resource
+  load_and_authorize_resource except: [:create]
   # GET /users
   # GET /users.json
   def index
-    
-    puts 'yes yes'
     @users = User.all
 
     respond_to do |format|
@@ -42,15 +40,18 @@ class Admin::UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user.attributes = params[:user]
-    @user.role_ids = params[:user][:role_ids] if params[:user]
-    @user = User.new(params[:user])
+    puts '---- creating new user ------'
+    @user = params[:user]
+    @user[:role_ids] = params[:user][:role_ids] if params[:user]
+    @user = User.new(user_params)
     respond_to do |format|
       if @user.save
         flash[:notice] = flash[:notice].to_a.concat @user.errors.full_messages
         format.html { redirect_to admin_users_path, :notice => 'User was successfully created.' }
         format.json { render :json => @user, :status => :created, :location => @user }
       else
+        puts 'save error'
+        puts @user.errors.full_messages
         flash[:notice] = flash[:notice].to_a.concat @user.errors.full_messages
         format.html { render :action => "new"}
         format.json { render :json => @user.errors, :status => :unprocessable_entity }
@@ -64,11 +65,14 @@ class Admin::UsersController < ApplicationController
     @user = User.find(params[:id])
     if params[:user][:password].blank?
         params[:user].delete(:password)
-        params[:user].delete(:password_confirmation)
     end
  
     respond_to do |format|
-      if @user.update_attributes(params[:user])
+      puts 'user params:'
+      puts user_params
+      puts 'user params role:'
+      puts user_params[:role_ids]
+      if @user.update_attributes(user_params)
         format.html { redirect_to admin_users_path, :notice => 'User was successfully updated.' }
         format.json { head :ok }
       else
@@ -89,4 +93,20 @@ class Admin::UsersController < ApplicationController
       format.json { head :ok }
     end
   end
+  
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_user
+      @user = User.find(params[:id])
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def user_params
+      params.require(:user).permit(
+        :email,
+        :password,
+        :password_confirmation,
+        # roles_attributes:[:role_ids],
+        :role_ids => [])
+    end
 end

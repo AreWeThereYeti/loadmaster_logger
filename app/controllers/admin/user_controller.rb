@@ -42,7 +42,7 @@ class Admin::UsersController < Admin::AdminController
   # POST /users
   # POST /users.json
   def create
-    @user.attributes = params[:user]
+    @user = params[:user]
     @user.role_ids = params[:user][:role_ids] if params[:user]
     @user = User.new(params[:user])
     respond_to do |format|

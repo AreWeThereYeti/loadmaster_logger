@@ -18,11 +18,11 @@
   </div>
 </div>
 
-<% for role in Role.find(:all) %> 
+<% for role in Role.all %> 
   <div class ="control-group">
    <%= f.label role.name , :class => 'control-label' %>
       <div class="controls">
-        <%= check_box_tag "user[role_ids][]", role.id, @user.roles.include?(role) %> 
+        <%= check_box_tag "user[role_ids][]", role.id %> 
       </div> 
   </div>
 <% end %>

@@ -4,5 +4,4 @@ class Role
   has_and_belongs_to_many :users
   field :name,              :type => String, :default => ""
   
-  
 end
