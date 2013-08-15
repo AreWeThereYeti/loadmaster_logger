@@ -6,7 +6,35 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-# User.new({ 
-#   :username => 'admin', 
-#   :password => 'admin'
-# }).save
+Role.new({ 
+  :name => 'Admin'
+}).save
+
+Role.new({ 
+  :name => 'Hauler'
+}).save
+
+Role.new({ 
+  :name => 'MobileDevice'
+}).save
+
+User.new({ 
+  :email => 'admin@loadmaster.dk', 
+  :password => 'loadmaster',
+  :password_confirmation => 'loadmaster',
+  :role_ids => [Role.find_by(:name => :Admin).id]
+}).save
+
+User.new({ 
+  :email => 'hauler@loadmaster.dk', 
+  :password => 'loadmaster',
+  :password_confirmation => 'loadmaster',
+  :role_ids => [Role.find_by(:name => :Hauler).id]
+}).save
+
+User.new({ 
+  :email => 'mobile@loadmaster.dk', 
+  :password => 'loadmaster',
+  :password_confirmation => 'loadmaster',
+  :role_ids => [Role.find_by(:name => :MobileDevice).id]
+}).save
