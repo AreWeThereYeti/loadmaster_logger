@@ -20,4 +20,8 @@ class ApplicationController < ActionController::Base
     redirect_to root_url, :alert => exception.message
   end
   
+  def unauthorized_ressource_redirect
+    redirect_to root_url, :alert => "You are not authorized to access this ressource"
+  end
+  
 end

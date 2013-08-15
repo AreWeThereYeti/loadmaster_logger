@@ -2,7 +2,8 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    user ||= User.new # guest user
+    user ||= User.new # guest user (not logged in)
+    
     if defined?(user.role_ids[0])
       if user.role? :admin, user.role_ids[0]
         puts 'Role is admin!!!!!'
