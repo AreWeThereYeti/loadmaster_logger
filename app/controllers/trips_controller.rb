@@ -1,19 +1,6 @@
 class TripsController < ApplicationController
   before_action :set_trip, only: [:show, :edit, :update, :destroy]
 
-  before_filter :verify_user
-
-  def verify_user
-    :authenticate_user!
-    if current_user
-      unless current_user.role?(:admin,current_user.role_ids[0]) || current_user.role?(:hauler,current_user.role_ids[0]) 
-        unauthorized_ressource_redirect
-      end
-    else
-      unauthorized_ressource_redirect
-    end
-  end
-
   # GET /trips
   # GET /trips.json
   def index

@@ -2,21 +2,10 @@ class Admin::UsersController < ApplicationController
   load_and_authorize_resource except: [:create]
   
   layout "admin"
-  before_filter :verify_admin
-
-  def verify_admin
-    :authenticate_user!
-    redirect_to root_url, :alert => "You are not authorized to access this ressource" unless current_user.role? :admin, current_user.role_ids[0]
-  end
-
-  # def current_ability
-  #   @current_ability ||= AdminAbility.new(current_user)
-  # end
   
   # GET /users
   # GET /users.json
   def index
-    puts '----user controller index loading-------'
     @users = User.all
 
     respond_to do |format|

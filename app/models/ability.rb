@@ -3,17 +3,13 @@ class Ability
 
   def initialize(user)
     user ||= User.new # guest user (not logged in)
-    
     if defined?(user.role_ids[0])
       if user.role? :admin, user.role_ids[0]
-        puts 'Role is admin!!!!!'
         can :manage, :all
       elsif user.role? :hauler, user.role_ids[0]
-        puts 'Role is hauler!!!!!'
-        can :read, :all
+        can :manage, :Trip
       else
-        puts 'Role is mobiledevice!!!!!'
-        can :read, :all
+        can :manage, :Trip
       end
     end
     # Define abilities for the passed in user here. For example:
