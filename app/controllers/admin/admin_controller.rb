@@ -4,7 +4,7 @@ class Admin::AdminController < ApplicationController
 
   def verify_admin
     :authenticate_user!
-    redirect_to root_url unless has_role?(current_user, 'admin')
+    redirect_to root_url, :alert => "You are not authorized to access this ressource" unless current_user.role? :admin, current_user.role_ids[0]
   end
 
   def current_ability

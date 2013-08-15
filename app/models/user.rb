@@ -47,18 +47,11 @@ class User
 
   before_save :setup_role
 
-  def role?(role)
-      if Role.find_by(:name => role.to_s.camelize)
-        puts 'found docs with role: ' + role.to_s
-        return role
-      else
-        puts 'did not find any documents with role: ' + role.to_s
-        return false
-      end
-      #return !!self.roles.find_by(:name => role.to_s.camelize)
+  def role?(role,role_id)
+    return Role.find_by(:name => role.to_s.camelize).id == role_id
   end
 
-  # Default role is "Registered"
+  # Default role is "Hauler"
   def setup_role
     if self[:role_ids].nil? || self[:role_ids].empty?  
       self[:role_ids] = [Role.find_by(:name => "Hauler").id]
