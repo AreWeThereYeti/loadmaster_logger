@@ -2,16 +2,15 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    puts 'initializing user'
     user ||= User.new # guest user
     if user.role? :admin, user.role_ids[0]
-      puts 'this was admin!!!!!'
+      puts 'Role is admin!!!!!'
       can :manage, :all
     elsif user.role? :hauler, user.role_ids[0]
-      puts 'this was hauler!!!!!'
+      puts 'Role is hauler!!!!!'
       can :read, :all
     else
-      puts 'this was mobiledevice!!!!!'
+      puts 'Role is mobiledevice!!!!!'
       can :read, :all
     end
     # Define abilities for the passed in user here. For example:
