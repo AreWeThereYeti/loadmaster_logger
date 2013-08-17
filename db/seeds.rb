@@ -19,13 +19,15 @@ Role.new({
 }).save
 
 User.new({ 
-  :email => 'admin@loadmaster.dk', 
+  :username => 'admin', 
+  :email => 'admin@loadmaster.dk',
   :password => 'loadmaster',
   :password_confirmation => 'loadmaster',
   :role_ids => [Role.find_by(:name => :Admin).id]
 }).save
 
 User.new({ 
+  :username => 'hauler', 
   :email => 'hauler@loadmaster.dk', 
   :password => 'loadmaster',
   :password_confirmation => 'loadmaster',
@@ -33,7 +35,8 @@ User.new({
 }).save
 
 User.new({ 
-  :email => 'mobile@loadmaster.dk', 
+  :username => 'mobile', 
+  :email => '',
   :password => 'loadmaster',
   :password_confirmation => 'loadmaster',
   :role_ids => [Role.find_by(:name => :MobileDevice).id]

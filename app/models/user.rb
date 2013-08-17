@@ -5,8 +5,10 @@ class User
   has_and_belongs_to_many :roles
   accepts_nested_attributes_for :roles
   
-  field :email,              :type => String, :default => ""
+  field :username,           :type => String, :default => ""
+  field :email,              :type => String, :default => "" 
   field :encrypted_password, :type => String, :default => ""
+  field :login
   
   ## Recoverable
   field :reset_password_token,   :type => String
@@ -21,6 +23,8 @@ class User
   field :last_sign_in_at,    :type => Time
   field :current_sign_in_ip, :type => String
   field :last_sign_in_ip,    :type => String
+  
+  field :devices,           :type => Array
 
   ## Confirmable
   # field :confirmation_token,   :type => String
@@ -40,12 +44,16 @@ class User
   # :lockable, :timeoutable and :omniauthable
   
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable, :authentication_keys => [:login]
   
   # Roles
   field :role_ids, :type => Array
 
   before_save :setup_role
+  
+  def email_required?
+    false
+  end
 
   def role?(role,role_id)
     return Role.find_by(:name => role.to_s.camelize).id == role_id
@@ -57,4 +65,25 @@ class User
       self[:role_ids] = [Role.find_by(:name => "Hauler").id]
     end
   end
+  
+  def self.find_first_by_auth_conditions(warden_conditions)
+    conditions = warden_conditions.dup
+    if login = conditions.delete(:login)
+      self.any_of({ :username =>  /^#{Regexp.escape(login)}$/i }, { :email =>  /^#{Regexp.escape(login)}$/i }).first
+    else
+      super
+    end
+  end
+  
+  def self.find_for_database_authentication(warden_conditions)
+    puts 'this ran!!!'
+    conditions = warden_conditions.dup
+    if login = conditions.delete(:login).downcase
+      puts 'finding stuff'
+      where(conditions).where('$or' => [ {:username => /^#{Regexp.escape(login)}$/i}, {:email => /^#{Regexp.escape(login)}$/i} ]).first
+    else
+      where(conditions).first
+    end
+  end
+  
 end

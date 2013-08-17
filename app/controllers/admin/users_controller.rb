@@ -43,7 +43,6 @@ class Admin::UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    puts '---- creating new user ------'
     @user = params[:user]
     @user[:role_ids] = params[:user][:role_ids] if params[:user]
     @user = User.new(user_params)
@@ -106,6 +105,7 @@ class Admin::UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(
+        :username,
         :email,
         :password,
         :password_confirmation,
