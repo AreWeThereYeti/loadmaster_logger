@@ -14,4 +14,6 @@ class Trip
   field :costumer, type: String
   field :commentary, type: String
   
+  field :access_token, type: String
+  
 end

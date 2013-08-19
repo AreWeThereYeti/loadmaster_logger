@@ -72,7 +72,6 @@ class TripsController < ApplicationController
       params.require(:trip).permit(
         :license_plate,
         :device_id,
-        :license_plate,
         :cargo,
         :start_location,
         :start_address, 

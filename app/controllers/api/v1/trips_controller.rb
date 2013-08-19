@@ -12,12 +12,54 @@ module Api
       #   end
       # end
       
-      before_filter :authenticate_user!, except: :index
+      before_filter :authenticate_user!, except: [:index,:create]  #overwrite devise and cancan auth
+      before_filter :restrict_access
       
       respond_to :json
       
       def index
         respond_with Trip.all
+      end
+      
+      def create
+        @trip = Trip.new(trip_params)
+        respond_to do |format|
+          if @trip.save
+            format.json { render json: 'success', status: :created, location: @trip }
+          else
+            format.json { render json: @trip.errors, status: :unprocessable_entity }
+          end
+        end
+      end
+      
+      
+      private
+        
+      def restrict_access
+        # request with header:
+        # authenticate_or_request_with_http_token do |token, options|
+        #   ApiKey.where(access_token: token).exists?
+        # end
+        
+        # as url query: e.g http://localhost:3000/api/v1/trips?access_token={api_key}
+        head :unauthorized unless ApiKey.where(access_token: params[:access_token]).exists?
+      end
+      
+      # Never trust parameters from the scary internet, only allow the white list through.
+      def trip_params
+        params.require(:trip).permit(
+          :license_plate,
+          :device_id,
+          :cargo,
+          :start_location,
+          :start_address, 
+          :end_location,
+          :end_address,
+          :start_timestamp,
+          :end_timestamp,
+          :weight,
+          :costumer,
+          :commentary)
       end
     
     end
