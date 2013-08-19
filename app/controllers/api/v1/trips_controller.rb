@@ -24,6 +24,7 @@ module Api
       def create
         @trip = Trip.new(trip_params)
         respond_to do |format|
+          format.json { render json: 'Please fill out all required fields', status: :unprocessable_entity } unless check_required_params(params[:trip])
           if @trip.save
             format.json { render json: 'success', status: :created, location: @trip }
           else
@@ -60,6 +61,14 @@ module Api
           :weight,
           :costumer,
           :commentary)
+      end
+      
+      def check_required_params(trip)
+        if trip.has_key?('license_plate') && trip.has_key?('cargo') && trip.has_key?('start_location') && trip.has_key?('end_location') && trip.has_key?('start_timestamp') && trip.has_key?('end_timestamp')
+          true
+        else
+          false
+        end
       end
     
     end

@@ -34,6 +34,14 @@ class Admin::UsersController < ApplicationController
       format.json { render :json => @user }
     end
   end
+  
+  def new_mobile
+    @user = User.new
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render :json => @user }
+    end
+  end
 
   # GET /users/1/edit
   def edit
@@ -46,6 +54,7 @@ class Admin::UsersController < ApplicationController
     @user = params[:user]
     @user[:role_ids] = params[:user][:role_ids] if params[:user]
     @user = User.new(user_params)
+    
     respond_to do |format|
       if @user.save
         flash[:notice] = flash[:notice].to_a.concat @user.errors.full_messages
@@ -56,6 +65,28 @@ class Admin::UsersController < ApplicationController
         puts @user.errors.full_messages
         flash[:notice] = flash[:notice].to_a.concat @user.errors.full_messages
         format.html { render :action => "new"}
+        format.json { render :json => @user.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+  
+  def create_mobile
+    @user = params[:user]
+    @user[:role_ids] = Role.where(:name=>'MobileDevice').first.id
+    @user[:password]="mobilepassword"
+    @user[:password_confirmation]="mobilepassword"
+    @user = User.new(user_params)
+    
+    respond_to do |format|
+      if @user.save
+        flash[:notice] = flash[:notice].to_a.concat @user.errors.full_messages
+        format.html { redirect_to admin_users_path, :notice => 'User was successfully created.' }
+        format.json { render :json => @user, :status => :created, :location => @user }
+      else
+        puts 'save error'
+        puts @user.errors.full_messages
+        flash[:notice] = flash[:notice].to_a.concat @user.errors.full_messages
+        format.html { render :action => "new_mobile"}
         format.json { render :json => @user.errors, :status => :unprocessable_entity }
       end
     end
@@ -109,7 +140,8 @@ class Admin::UsersController < ApplicationController
         :email,
         :password,
         :password_confirmation,
-        # roles_attributes:[:role_ids],
+        :access_token,
         :role_ids => [])
     end
+
 end

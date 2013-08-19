@@ -1,0 +1,3 @@
+<%= form_for [:admin, @user], :url => '/admin/form_mobile', :html => { :class => :form } do |f| -%>
+  <%= render :partial => "mobile_form", :locals => {:f => f} %>
+<% end -%>

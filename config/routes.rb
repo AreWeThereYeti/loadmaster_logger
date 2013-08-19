@@ -13,6 +13,8 @@ LoadmasterLogger::Application.routes.draw do
   
   namespace :admin do
   	get '/' => 'users#index'
+  	get '/new_mobile' => 'users#new_mobile'
+  	post '/form_mobile' => 'users#create_mobile'
   	resources :users
   end
   

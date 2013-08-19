@@ -25,6 +25,8 @@ class User
   field :last_sign_in_ip,    :type => String
   
   field :devices,           :type => Array
+  
+  field :access_token,        :type => String
 
   ## Confirmable
   # field :confirmation_token,   :type => String
