@@ -1,8 +1,8 @@
 LoadmasterLogger::Application.routes.draw do
   get "users/index"
   devise_for :users
+  
   resources :trips
-
   resources :homes
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -14,6 +14,14 @@ LoadmasterLogger::Application.routes.draw do
   namespace :admin do
   	get '/' => 'users#index'
   	resources :users
+  end
+  
+  # api routes
+  namespace :api, defaults: {format: 'json'} do
+    # /api
+    namespace :v1 do
+      resources :trips
+    end
   end
 
   # Example of regular route:
