@@ -70,28 +70,6 @@ class Admin::UsersController < ApplicationController
     end
   end
   
-  def create_mobile
-    @user = params[:user]
-    @user[:role_ids] = Role.where(:name=>'MobileDevice').first.id
-    @user[:password]="mobilepassword"
-    @user[:password_confirmation]="mobilepassword"
-    @user = User.new(user_params)
-    
-    respond_to do |format|
-      if @user.save
-        flash[:notice] = flash[:notice].to_a.concat @user.errors.full_messages
-        format.html { redirect_to admin_users_path, :notice => 'User was successfully created.' }
-        format.json { render :json => @user, :status => :created, :location => @user }
-      else
-        puts 'save error'
-        puts @user.errors.full_messages
-        flash[:notice] = flash[:notice].to_a.concat @user.errors.full_messages
-        format.html { render :action => "new_mobile"}
-        format.json { render :json => @user.errors, :status => :unprocessable_entity }
-      end
-    end
-  end
-
   # PUT /users/1
   # PUT /users/1.json
   def update

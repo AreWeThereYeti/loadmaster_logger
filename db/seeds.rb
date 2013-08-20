@@ -14,10 +14,6 @@ Role.new({
   :name => 'Hauler'
 }).save
 
-Role.new({ 
-  :name => 'MobileDevice'
-}).save
-
 User.new({ 
   :username => 'admin', 
   :email => 'admin@loadmaster.dk',
@@ -32,12 +28,4 @@ User.new({
   :password => 'loadmaster',
   :password_confirmation => 'loadmaster',
   :role_ids => [Role.find_by(:name => :Hauler).id]
-}).save
-
-User.new({ 
-  :username => 'mobile', 
-  :email => '',
-  :password => 'loadmaster',
-  :password_confirmation => 'loadmaster',
-  :role_ids => [Role.find_by(:name => :MobileDevice).id]
 }).save

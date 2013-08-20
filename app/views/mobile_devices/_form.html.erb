@@ -1,0 +1,26 @@
+<%= form_for(@mobile_device) do |f| %>
+  <% if @mobile_device.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@mobile_device.errors.count, "error") %> prohibited this mobile_device from being saved:</h2>
+
+      <ul>
+      <% @mobile_device.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div class="field">
+    <%= f.label :device_id %><br>
+    <%= f.text_field :device_id %>
+  </div>
+  <div class="field">
+    <%= f.label :user_id %><br>
+    <%= f.text_field :user_id %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
