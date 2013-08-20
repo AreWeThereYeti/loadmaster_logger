@@ -2,7 +2,7 @@ LoadmasterLogger::Application.routes.draw do
   resources :mobile_devices
 
   get "users/index"
-  devise_for :users
+  devise_for :users, :skip => [:registrations] 
   
   resources :trips
   resources :homes
