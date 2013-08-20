@@ -49,7 +49,7 @@ class User
          :recoverable, :rememberable, :trackable, :validatable, :authentication_keys => [:login]
   
   # Roles
-  field :role_ids, :type => Array
+  field :role_id, :type => String
 
   before_save :setup_role
   
@@ -58,13 +58,13 @@ class User
   end
 
   def role?(role,role_id)
-    return Role.find_by(:name => role.to_s.camelize).id == role_id
+    return Role.find_by(:name => role.to_s.camelize).id.to_s == role_id
   end
 
   # Default role is "Hauler"
   def setup_role
-    if self[:role_ids].nil? || self[:role_ids].empty?  
-      self[:role_ids] = [Role.find_by(:name => "Hauler").id]
+    if self[:role_id].nil? || self[:role_id].empty?  
+      self[:role_id] = Role.find_by(:name => "Hauler").id
     end
   end
   
@@ -78,10 +78,8 @@ class User
   end
   
   def self.find_for_database_authentication(warden_conditions)
-    puts 'this ran!!!'
     conditions = warden_conditions.dup
     if login = conditions.delete(:login).downcase
-      puts 'finding stuff'
       where(conditions).where('$or' => [ {:username => /^#{Regexp.escape(login)}$/i}, {:email => /^#{Regexp.escape(login)}$/i} ]).first
     else
       where(conditions).first

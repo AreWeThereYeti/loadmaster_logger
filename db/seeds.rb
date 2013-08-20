@@ -19,7 +19,7 @@ User.new({
   :email => 'admin@loadmaster.dk',
   :password => 'loadmaster',
   :password_confirmation => 'loadmaster',
-  :role_ids => [Role.find_by(:name => :Admin).id]
+  :role_id => Role.find_by(:name => :Admin).id
 }).save
 
 User.new({ 
@@ -27,5 +27,5 @@ User.new({
   :email => 'hauler@loadmaster.dk', 
   :password => 'loadmaster',
   :password_confirmation => 'loadmaster',
-  :role_ids => [Role.find_by(:name => :Hauler).id]
+  :role_id => Role.find_by(:name => :Hauler).id
 }).save

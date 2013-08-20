@@ -1,6 +1,31 @@
 
-<label class="label"><%= t("activerecord.attributes.user.email", :default => t("activerecord.labels.email", :default => "Email")) %>:</label>
+<label class=""><%= t("activerecord.attributes.user.email", :default => t("activerecord.labels.email", :default => "Email")) %>:</label>
 <p><%= @user.email %></p>
+
+<h3>Mobile Devices:</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Device ID</th>
+      <th>Access Token</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @mobile_devices.each do |mobile_device| %>
+      <tr>
+        <td><%= mobile_device.device_id %> </th>
+        <td><%= mobile_device.access_token %> </th>
+        <td><%= link_to 'Show', mobile_device %></td>
+        <td><%= link_to 'Edit', edit_mobile_device_path(mobile_device) %></td>
+        <td><%= link_to 'Destroy', mobile_device, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <div class="form-actions">
 <%= link_to "Back", admin_users_path, :class => 'btn'  %>

@@ -15,11 +15,16 @@
     <%= f.label :device_id %><br>
     <%= f.text_field :device_id %>
   </div>
-  <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.text_field :user_id %>
-  </div>
 
+  <%= f.collection_select(:user_id,@haulers, :id, :username) %>
+  
+  <% if !@mobile_device[:access_token].nil? %>
+    <div class="field">
+      <%= f.label :access_token %><br>
+      <%= f.text_field :access_token %>
+    </div>
+  <% end %>
+  
   <div class="actions">
     <%= f.submit %>
   </div>

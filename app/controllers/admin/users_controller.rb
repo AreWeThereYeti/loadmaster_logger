@@ -18,7 +18,8 @@ class Admin::UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
-
+    @mobile_devices = MobileDevice.where(:user_id => params[:id].to_s)
+      
     respond_to do |format|
       format.html # show.html.erb
       format.json { render :json => @user }
@@ -52,7 +53,7 @@ class Admin::UsersController < ApplicationController
   # POST /users.json
   def create
     @user = params[:user]
-    @user[:role_ids] = params[:user][:role_ids] if params[:user]
+    @user[:role_id] = params[:user][:role_id] if params[:user]
     @user = User.new(user_params)
     
     respond_to do |format|
@@ -79,10 +80,6 @@ class Admin::UsersController < ApplicationController
     end
  
     respond_to do |format|
-      puts 'user params:'
-      puts user_params
-      puts 'user params role:'
-      puts user_params[:role_ids]
       if @user.update_attributes(user_params)
         format.html { redirect_to admin_users_path, :notice => 'User was successfully updated.' }
         format.json { head :ok }
@@ -119,7 +116,7 @@ class Admin::UsersController < ApplicationController
         :password,
         :password_confirmation,
         :access_token,
-        :role_ids => [])
+        :role_id)
     end
 
 end

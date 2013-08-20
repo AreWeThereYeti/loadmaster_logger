@@ -3,10 +3,10 @@ class Ability
 
   def initialize(user)
     user ||= User.new # guest user (not logged in)
-    if defined?(user.role_ids[0])
-      if user.role? :admin, user.role_ids[0]
+    if defined?(user.role_id)
+      if user.role? :admin, user.role_id
         can :manage, :all
-      elsif user.role? :hauler, user.role_ids[0]
+      elsif user.role? :hauler, user.role_id
         can :manage, :Trip
       else
         can :manage, :Trip

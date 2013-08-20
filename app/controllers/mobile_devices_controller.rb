@@ -15,17 +15,21 @@ class MobileDevicesController < ApplicationController
   # GET /mobile_devices/new
   def new
     @mobile_device = MobileDevice.new
+    @haulers = User.where(:role_id => Role.find_by("name" => "Hauler").id.to_s)
   end
 
   # GET /mobile_devices/1/edit
   def edit
+    @haulers = User.where(:role_id => Role.find_by("name" => "Hauler").id.to_s)
   end
 
   # POST /mobile_devices
   # POST /mobile_devices.json
   def create
     @mobile_device = MobileDevice.new(mobile_device_params)
-
+    if !User.find_by(:id => @mobile_device.user_id.to_s).add_to_set(:devices => @mobile_device.id)
+      format.html { render action: 'new' }
+    end
     respond_to do |format|
       if @mobile_device.save
         format.html { redirect_to @mobile_device, notice: 'Mobile device was successfully created.' }
@@ -40,6 +44,7 @@ class MobileDevicesController < ApplicationController
   # PATCH/PUT /mobile_devices/1
   # PATCH/PUT /mobile_devices/1.json
   def update
+    @haulers = User.where(:role_id => Role.find_by("name" => "Hauler").id.to_s)
     respond_to do |format|
       if @mobile_device.update(mobile_device_params)
         format.html { redirect_to @mobile_device, notice: 'Mobile device was successfully updated.' }

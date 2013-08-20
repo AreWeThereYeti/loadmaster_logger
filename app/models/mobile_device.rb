@@ -10,7 +10,6 @@ class MobileDevice
   private
 
     def generate_access_token
-      puts 'generating api_key'
       self.access_token=ApiKey.create![:access_token]
       self.access_token
     end
