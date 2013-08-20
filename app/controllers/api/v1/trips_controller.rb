@@ -12,29 +12,48 @@ module Api
       #   end
       # end
       
-      before_filter :authenticate_user!, except: [:index,:create]  #overwrite devise and cancan auth
+      before_filter :authenticate_user!, except: [:create]  #overwrite devise and cancan auth
       before_filter :restrict_access
       
       respond_to :json
       
-      def index
-        respond_with Trip.all
-      end
+      # def index
+      #   respond_with Trip.all
+      # end
       
+      # action takes hash of trips and saves them in DB
       def create
-        @trip = Trip.new(trip_params)
+        err_objs=[]
+        error=false
+        params[:trips].each do |trip|
+          if !create_trip(trip[1])
+            error=true
+            err_objs.push(trip[1])
+          end
+        end
         respond_to do |format|
-          format.json { render json: 'Please fill out all required fields', status: :unprocessable_entity } unless check_required_params(params[:trip])
-          if @trip.save
+          if !error
             format.json { render json: 'success', status: :created, location: @trip }
           else
-            format.json { render json: @trip.errors, status: :unprocessable_entity }
+            format.json { render json: {:msg => "Could not save the following trips. Please check that all required fields are filled out (license_plate, cargo, start_location, end_location, start_timestamp, end_timestamp)", :trips => err_objs}, status: :unprocessable_entity }
           end
         end
       end
       
       
       private
+      
+      def create_trip(trip)
+        @trip = Trip.new(trip)
+        return false unless check_required_params(trip)
+        if @trip.save
+          puts 'save trip successfully!!'
+          return true
+        else
+          puts 'save trip error!!!'
+          return false
+        end
+      end
         
       def restrict_access
         # request with header:
@@ -63,6 +82,10 @@ module Api
           :commentary)
       end
       
+      def trips_params
+        params.require(:trips).permit(:trips)
+      end
+
       def check_required_params(trip)
         if trip.has_key?('license_plate') && trip.has_key?('cargo') && trip.has_key?('start_location') && trip.has_key?('end_location') && trip.has_key?('start_timestamp') && trip.has_key?('end_timestamp')
           true

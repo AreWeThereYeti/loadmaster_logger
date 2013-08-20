@@ -11,7 +11,6 @@ class MobileDevice
 
     def generate_access_token
       self.access_token=ApiKey.create![:access_token]
-      self.access_token
     end
   
 end
