@@ -52,6 +52,7 @@ class Admin::UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
+    puts 'user create ran'
     @user = params[:user]
     @user[:role_id] = params[:user][:role_id] if params[:user]
     @user = User.new(user_params)
