@@ -7,9 +7,10 @@ class Ability
       if user.role? :admin, user.role_id
         can :manage, :all
       elsif user.role? :hauler, user.role_id
-        can :manage, :Trip
+        #user can manage any page, but only objects with a matching user_id
+        can :manage, [User,Trip,Invoice], user_id: user.id.to_s
       else
-        can :manage, :Trip
+        can :create, :Trip
       end
     end
     # Define abilities for the passed in user here. For example:

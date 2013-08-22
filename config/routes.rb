@@ -1,4 +1,6 @@
 LoadmasterLogger::Application.routes.draw do
+  resources :invoices
+
   resources :mobile_devices
 
   get "users/index"

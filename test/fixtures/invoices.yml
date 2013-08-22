@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  timestamp: 2013-08-22 11:23:02
+  hauler_id: MyString
+  trips: 
+  price: MyString
+  costumer: 
+  description: MyString
+  due_date: 2013-08-22 11:23:02
+  cvr: 1
+  commentary: MyString
+  end_note: MyString
+  invoice_number: 1
+  sales_taxes: 1
+
+two:
+  timestamp: 2013-08-22 11:23:02
+  hauler_id: MyString
+  trips: 
+  price: MyString
+  costumer: 
+  description: MyString
+  due_date: 2013-08-22 11:23:02
+  cvr: 1
+  commentary: MyString
+  end_note: MyString
+  invoice_number: 1
+  sales_taxes: 1

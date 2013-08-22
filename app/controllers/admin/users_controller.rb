@@ -1,5 +1,5 @@
 class Admin::UsersController < ApplicationController
-  load_and_authorize_resource except: [:create]
+  load_and_authorize_resource
   
   layout "admin"
   

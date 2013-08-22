@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Timestamp:</strong>
+  <%= @invoice.timestamp %>
+</p>
+
+<p>
+  <strong>Trips:</strong>
+  <%= @invoice.trips %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @invoice.price %>
+</p>
+
+<p>
+  <strong>Costumer:</strong>
+  <%= @invoice.costumer %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @invoice.description %>
+</p>
+
+<p>
+  <strong>Due date:</strong>
+  <%= @invoice.due_date %>
+</p>
+
+<p>
+  <strong>Cvr:</strong>
+  <%= @invoice.cvr %>
+</p>
+
+<p>
+  <strong>Commentary:</strong>
+  <%= @invoice.commentary %>
+</p>
+
+<p>
+  <strong>End note:</strong>
+  <%= @invoice.end_note %>
+</p>
+
+<p>
+  <strong>Invoice number:</strong>
+  <%= @invoice.invoice_number %>
+</p>
+
+<p>
+  <strong>Sales taxes:</strong>
+  <%= @invoice.sales_taxes %>
+</p>
+
+<%= link_to 'Edit', edit_invoice_path(@invoice) %> |
+<%= link_to 'Back', invoices_path %>

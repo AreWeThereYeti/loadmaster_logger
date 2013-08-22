@@ -1,6 +1,8 @@
 class Trip
   include Mongoid::Document
   
+  has_and_belongs_to_many :users
+  
   field :license_plate, type: String
   field :device_id, type: String
   field :cargo, type: String
@@ -13,6 +15,8 @@ class Trip
   field :weight, type: Float
   field :costumer, type: String
   field :commentary, type: String
+  
+  field :user_id, type: String
   
   field :access_token, type: String
   

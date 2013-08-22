@@ -1,4 +1,5 @@
 class TripsController < ApplicationController
+  load_and_authorize_resource except: [:create]
   before_action :set_trip, only: [:show, :edit, :update, :destroy]
 
   # GET /trips
@@ -25,7 +26,7 @@ class TripsController < ApplicationController
   # POST /trips.json
   def create
     @trip = Trip.new(trip_params)
-
+    @trip.user_id=current_user.id
     respond_to do |format|
       if @trip.save
         format.html { redirect_to @trip, notice: 'Trip was successfully created.' }
@@ -74,13 +75,14 @@ class TripsController < ApplicationController
         :device_id,
         :cargo,
         :start_location,
-        :start_address, 
+        :start_address,
         :end_location,
         :end_address,
         :start_timestamp,
         :end_timestamp,
         :weight,
         :costumer,
-        :commentary)
+        :commentary,
+        :user_id)
     end
 end

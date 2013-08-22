@@ -1,0 +1,47 @@
+<h1>Listing invoices</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Timestamp</th>
+      <th>Trips</th>
+      <th>Price</th>
+      <th>Costumer</th>
+      <th>Description</th>
+      <th>Due date</th>
+      <th>Cvr</th>
+      <th>Commentary</th>
+      <th>End note</th>
+      <th>Invoice number</th>
+      <th>Sales taxes</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @invoices.each do |invoice| %>
+      <tr>
+        <td><%= invoice.timestamp %></td>
+        <td><%= invoice.trips %></td>
+        <td><%= invoice.price %></td>
+        <td><%= invoice.costumer %></td>
+        <td><%= invoice.description %></td>
+        <td><%= invoice.due_date %></td>
+        <td><%= invoice.cvr %></td>
+        <td><%= invoice.commentary %></td>
+        <td><%= invoice.end_note %></td>
+        <td><%= invoice.invoice_number %></td>
+        <td><%= invoice.sales_taxes %></td>
+        <td><%= link_to 'Show', invoice %></td>
+        <td><%= link_to 'Edit', edit_invoice_path(invoice) %></td>
+        <td><%= link_to 'Destroy', invoice, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Invoice', new_invoice_path %>
