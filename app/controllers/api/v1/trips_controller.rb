@@ -64,7 +64,8 @@ module Api
         # end
         
         # as url query: e.g http://localhost:3000/api/v1/trips?access_token={api_key}
-        head :unauthorized unless ApiKey.where(access_token: params[:access_token]).exists?
+        
+        head :unauthorized unless ApiKey.where(access_token: params[:access_token]).exists? && MobileDevice.where(access_token: params[:access_token]).first.device_id == params[:device_id]
       end
       
       # Never trust parameters from the scary internet, only allow the white list through.
@@ -90,7 +91,7 @@ module Api
       end
 
       def check_required_params(trip)
-        if trip.has_key?('license_plate') && trip.has_key?('cargo') && trip.has_key?('start_location') && trip.has_key?('end_location') && trip.has_key?('start_timestamp') && trip.has_key?('end_timestamp')
+        if trip.has_key?('license_plate') && trip.has_key?('cargo') && trip.has_key?('start_location') && trip.has_key?('end_location') && trip.has_key?('start_timestamp') && trip.has_key?('end_timestamp') && trip.has_key?('device_id')
           true
         else
           false
