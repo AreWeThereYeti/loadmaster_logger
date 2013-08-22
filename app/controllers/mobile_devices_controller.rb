@@ -27,11 +27,12 @@ class MobileDevicesController < ApplicationController
   # POST /mobile_devices.json
   def create
     @mobile_device = MobileDevice.new(mobile_device_params)
-    if !User.find_by(:id => @mobile_device.user_id.to_s).add_to_set(:devices => @mobile_device.id)
-      format.html { render action: 'new' }
-    end
     respond_to do |format|
-      if @mobile_device.save
+      if @mobile_device.save        
+        if !User.find_by(:id => @mobile_device.user_id.to_s).add_to_set(:devices => @mobile_device.id)
+          format.html { render action: 'new' }
+        end
+        
         format.html { redirect_to @mobile_device, notice: 'Mobile device was successfully created.' }
         format.json { render action: 'show', status: :created, location: @mobile_device }
       else

@@ -25,8 +25,9 @@ module Api
       def create
         err_objs=[]
         error=false
+        user_id=MobileDevice.where(:access_token=>params[:access_token]).first.user_id
         params[:trips].each do |trip|
-          if !create_trip(trip[1])
+          if !create_trip(trip[1],user_id)
             error=true
             err_objs.push(trip[1])
           end
@@ -43,9 +44,10 @@ module Api
       
       private
       
-      def create_trip(trip)
+      def create_trip(trip,user_id)
         @trip = Trip.new(trip)
         return false unless check_required_params(trip)
+        @trip.user_id=user_id
         if @trip.save
           puts 'save trip successfully!!'
           return true
@@ -79,7 +81,8 @@ module Api
           :end_timestamp,
           :weight,
           :costumer,
-          :commentary)
+          :start_comments,
+          :end_comments)
       end
       
       def trips_params

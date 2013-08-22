@@ -14,7 +14,9 @@ class Trip
   field :end_timestamp, type: Float
   field :weight, type: Float
   field :costumer, type: String
-  field :commentary, type: String
+  field :start_comments, type: String
+  field :end_comments, type: String
+
   
   field :user_id, type: String
   
