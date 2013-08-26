@@ -8,7 +8,11 @@ class Ability
         can :manage, :all
       elsif user.role? :hauler, user.role_id
         #user can manage any page, but only objects with a matching user_id
-        can :manage, [User,Trip,Invoice], user_id: user.id.to_s
+        can :manage, [Trip,Invoice], user_id: user.id.to_s
+        can [:show,:update,:destroy], User, user_id: user.id.to_s
+        #puts 'is this id???'
+        #puts user.id
+        #can :manage, User, :id => user.id.to_s
       else
         can :create, :Trip
       end

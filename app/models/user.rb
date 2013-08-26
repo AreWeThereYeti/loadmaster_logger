@@ -27,6 +27,8 @@ class User
   field :devices,           :type => Array
   
   field :access_token,        :type => String
+  
+  field :user_id,           :type => String
 
   ## Confirmable
   # field :confirmation_token,   :type => String
@@ -52,6 +54,7 @@ class User
   field :role_id, :type => String
 
   before_save :setup_role
+  after_save :setup_user_id
   
   def email_required?
     false
@@ -65,6 +68,13 @@ class User
   def setup_role
     if self[:role_id].nil? || self[:role_id].empty?  
       self[:role_id] = Role.find_by(:name => "Hauler").id
+    end
+  end
+  
+  def setup_user_id
+    if !self[:user_id]
+      self[:user_id] = self[:id]
+      self.update
     end
   end
   

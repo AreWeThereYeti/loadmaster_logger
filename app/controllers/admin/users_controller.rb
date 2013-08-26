@@ -1,5 +1,7 @@
 class Admin::UsersController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource except: [:create]
+  #load_and_authorize_resource
+  before_filter :authenticate_user!
   
   layout "admin"
   
@@ -17,8 +19,12 @@ class Admin::UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    # puts '------show ran-------'
     @user = User.find(params[:id])
+    # puts 'ran this...'
     @mobile_devices = MobileDevice.where(:user_id => params[:id].to_s)
+    # puts 'mobile_devices is: '
+    # puts @mobile_devices  
       
     respond_to do |format|
       format.html # show.html.erb
@@ -55,6 +61,7 @@ class Admin::UsersController < ApplicationController
     puts 'user create ran'
     @user = params[:user]
     @user[:role_id] = params[:user][:role_id] if params[:user]
+    puts @user
     @user = User.new(user_params)
     
     respond_to do |format|
@@ -111,12 +118,12 @@ class Admin::UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
+      puts 'user_params ran'
       params.require(:user).permit(
         :username,
         :email,
         :password,
         :password_confirmation,
-        :access_token,
         :role_id)
     end
 

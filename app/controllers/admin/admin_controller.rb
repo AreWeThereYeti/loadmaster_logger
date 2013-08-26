@@ -10,4 +10,17 @@ class Admin::AdminController < ApplicationController
   def current_ability
     @current_ability ||= AdminAbility.new(current_user)
   end
+  
+  
+  private
+  
+    def user_params
+      params.require(:user).permit(
+        :username,
+        :email,
+        :password,
+        :password_confirmation,
+        :role_id,
+        :user_id)
+    end
 end
