@@ -1,6 +1,8 @@
 
-<label class=""><%= t("activerecord.attributes.user.email", :default => t("activerecord.labels.email", :default => "Email")) %>:</label>
+<label class="">Email:</label>
 <p><%= @user.email %></p>
+<label class="">Username:</label>
+<p><%= @user.username %></p>
 
 <div class="form-actions">
 <%= link_to "Back", '/', :class => 'btn'  %>

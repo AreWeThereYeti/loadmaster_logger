@@ -6,11 +6,7 @@ class UserController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    # puts '------show ran-------'
     @user = User.find(params[:id])
-    @mobile_devices = MobileDevice.where(:user_id => params[:id].to_s)
-    # puts 'mobile_devices is: '
-    # puts @mobile_devices  
       
     respond_to do |format|
       format.html # show.html.erb
@@ -26,6 +22,7 @@ class UserController < ApplicationController
   # PUT /users/1
   # PUT /users/1.json
   def update
+    puts 'update ran in user controller'
     @user = User.find(params[:id])
     if params[:user][:password].blank?
         params[:user].delete(:password)
@@ -33,7 +30,7 @@ class UserController < ApplicationController
  
     respond_to do |format|
       if @user.update_attributes(user_params)
-        format.html { redirect_to admin_users_path, :notice => 'User was successfully updated.' }
+        format.html { render :action => 'show', :id => @user.id, :notice => 'User was successfully updated.' }
         format.json { head :ok }
       else
         format.html { render :action => "edit" }

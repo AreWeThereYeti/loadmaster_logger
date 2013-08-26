@@ -60,8 +60,24 @@ class User
     false
   end
 
-  def role?(role,role_id)
-    return Role.find_by(:name => role.to_s.camelize).id.to_s == role_id
+  # def role?(role,role_id)
+  #   return Role.find_by(:name => role.to_s.camelize).id.to_s == role_id
+  # end
+  
+  def role?(role,user_role_id)
+    puts 'role: '
+    puts role
+    puts 'user role'
+    user_role=Role.find_by(:name => role.to_s.camelize)
+    puts user_role.id
+    puts 'current_user id:'
+    puts user_role_id
+    
+    if !!user_role
+      Role.find_by(:name => role.to_s.camelize).id.to_s == user_role_id
+    else
+      false
+    end
   end
 
   # Default role is "Hauler"

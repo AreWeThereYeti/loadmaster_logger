@@ -1,6 +1,5 @@
 class Admin::UsersController < ApplicationController
   load_and_authorize_resource except: [:create]
-  #load_and_authorize_resource
   before_filter :authenticate_user!
   
   layout "admin"
@@ -52,16 +51,15 @@ class Admin::UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    #redirect_to root_url, :alert => "You are not authorized to access this ressource..." unless current_user.role? :admin
     @user = User.find(params[:id])
   end
 
   # POST /users
   # POST /users.json
   def create
-    puts 'user create ran'
     @user = params[:user]
     @user[:role_id] = params[:user][:role_id] if params[:user]
-    puts @user
     @user = User.new(user_params)
     
     respond_to do |format|

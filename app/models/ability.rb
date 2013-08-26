@@ -5,15 +5,14 @@ class Ability
     user ||= User.new # guest user (not logged in)
     if defined?(user.role_id)
       if user.role? :admin, user.role_id
+        puts 'this is adming'
         can :manage, :all
       elsif user.role? :hauler, user.role_id
+        puts 'this is hauler'
         #user can manage any page, but only objects with a matching user_id
-        can :manage, [Trip,Invoice], user_id: user.id.to_s
-        can [:show,:update,:destroy], User, user_id: user.id.to_s
-        #puts 'is this id???'
-        #puts user.id
-        #can :manage, User, :id => user.id.to_s
+        can :manage, [User,Trip,Invoice], user_id: user.id.to_s
       else
+        puts 'this is outside user'
         can :create, :Trip
       end
     end
