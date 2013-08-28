@@ -8,37 +8,42 @@
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
-<div class="container">
+<body ng-app="loadmaster">
+  <div ng-loadmaster>
+    <div class="container">
 
-	<div class="navbar navbar-inverse">
-	  <a class="navbar-brand" href="/">Loadmaster Logger</a>
-	  <ul class="nav navbar-nav">
-	    <li class="active"><a href="/">Home</a></li>
-	    <li><a href="/trips">Ture</a></li>
-	    <li><a href="/admin">Users</a></li>
-	  </ul>
-	  <% if user_signed_in? %>
-	    <ul class="nav navbar-nav pull-right">
-	      <li>
-	        <%= link_to "My Profile", user_path(current_user) %>
-	      </li>
-	      <li>
-	        <%= link_to('Logout', destroy_user_session_path, :method=>'delete') %>
-	      </li>  
-	    </ul>
-	  <%end%>
-	</div>
+    	<div class="navbar navbar-inverse">
+    	  <a class="navbar-brand" href="/">Loadmaster Logger</a>
+    	  <ul class="nav navbar-nav">
+    	    <li class="active"><a href="/">Home</a></li>
+    	    <li><a href="/trips">Ture</a></li>
+    	    <li><a href="/admin">Users</a></li>
+    	  </ul>
+    	  <% if user_signed_in? %>
+    	    <ul class="nav navbar-nav pull-right">
+    	      <li>
+    	        <%= link_to "My Profile", user_path(current_user) %>
+    	      </li>
+    	      <li>
+    	        <%= link_to('Logout', destroy_user_session_path, :method=>'delete') %>
+    	      </li>  
+    	    </ul>
+    	  <%end%>
+    	</div>
 
-	<% flash.each do |name, msg| %>
-	  <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
-	<% end %>
+    	<% flash.each do |name, msg| %>
+    	  <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
+    	<% end %>
 	
 	
-	
-	<%= yield %>
-</div>
+    	<div class="container">
+    	  <div class="content">
+    	    <%= yield %>
+    	  </div>
+    	</div>
+    </div>
 
-<div class="footer"></div>
+    <div class="footer"></div>
+  </div>
 </body>
 </html>
