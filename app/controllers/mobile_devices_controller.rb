@@ -1,5 +1,6 @@
 class MobileDevicesController < ApplicationController
   before_action :set_mobile_device, only: [:show, :edit, :update, :destroy]
+  before_filter :authenticate_user!
 
   # GET /mobile_devices
   # GET /mobile_devices.json

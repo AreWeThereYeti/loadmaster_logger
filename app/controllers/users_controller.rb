@@ -1,8 +1,14 @@
 class UsersController < ApplicationController
   
   load_and_authorize_resource
-  before_filter :authenticate_user!
+  before_filter :match_self, :authenticate_user!
+  attr_accessor :user
 
+  
+  # def current_ability
+  #   @current_ability ||= Ability.new(current_user)
+  # end
+  
   # GET /users/1
   # GET /users/1.json
   def show
@@ -16,13 +22,13 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    puts 'edit ran is user controller'
     @user = User.find(params[:id])
   end
   
   # PUT /users/1
   # PUT /users/1.json
   def update
-    puts 'update ran in user controller'
     @user = User.find(params[:id])
     if params[:user][:password].blank?
         params[:user].delete(:password)
@@ -30,8 +36,9 @@ class UsersController < ApplicationController
  
     respond_to do |format|
       if @user.update_attributes(user_params)
+        puts 'user was updated'
         #format.html { render :action => 'show', :id => @user.id, :notice => 'User was successfully updated.' }
-        format.html { redirect_to @user, :notice => 'User was successfully updated.' }
+        format.html { redirect_to :back, :notice => 'User was successfully updated.' }
         format.json { head :ok }
       else
         format.html { render :action => "edit" }
@@ -47,7 +54,7 @@ class UsersController < ApplicationController
     @user.destroy
 
     respond_to do |format|
-      format.html { redirect_to admin_users_url }
+      format.html { redirect_to '/', :notice => 'Your profile was successfully deleted' }
       format.json { head :ok }
     end
   end
@@ -65,6 +72,15 @@ class UsersController < ApplicationController
         :email,
         :password,
         :password_confirmation)
+    end
+    
+    def match_self
+      if params[:id] == 'self' || params[:id] == 'me'
+        @user = current_user
+      elsif params[:id]
+        @user = User.find(params[:id])
+      end
+      @user = current_user #if user.blank?
     end
   
 end

@@ -7,9 +7,9 @@ class Admin::AdminController < ApplicationController
     #redirect_to root_url, :alert => "You are not authorized to access this ressource" unless current_user.role? :admin
   end
 
-  def current_ability
-    @current_ability ||= AdminAbility.new(current_user)
-  end
+  # def current_ability
+  #   @current_ability ||= Ability.new(current_user)
+  # end
   
   
   private
