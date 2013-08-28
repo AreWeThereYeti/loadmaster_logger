@@ -1,6 +1,6 @@
 class Admin::UsersController < ApplicationController
   load_and_authorize_resource except: [:create]
-  before_filter :authenticate_user!
+  before_filter :verify_admin
   
   layout "admin"
   
@@ -119,6 +119,11 @@ class Admin::UsersController < ApplicationController
         :password,
         :password_confirmation,
         :role_id)
+    end
+    
+    def verify_admin
+      :authenticate_user!
+      redirect_to root_url, :alert => "You are not authorized to access this ressource" unless current_user.role? :admin, current_user.role_id
     end
 
 end

@@ -2,11 +2,6 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    if user.nil?
-      puts 'user NOT defined...'
-    else
-      puts 'user WAS defined'
-    end
     user ||= User.new # guest user (not logged in)
     if defined?(user.role_id)
       if user.role? :admin, user.role_id

@@ -67,18 +67,8 @@ class User
   end
   
   def role?(role,role_id)
-    puts 'role ran with id'
-    puts role_id.to_s
-    puts self.role_id
     role_id=Role.where(:name => role.to_s.camelize)
-    puts role_id.first.id.to_s
-    puts self
-    
-    for attribute in self.attributes
-      puts attribute
-    end
     if !!role_id
-      puts 'role_id defined...'
       return self.role_id == role_id.first.id.to_s
     else
       false
