@@ -12,6 +12,12 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
+//= require jquery.turbolinks
 //= require_tree ./bootstrap
+//= require_tree ./libs
+//= require_tree ./angular
+//= require_tree ./angular/controllers
+//= require_tree ./angular/templates
+//= require_tree ./loadmaster
+//= require turbolinks
 //= require_tree .

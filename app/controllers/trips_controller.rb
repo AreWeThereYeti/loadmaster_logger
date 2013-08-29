@@ -1,6 +1,7 @@
 class TripsController < ApplicationController
   load_and_authorize_resource except: [:create]
   before_action :set_trip, only: [:show, :edit, :update, :destroy]
+  before_filter :authenticate_user!
 
   # GET /trips
   # GET /trips.json

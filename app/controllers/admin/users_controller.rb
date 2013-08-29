@@ -1,6 +1,6 @@
 class Admin::UsersController < ApplicationController
   load_and_authorize_resource except: [:create]
-  before_filter :authenticate_user!
+  before_filter :verify_admin
   
   layout "admin"
   
@@ -8,7 +8,6 @@ class Admin::UsersController < ApplicationController
   # GET /users.json
   def index
     @users = User.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => @users }
@@ -18,13 +17,8 @@ class Admin::UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    # puts '------show ran-------'
     @user = User.find(params[:id])
-    # puts 'ran this...'
     @mobile_devices = MobileDevice.where(:user_id => params[:id].to_s)
-    # puts 'mobile_devices is: '
-    # puts @mobile_devices  
-      
     respond_to do |format|
       format.html # show.html.erb
       format.json { render :json => @user }
@@ -51,6 +45,7 @@ class Admin::UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    puts 'edit ran in admin user controller'
     #redirect_to root_url, :alert => "You are not authorized to access this ressource..." unless current_user.role? :admin
     @user = User.find(params[:id])
   end
@@ -80,6 +75,7 @@ class Admin::UsersController < ApplicationController
   # PUT /users/1
   # PUT /users/1.json
   def update
+    puts 'ran update in admin controller'
     @user = User.find(params[:id])
     if params[:user][:password].blank?
         params[:user].delete(:password)
@@ -123,6 +119,11 @@ class Admin::UsersController < ApplicationController
         :password,
         :password_confirmation,
         :role_id)
+    end
+    
+    def verify_admin
+      :authenticate_user!
+      redirect_to root_url, :alert => "You are not authorized to access this ressource" unless current_user.role? :admin, current_user.role_id
     end
 
 end

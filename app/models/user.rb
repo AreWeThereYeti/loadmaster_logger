@@ -3,7 +3,14 @@ class User
   ## Database authenticatable
   
   has_and_belongs_to_many :roles
+  has_many :trips
+  has_many :invoices
+  has_many :mobile_devices
+  
   accepts_nested_attributes_for :roles
+  
+  before_save :setup_role
+  after_save :setup_user_id
   
   field :username,           :type => String, :default => ""
   field :email,              :type => String, :default => "" 
@@ -53,46 +60,15 @@ class User
   # Roles
   field :role_id, :type => String
 
-  before_save :setup_role
-  after_save :setup_user_id
+
   
   def email_required?
     false
   end
-
-  # def role?(role,role_id)
-  #   return Role.find_by(:name => role.to_s.camelize).id.to_s == role_id
-  # end
-  
-  # def role?(role,user_role_id)
-  #   puts 'role: '
-  #   puts role
-  #   puts 'user role'
-  #   user_role=Role.find_by(:name => role.to_s.camelize)
-  #   puts user_role.id
-  #   puts 'current_user id:'
-  #   puts user_role_id
-  #   
-  #   if !!user_role
-  #     Role.find_by(:name => role.to_s.camelize).id.to_s == user_role_id
-  #   else
-  #     false
-  #   end
-  # end
   
   def role?(role,role_id)
-    puts 'role ran with id'
-    puts role_id.to_s
-    puts self.role_id
     role_id=Role.where(:name => role.to_s.camelize)
-    puts role_id.first.id.to_s
-    puts self
-    
-    for attribute in self.attributes
-      puts attribute
-    end
     if !!role_id
-      puts 'role_id defined...'
       return self.role_id == role_id.first.id.to_s
     else
       false

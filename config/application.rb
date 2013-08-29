@@ -28,5 +28,7 @@ module LoadmasterLogger
     config.generators do |g|
       g.orm :active_record
     end
+    
+    config.filter_parameters += [:password, :password_confirmation]
   end
 end

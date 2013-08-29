@@ -4,18 +4,23 @@ LoadmasterLogger::Application.routes.draw do
   resources :mobile_devices
 
   get "users/index"
-  devise_for :users, :skip => [:registrations] 
-    
+  #devise_for :users, :skip => [:registrations] 
+  devise_for :users
+  resources :users
+  
   resources :trips
   resources :homes
-  resources :users
-  resources :user
+  
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   root :to => 'home#index'
+  
+  # namespace :users do
+  #   get '/' => 'users#show'
+  # end
   
   namespace :admin do
   	get '/' => 'users#index'

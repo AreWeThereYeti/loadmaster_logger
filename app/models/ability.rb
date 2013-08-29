@@ -5,7 +5,7 @@ class Ability
     user ||= User.new # guest user (not logged in)
     if defined?(user.role_id)
       if user.role? :admin, user.role_id
-        puts 'this is adming'
+        puts 'this is admin'
         can :manage, :all
       elsif user.role? :hauler, user.role_id
         puts 'this is hauler'
