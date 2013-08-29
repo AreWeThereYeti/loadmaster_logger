@@ -10,7 +10,6 @@
 </head>
 <body ng-app="loadmaster">
   <div ng-loadmaster>
-    <div class="container">
 
     	<div class="navbar navbar-default">
     	  <a class="navbar-brand" href="/">Loadmaster Logger</a>
@@ -30,6 +29,9 @@
     	    </ul>
     	  <%end%>
     	</div>
+
+    <div class="container">
+
 
 	    	<% flash.each do |name, msg| %>
 	    	 <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
