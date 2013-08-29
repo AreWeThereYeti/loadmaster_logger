@@ -12,9 +12,9 @@
   <tbody>
     <% @mobile_devices.each do |mobile_device| %>
       <tr>
-        <td><%= link_to 'Show', mobile_device %></td>
-        <td><%= link_to 'Edit', edit_mobile_device_path(mobile_device) %></td>
-        <td><%= link_to 'Destroy', mobile_device, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', mobile_device, :class =>"btn btn-info btn-xs" %></td>
+        <td><%= link_to 'Edit', edit_mobile_device_path(mobile_device), :class =>"btn btn-warning btn-xs" %></td>
+        <td><%= link_to 'Destroy', mobile_device, method: :delete, data: { confirm: 'Are you sure?' }, :class =>"btn btn-danger btn-xs" %></td>
       </tr>
     <% end %>
   </tbody>
@@ -22,4 +22,4 @@
 
 <br>
 
-<%= link_to 'New Mobile device', new_mobile_device_path %>
+<%= link_to 'New Mobile device', new_mobile_device_path, :class => 'btn btn-primary' %>

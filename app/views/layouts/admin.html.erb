@@ -9,36 +9,36 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<div class="navbar">
-  <a class="navbar-brand" href="/">Loadmaster Logger</a>
-  <ul class="nav navbar-nav">
-    <li class="active"><a href="/">Home</a></li>
-    <li><a href="/trips">Ture</a></li>
-    <li><a href="/admin">Users</a></li>
-  </ul>
-  <% if user_signed_in? %>
-    <ul class="nav navbar-nav pull-right">
-      <li>
-        <%= link_to "My Profile", user_path(current_user) %>
-      </li>
-      <li>
-        <%= link_to('Logout', destroy_user_session_path, :method=>'delete') %>
-      </li>  
-    </ul>
-  <%end%>
+	<div class="container">
+	<div class="navbar navbar-default">
+	  <a class="navbar-brand" href="/">Loadmaster Logger</a>
+	  <ul class="nav navbar-nav">
+	    <li class="active"><a href="/">Home</a></li>
+	    <li><a href="/trips">Ture</a></li>
+	    <li><a href="/admin">Users</a></li>
+	  </ul>
+	  <% if user_signed_in? %>
+	    <ul class="nav navbar-nav pull-right">
+	      <li>
+	        <%= link_to "My Profile", user_path(current_user) %>
+	      </li>
+	      <li>
+	        <%= link_to('Logout', destroy_user_session_path, :method=>'delete') %>
+	      </li>  
+	    </ul>
+	  <%end%>
+	</div>
+	
+	<% flash.each do |name, msg| %>
+	  <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
+	<% end %>
+	
+	<% if user_signed_in? %>
+	  <% #link_to "My Profile", user_root_path%>
+	  <%= link_to('Logout', destroy_user_session_path, :method=>'delete') %>  
+	<%end%>
+	
+	<%= yield %>
 </div>
-
-<% flash.each do |name, msg| %>
-  <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
-<% end %>
-
-<% if user_signed_in? %>
-  <% #link_to "My Profile", user_root_path%>
-  <%= link_to('Logout', destroy_user_session_path, :method=>'delete') %>  
-<%end%>
-
-<%= yield %>
-
 </body>
 </html>

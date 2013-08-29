@@ -12,7 +12,7 @@
   <div ng-loadmaster>
     <div class="container">
 
-    	<div class="navbar navbar-inverse">
+    	<div class="navbar navbar-default">
     	  <a class="navbar-brand" href="/">Loadmaster Logger</a>
     	  <ul class="nav navbar-nav">
     	    <li class="active"><a href="/">Home</a></li>
@@ -31,10 +31,12 @@
     	  <%end%>
     	</div>
 
-    	<% flash.each do |name, msg| %>
-    	  <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
-    	<% end %>
-	
+	    	<% flash.each do |name, msg| %>
+	    	 <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
+	    	  <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
+	    	 </div>
+	    	<% end %>
+	    	
 	
     	<div class="container">
     	  <div class="content">

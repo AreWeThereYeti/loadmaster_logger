@@ -1,28 +1,28 @@
 <div ng-trips>
   <h1>Listing trips</h1>
 
-  <table id="trips-table" class="table table-bordered table-hover">
+  <table id="trips-table" class="table table-hover">
     <thead>
       <tr>
-        <th>license_plate</th>
-        <th>cargo</th>
-        <th>start_address</th>
-        <th>end_address</th>
-        <th>start_timestamp</th>
-        <th>end_timestamp</th>
-        <th>weight</th>
-        <th>costumer</th>
-        <th>start comments</th>
-        <th>end comments</th>
+        <th>License plate</th>
+        <th>Cargo</th>
+        <th>Start address</th>
+        <th>End address</th>
+        <th>Start timestamp</th>
+        <th>End timestamp</th>
+        <th>Weight</th>
+        <th>Costumer</th>
+        <th>Start comments</th>
+        <th>End comments</th>
       </tr>
     </thead>
 
     <tbody>
       <% @trips.each do |trip| %>
         <tr id="<%= trip.id %>" ng-click="selectTrip('<%= trip.id %>')">
-  				<td><%= trip.license_plate %></td>
+			<td><%= trip.license_plate %></td>
   			  <td><%= trip.cargo %></td>
-  			 	<td><%= trip.start_address %></td>
+  			  <td><%= trip.start_address %></td>
   			  <td><%= trip.end_address %></td>
   			  <td><%= trip.start_timestamp %></td>
   			  <td><%= trip.end_timestamp %></td>
@@ -32,7 +32,7 @@
   			  <td><%= trip.end_comments %></td>
           <!-- <td><%= link_to 'Show', trip %></td>
           <td><%= link_to 'Edit', edit_trip_path(trip) %></td> -->
-          <td><%= link_to 'Slet', trip, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Slet', trip, method: :delete, data: { confirm: 'Are you sure?' }, :class =>"btn btn-danger btn-xs" %></td>
         </tr>
       <% end %>
     </tbody>
@@ -40,5 +40,5 @@
 
   <br>
 
-  <%= link_to 'New Trip', new_trip_path %>
+  <%= link_to 'New Trip', new_trip_path, :class =>"btn btn-primary" %>
 </div>

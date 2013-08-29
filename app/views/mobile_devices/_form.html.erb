@@ -16,7 +16,7 @@
     <%= f.text_field :device_id %>
   </div>
 
-  <%= f.collection_select(:user_id,@haulers, :id, :username) %>
+  <%= f.collection_select(:user_id,@haulers, :id, :username, {:class => 'form-control'}) %>
   
   <% if !@mobile_device[:access_token].nil? %>
     <div class="field">
@@ -26,6 +26,6 @@
   <% end %>
   
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit :class => 'btn btn-primary btn-sm' %>
   </div>
 <% end %>
