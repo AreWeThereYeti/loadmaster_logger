@@ -7,6 +7,7 @@ gem 'rails', '4.0.0'
 gem "mongo_mapper"
 
 gem 'mongoid', github: 'mongoid/mongoid'
+gem 'mongoid_search'
 #gem 'mongoid', git: 'https://github.com/mongoid/mongoid.git'
 #gem "bson", "~> 1.8.6"
 

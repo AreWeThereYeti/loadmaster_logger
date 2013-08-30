@@ -27,6 +27,9 @@ class TripsController < ApplicationController
   # POST /trips.json
   def create
     @trip = Trip.new(trip_params)
+    @trip.start_timestamp=get_timestamp(params[:start_timestamp])
+    @trip.end_timestamp=get_timestamp(params[:end_timestamp])
+    
     @trip.user_id=current_user.id
     respond_to do |format|
       if @trip.save
@@ -61,6 +64,14 @@ class TripsController < ApplicationController
       format.html { redirect_to trips_url }
       format.json { head :no_content }
     end
+  end
+  
+  def search
+    @number_of_trips=Trips.where(:id => current_user.id).count
+    params[:search].kind_of?(Array) ? @search_str=params[:search].first.to_s : @search_str=params[:search].to_s
+    page_size=100
+    @trips = Trips.full_text_search(@search_str, {:max_results => page_size})
+    render 'index'
   end
 
   private

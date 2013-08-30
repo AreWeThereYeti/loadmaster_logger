@@ -1,5 +1,7 @@
 <div ng-trips>
-  <h1>Listing trips</h1>
+  <h1>Ture</h1>
+
+  <%= render :partial => 'trips/search' %>
 
   <table id="trips-table" class="table table-hover">
     <thead>
@@ -19,7 +21,7 @@
 
     <tbody>
       <% @trips.each do |trip| %>
-        <tr id="<%= trip.id %>" ng-click="selectTrip('<%= trip.id %>')">
+        <tr id="<%= trip.id %>" ng-click="selectTrip('<%= trip.id %>')" class="hand-cursor">
 			<td><%= trip.license_plate %></td>
   			  <td><%= trip.cargo %></td>
   			  <td><%= trip.start_address %></td>
@@ -40,5 +42,7 @@
 
   <br>
 
-  <%= link_to 'New Trip', new_trip_path, :class =>"btn btn-primary" %>
+  <div class="row">
+    <%= link_to 'Ny Tur', new_trip_path, :class =>"btn btn-success float-right" %>
+  </div>
 </div>

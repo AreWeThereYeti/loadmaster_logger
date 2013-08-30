@@ -30,8 +30,8 @@ class InvoicesController < ApplicationController
   def create
     puts 'create ran'
     @invoice = Invoice.new(invoice_params)
-    @invoice.timestamp=Time.new(params[:timestamp][:year],params[:timestamp][:month],params[:timestamp][:day],params[:timestamp][:hour],params[:timestamp][:minute])
-    @invoice.due_date=Time.new(params[:due_date][:year],params[:due_date][:month],params[:due_date][:day],params[:due_date][:hour],params[:due_date][:minute])
+    @invoice.timestamp=get_timestamp(params[:timestamp])
+    @invoice.due_date=get_timestamp(params[:due_date])
     @invoice.user_id=current_user.id
 
     respond_to do |format|

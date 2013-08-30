@@ -11,59 +11,48 @@
     </div>
   <% end %>
 
-	<div class="field">
-    <%= f.label :license_plate %><br>
-    <%= f.text_field :license_plate %>
-  </div>
   <div class="field">
-    <%= f.label :device_id %><br>
-    <%= f.text_field :device_id %>
-  </div>
-  <div class="field">
-    <%= f.label :cargo %><br>
+    <%= f.label :last %><br>
     <%= f.text_field :cargo %>
   </div>
   <div class="field">
-    <%= f.label :start_location %><br>
-    <%= f.text_field :start_location %>
-  </div>
-  <div class="field">
-    <%= f.label :start_address %><br>
+    <%= f.label :start_adresse %><br>
     <%= f.text_field :start_address %>
   </div>
   <div class="field">
-    <%= f.label :end_location %><br>
-    <%= f.text_field :end_location %>
-  </div>
-  <div class="field">
-    <%= f.label :end_address %><br>
+    <%= f.label :slut_adress %><br>
     <%= f.text_field :end_address %>
   </div>
   <div class="field">
-    <%= f.label :start_timestamp %><br>
-    <%= f.text_field :start_timestamp %>
+    <%= f.label :tur_start %><br>
+    <%= select_datetime Date.today, :prefix => :start_timestamp %>
+    <!-- <%= f.text_field :start_timestamp %> -->
   </div>
   <div class="field">
-    <%= f.label :end_timestamp %><br>
-    <%= f.text_field :end_timestamp %>
+    <%= f.label :tur_slut %><br>
+    <%= select_datetime Date.today, :prefix => :end_timestamp %>
+    <!-- <%= f.text_field :end_timestamp %> -->
   </div>
   <div class="field">
-    <%= f.label :weight %><br>
+    <%= f.label :vægt %><br>
     <%= f.text_field :weight %>
   </div>
   <div class="field">
-    <%= f.label :costumer %><br>
+    <%= f.label :kunde %><br>
     <%= f.text_field :costumer %>
   </div>
   <div class="field">
-    <%= f.label :start_comments %><br>
-    <%= f.text_field :start_comments %>
-  </div>
-  <div class="field">
-    <%= f.label :end_comments %><br>
-    <%= f.text_field :end_comments %>
+    <%= f.label :kommentarer %><br>
+    <%= f.text_area :start_comments %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <div class="row">
+      <div class="col-md-6">
+        <%= button_to "Annuller", '/trips' , :class => 'btn btn-danger' %>
+      </div>
+      <div class="col-md-6">
+        <%= f.submit 'Gem Tur', :class => 'btn btn-success float-right'%>
+      </div>
+    </div>
   </div>
 <% end %>

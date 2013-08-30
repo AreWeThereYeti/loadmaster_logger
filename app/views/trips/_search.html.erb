@@ -1,0 +1,14 @@
+<%= form_tag('/trips/search', :method => :get) do %>
+  <div class="row">
+    <div class="span5">
+      <% if @search_str %>
+        <%= text_field :search, '', :class => 'span4 inline', :id => 'user-search-field',:value => @search_str %>
+      <% else %>
+        <%= text_field :search, '', :placeholder => 'Søg efter en tur', :class => 'inline', :id => 'user-search-field' %>
+      <% end %>
+      <div class="actions inline">
+        <%= submit_tag "Søg", :class => 'btn btn-success' %>
+      </div>
+    </div>
+  </div>
+<% end %>

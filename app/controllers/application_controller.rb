@@ -29,4 +29,8 @@ class ApplicationController < ActionController::Base
       redirect_to root_url, :alert => "You are not authorized to access this ressource" unless current_user.role? :admin, current_user.role_id
     end
     
+    def get_timestamp(hash)
+        return Time.new(hash[:year],hash[:month],hash[:day],hash[:hour],hash[:minute])
+    end
+    
 end
