@@ -22,4 +22,11 @@ class ApplicationController < ActionController::Base
     redirect_to root_url, :alert => "You are not authorized to access this ressource"
   end
   
+  private
+  
+    def verify_admin
+      :authenticate_user!
+      redirect_to root_url, :alert => "You are not authorized to access this ressource" unless current_user.role? :admin, current_user.role_id
+    end
+    
 end

@@ -16,7 +16,7 @@ class Trip
   field :costumer, type: String
   field :start_comments, type: String
   field :end_comments, type: String
-
+  #field :trip_id, type: String
   
   field :user_id, type: String
   

@@ -8,4 +8,15 @@ module ApplicationHelper
   #   end
   # end
   
+  def is_admin
+    unless !user_signed_in?
+      if current_user.role? :admin, current_user 
+        return true
+      else
+        return false
+      end
+    end
+    return false
+  end
+  
 end

@@ -1,3 +1,15 @@
+<% if @user.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@user.errors.count, "error") %> prohibited this mobile_device from being saved:</h2>
+
+    <ul>
+    <% @user.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <div class="control-group">
    <%= f.label :username, t("activerecord.attributes.user.email", :default => "Username"), :class => 'control-label' %>
   <div class="input">

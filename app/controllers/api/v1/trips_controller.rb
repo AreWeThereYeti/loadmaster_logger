@@ -27,16 +27,17 @@ module Api
         error=false
         user_id=MobileDevice.where(:access_token=>params[:access_token]).first.user_id
         params[:trips].each do |trip|
+          trip_id=trip[1][:trip_id]         #save ref to trip id in case @trip.save fails (used in return response)
           if !create_trip(trip[1],user_id)
             error=true
-            err_objs.push(trip[1])
+            err_objs.push(trip_id)
           end
         end
         respond_to do |format|
           if !error
             format.json { render json: 'success', status: :created, location: @trip }
           else
-            format.json { render json: {:msg => "Could not save the following trips. Please check that all required fields are filled out (license_plate, cargo, start_location, end_location, start_timestamp, end_timestamp)", :trips => err_objs}, status: :unprocessable_entity }
+            format.json { render json: {:msg => "Could not save the following trips. Please check that all required fields are filled out (license_plate, cargo, start_location, end_location, start_timestamp, end_timestamp)", :err_ids => err_objs}, status: :unprocessable_entity }
           end
         end
       end
@@ -45,14 +46,13 @@ module Api
       private
       
       def create_trip(trip,user_id)
-        @trip = Trip.new(trip)
         return false unless check_required_params(trip)
+        trip.delete("trip_id")
+        @trip = Trip.new(trip)
         @trip.user_id=user_id
         if @trip.save
-          puts 'save trip successfully!!'
           return true
         else
-          puts 'save trip error!!!'
           return false
         end
       end
@@ -64,8 +64,11 @@ module Api
         # end
         
         # as url query: e.g http://localhost:3000/api/v1/trips?access_token={api_key}
-        
-        head :unauthorized unless ApiKey.where(access_token: params[:access_token]).exists? && MobileDevice.where(access_token: params[:access_token]).first.device_id == params[:device_id]
+        unless ApiKey.where(access_token: params[:access_token]).exists? && MobileDevice.where(access_token: params[:access_token]).first.device_id == params[:device_id]
+          respond_to do |format| 
+            format.json { render json: "Your mobile device's ID doesn't match the ID we have in our records. Please register the mobile device in the Loadmaster Logger web application and try again", status: :unauthorized } 
+          end
+        end 
       end
       
       # Never trust parameters from the scary internet, only allow the white list through.
@@ -91,11 +94,14 @@ module Api
       end
 
       def check_required_params(trip)
-        if trip.has_key?('license_plate') && trip.has_key?('cargo') && trip.has_key?('start_location') && trip.has_key?('end_location') && trip.has_key?('start_timestamp') && trip.has_key?('end_timestamp')
-          true
-        else
-          false
+        if trip.has_key?('trip_id') && trip.has_key?('license_plate') && trip.has_key?('cargo') && trip.has_key?('start_timestamp') && trip.has_key?('end_timestamp')
+          if trip.has_key?('start_location') || trip.has_key?('start_address')
+            if trip.has_key?('end_location') || trip.has_key?('end_address')
+              return true
+            end
+          end
         end
+        return false
       end
     
     end

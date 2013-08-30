@@ -8,7 +8,7 @@ class Ability
         puts 'this is admin'
         can :manage, :all
       elsif user.role? :hauler, user.role_id
-        puts 'this is hauler'
+        puts '----------------this is hauler-------------------'
         #user can manage any page, but only objects with a matching user_id
         can :manage, [User,Trip,Invoice], user_id: user.id.to_s
       else

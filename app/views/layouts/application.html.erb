@@ -10,43 +10,26 @@
 </head>
 <body ng-app="loadmaster">
   <div ng-loadmaster>
-
-    	<div class="navbar navbar-default">
-    	  <a class="navbar-brand" href="/">Loadmaster Logger</a>
-    	  <ul class="nav navbar-nav">
-    	    <li class="active"><a href="/">Home</a></li>
-    	    <li><a href="/trips">Ture</a></li>
-    	    <li><a href="/admin">Users</a></li>
-    	  </ul>
-    	  <% if user_signed_in? %>
-    	    <ul class="nav navbar-nav pull-right">
-    	      <li>
-    	        <%= link_to "My Profile", user_path(current_user) %>
-    	      </li>
-    	      <li>
-    	        <%= link_to('Logout', destroy_user_session_path, :method=>'delete') %>
-    	      </li>  
-    	    </ul>
-    	  <%end%>
-    	</div>
-
+    
+    <%= render 'shared/navbar'%>
+      
     <div class="container">
-
-
+      <div class="content">
 	    	<% flash.each do |name, msg| %>
 	    	 <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
 	    	  <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
 	    	 </div>
 	    	<% end %>
+	    </div>
+	  </div>
 	    	
 	
-    	<div class="container">
-    	  <div class="content">
-    	    <%= yield %>
-    	  </div>
-    	</div>
-    </div>
-
+  	<div class="container">
+  	  <div class="content">
+  	    <%= yield %>
+  	  </div>
+  	</div>
+  	
     <div class="footer"></div>
   </div>
 </body>

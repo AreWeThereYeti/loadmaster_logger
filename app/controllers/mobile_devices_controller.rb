@@ -1,16 +1,19 @@
 class MobileDevicesController < ApplicationController
   before_action :set_mobile_device, only: [:show, :edit, :update, :destroy]
-  before_filter :authenticate_user!
+  before_filter :verify_admin
+  helper_method :user
 
   # GET /mobile_devices
   # GET /mobile_devices.json
   def index
-    @mobile_devices = MobileDevice.all
+    @mobile_devices = MobileDevice.limit(15)
   end
 
   # GET /mobile_devices/1
   # GET /mobile_devices/1.json
   def show
+    @mobile_device = MobileDevice.find(params[:id])
+    @mobile_device_user = User.where(:id => @mobile_device.user_id).first.username
   end
 
   # GET /mobile_devices/new
@@ -34,7 +37,7 @@ class MobileDevicesController < ApplicationController
           format.html { render action: 'new' }
         end
         
-        format.html { redirect_to @mobile_device, notice: 'Mobile device was successfully created.' }
+        format.html { redirect_to @mobile_device, notice: 'Den mobile enhed blev oprettet. Indtast nu denne kode på dit android device: '+ @mobile_device.access_token.to_s }
         format.json { render action: 'show', status: :created, location: @mobile_device }
       else
         format.html { render action: 'new' }
@@ -79,5 +82,10 @@ class MobileDevicesController < ApplicationController
       params.require(:mobile_device).permit(
         :device_id,
         :user_id)
+    end
+    
+    def verify_admin
+      :authenticate_user!
+      redirect_to root_url, :alert => "You are not authorized to access this ressource" unless current_user.role? :admin, current_user.role_id
     end
 end
