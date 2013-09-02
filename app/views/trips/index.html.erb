@@ -5,16 +5,14 @@
   <table id="trips-table" class="table table-hover">
     <thead>
       <tr>
-        <th>License plate</th>
-        <th>Cargo</th>
-        <th>Start address</th>
-        <th>End address</th>
-        <th>Start timestamp</th>
-        <th>End timestamp</th>
-        <th>Weight</th>
-        <th>Costumer</th>
-        <th>Start comments</th>
-        <th>End comments</th>
+        <th><%= sortable 'Nummer Plade', 'license_plate' %></th>
+        <th><%= sortable 'Last', 'cargo' %></th>
+        <th><%= sortable 'Start Adresse', 'start_address' %></th>
+        <th><%= sortable 'Slut Adresse', 'end_address' %></th>
+        <th><%= sortable 'Tur Start','start_timestamp' %></th>
+        <th><%= sortable 'Tur Slut', 'end_timestamp' %></th>
+        <th><%= sortable 'Vægt', 'weight' %></th>
+        <th><%= sortable 'Kunde', 'costumer' %></th>
       </tr>
     </thead>
 
@@ -29,8 +27,6 @@
   			  <td><%= trip.end_timestamp %></td>
   			  <td><%= trip.weight %></td>
   			  <td><%= trip.costumer %></td>
-  			  <td><%= trip.start_comments %></td>
-  			  <td><%= trip.end_comments %></td>
           <!-- <td><%= link_to 'Show', trip %></td>
           <td><%= link_to 'Edit', edit_trip_path(trip) %></td> -->
           <td><%= link_to 'Slet', trip, method: :delete, data: { confirm: 'Are you sure?' }, :class =>"btn btn-danger btn-xs" %></td>

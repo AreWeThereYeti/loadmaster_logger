@@ -22,6 +22,7 @@ gem "therubyracer"
 
 # Use LESS for stylesheets
 gem "less-rails"
+gem 'sass-rails'
 
 
 # Use Uglifier as compressor for JavaScript assets

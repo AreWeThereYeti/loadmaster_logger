@@ -2,11 +2,13 @@ class TripsController < ApplicationController
   load_and_authorize_resource except: [:create]
   before_action :set_trip, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!
+  
+  helper_method :sort_column, :sort_direction
 
   # GET /trips
   # GET /trips.json
   def index
-    @trips = Trip.where(:user_id => current_user.user_id)
+    @trips = Trip.where(:user_id => current_user.user_id).order_by([[sort_column, sort_direction]])
   end
 
   # GET /trips/1
@@ -95,5 +97,13 @@ class TripsController < ApplicationController
         :costumer,
         :commentary,
         :user_id)
+    end
+    
+    def sort_column
+      Trip.fields.keys.include?(params[:sort]) ? params[:sort] : "start_timestamp"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
     end
 end
