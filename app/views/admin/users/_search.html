@@ -1,15 +1,14 @@
-<%= form_tag('/trips/search', :method => :get) do %>
+<%= form_tag('/admin/users/search', :method => :get) do %>
   <div class="row">
     <div class="col-md-4">
       <div class="input-group">
         <% if @search_str %>
-          <%= text_field :search, '', :class => 'form-control', :value => @search_str %>
+          <%= text_field :search, '', :class => 'form-control',:value => @search_str %>
         <% else %>
-          <%= text_field :search, '', :placeholder => 'Søg efter en tur', :class => 'form-control', :id => 'user-search-field' %>
+          <%= text_field :search, '', :placeholder => 'Søg efter en bruger', :class => 'form-control', :id => 'user-search-field' %>
         <% end %>
         <span class="input-group-addon with-btn"><%= submit_tag "Søg", :class => 'btn btn-info' %></span>
       </div>
     </div>
   </div>
 <% end %>
-

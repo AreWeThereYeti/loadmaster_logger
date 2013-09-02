@@ -104,6 +104,11 @@ class Admin::UsersController < ApplicationController
     end
   end
   
+  def search
+    @users = string_search(params[:search],User,50)   #(search_str,the_model,max_results)
+    render 'index'
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -112,7 +117,6 @@ class Admin::UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      puts 'user_params ran'
       params.require(:user).permit(
         :username,
         :email,

@@ -33,4 +33,9 @@ class ApplicationController < ActionController::Base
         return Time.new(hash[:year],hash[:month],hash[:day],hash[:hour],hash[:minute])
     end
     
+    def string_search(search_str,the_model,max_results)
+      search_str.kind_of?(Array) ? @search_str=search_str.first.to_s : @search_str=search_str.to_s
+      the_model.full_text_search(@search_str, {:max_results => max_results})
+    end
+    
 end

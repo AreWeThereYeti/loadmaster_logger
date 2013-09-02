@@ -30,6 +30,7 @@ LoadmasterLogger::Application.routes.draw do
   	get '/' => 'users#index'
   	get '/new_mobile' => 'users#new_mobile'
   	post '/form_mobile' => 'users#create_mobile'
+  	get '/users/search' => 'users#search'
   	resources :users
   end
   

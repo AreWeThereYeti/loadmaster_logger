@@ -69,9 +69,7 @@ class TripsController < ApplicationController
   end
   
   def search
-    params[:search].kind_of?(Array) ? @search_str=params[:search].first.to_s : @search_str=params[:search].to_s
-    page_size=50
-    @trips = Trip.full_text_search(@search_str, {:max_results => page_size})
+    @trips = string_search(params[:search],Trip,50)   #(search_str,the_model,max_results)
     render 'index'
   end
 

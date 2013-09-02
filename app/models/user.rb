@@ -1,5 +1,6 @@
 class User
   include Mongoid::Document
+  include Mongoid::Search
   ## Database authenticatable
   
   has_and_belongs_to_many :roles
@@ -60,6 +61,7 @@ class User
   # Roles
   field :role_id, :type => String
 
+  search_in :username, :email, :role_id
 
   
   def email_required?
