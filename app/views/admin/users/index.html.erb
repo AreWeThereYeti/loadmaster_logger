@@ -4,21 +4,20 @@
 	<table class="table table-striped table-bordered table-hover">
 	 <thead>
 	  <tr>
-	    <th>ID</th>
-	        <th>
+	    <th>Username</th>
+	    <th>
 	      <%= t("activerecord.attributes.user.email", :default => t("activerecord.labels.email", :default => "Email")) %>
 	    </th>
-	        <th>Created at</th>
-	    <th>Actions</th>
+	    <th></th>
 	  </tr>
 	  </thead>
 	  <tbody>
 	  <% @users.each do |user| -%>
 	   <tr>
-	    <td><%= user.id %></td>
-	        <td><%= link_to user.email, admin_user_path(user) %>
+	    <td><%= user.username %></td>
+	    <td>
+	      <%= link_to user.email, admin_user_path(user) %>
 	    </td>
-	       <td><%= user.remember_created_at %></td>
 	    <td>
 	      <%= link_to "Show", admin_user_path(user), :class =>"btn btn-info btn-xs" %>
 	      <%= link_to "Edit", edit_admin_user_path(user), :class =>"btn btn-warning btn-xs" %>
