@@ -73,6 +73,9 @@ GEM
       railties (>= 3.1.0)
       turbolinks
     json (1.8.0)
+    kaminari (0.14.1)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
     less (2.3.2)
       commonjs (~> 0.2.6)
     less-rails (2.3.3)
@@ -167,6 +170,7 @@ DEPENDENCIES
   jbuilder (~> 1.0.1)
   jquery-rails
   jquery-turbolinks
+  kaminari
   less
   less-rails
   mongo_mapper

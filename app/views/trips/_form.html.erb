@@ -12,6 +12,10 @@
   <% end %>
 
   <div class="field">
+    <%= f.label :nummerplade %><br>
+    <%= f.text_field :license_plate %>
+  </div>
+  <div class="field">
     <%= f.label :last %><br>
     <%= f.text_field :cargo %>
   </div>
@@ -26,12 +30,10 @@
   <div class="field">
     <%= f.label :tur_start %><br>
     <%= select_datetime Date.today, :prefix => :start_timestamp %>
-    <!-- <%= f.text_field :start_timestamp %> -->
   </div>
   <div class="field">
     <%= f.label :tur_slut %><br>
     <%= select_datetime Date.today, :prefix => :end_timestamp %>
-    <!-- <%= f.text_field :end_timestamp %> -->
   </div>
   <div class="field">
     <%= f.label :vægt %><br>

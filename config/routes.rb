@@ -11,9 +11,9 @@ LoadmasterLogger::Application.routes.draw do
   devise_for :users
   resources :users
   
-
-  
   resources :homes
+  
+  get "invoices/search" => 'invoices#search'
   
 
   # The priority is based upon order of creation: first created -> highest priority.

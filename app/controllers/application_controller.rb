@@ -37,5 +37,9 @@ class ApplicationController < ActionController::Base
       search_str.kind_of?(Array) ? @search_str=search_str.first.to_s : @search_str=search_str.to_s
       the_model.full_text_search(@search_str, {:max_results => max_results})
     end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
+    end
     
 end

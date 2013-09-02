@@ -1,47 +1,53 @@
-<h1>Listing invoices</h1>
+<h1>Dine Fakturaer</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Timestamp</th>
-      <th>Trips</th>
-      <th>Price</th>
-      <th>Costumer</th>
-      <th>Description</th>
-      <th>Due date</th>
-      <th>Cvr</th>
-      <th>Commentary</th>
-      <th>End note</th>
-      <th>Invoice number</th>
-      <th>Sales taxes</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+<%= render :partial => 'shared/search', :locals => {:placeholder => 'Søg efter en faktura'} %>
 
-  <tbody>
-    <% @invoices.each do |invoice| %>
-      <tr>
-        <td><%= invoice.timestamp %></td>
-        <td><%= invoice.trips %></td>
-        <td><%= invoice.price %></td>
-        <td><%= invoice.costumer %></td>
-        <td><%= invoice.description %></td>
-        <td><%= invoice.due_date %></td>
-        <td><%= invoice.cvr %></td>
-        <td><%= invoice.commentary %></td>
-        <td><%= invoice.end_note %></td>
-        <td><%= invoice.invoice_number %></td>
-        <td><%= invoice.sales_taxes %></td>
-        <td><%= link_to 'Show', invoice %></td>
-        <td><%= link_to 'Edit', edit_invoice_path(invoice) %></td>
-        <td><%= link_to 'Destroy', invoice, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="row">
+  <div class="col-md-12">
+    <table id="invoices-table" class="table table-hover">
+      <thead>
+        <tr>
+          <th><%= sortable 'Dato', 'timestamp' %></th>
+          <th><%= sortable 'Pris', 'price' %></th>
+          <th><%= sortable 'Køber', 'costumer' %></th>
+          <th>Beskrivelse</th>
+          <th><%= sortable 'Betalings Dato', 'due_date' %></th>
+          <th>CVR</th>
+          <th>Kommentarer</th>
+          <th><%= sortable 'Faktura Nr.', 'invoice_number' %></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
 
-<br>
+      <tbody>
+        <% @invoices.each do |invoice| %>
+          <tr id="<%= invoice.id %>" ng-click="selectTableRow('invoices','<%= invoice.id %>')" class="hand-cursor">
+            <td><%= invoice.timestamp %></td>
+            <td><%= invoice.price %></td>
+            <td><%= invoice.costumer %></td>
+            <td><%= invoice.description %></td>
+            <td><%= invoice.due_date %></td>
+            <td><%= invoice.cvr %></td>
+            <td><%= invoice.commentary %></td>
+            <td><%= invoice.invoice_number %></td>
+            <td><%= link_to 'Slet', invoice, method: :delete, data: { confirm: 'Er du sikker?' }, :class =>"btn btn-danger btn-xs" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
 
-<%= link_to 'New Invoice', new_invoice_path %>
+<div class="row">
+  <div class="col-md-12">
+    <div class="center">
+      <%= paginate @invoices %>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <%= link_to 'Ny Faktura', new_invoice_path, :class =>"btn btn-success float-right" %>
+</div>

@@ -1,7 +1,6 @@
 class User
   include Mongoid::Document
   include Mongoid::Search
-  ## Database authenticatable
   
   has_and_belongs_to_many :roles
   has_many :trips

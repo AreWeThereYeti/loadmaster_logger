@@ -1,5 +1,6 @@
 class Invoice
   include Mongoid::Document
+  include Mongoid::Search
   
   has_and_belongs_to_many :users
   
@@ -15,5 +16,7 @@ class Invoice
   field :end_note,          :type => String 
   field :invoice_number,    :type => Integer 
   field :sales_taxes,       :type => Integer
+  
+  search_in :price, :invoice_number, :costumer
   
 end

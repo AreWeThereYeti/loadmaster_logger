@@ -8,24 +8,26 @@
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
-  <%= render 'shared/navbar'%>
+<body ng-app="loadmaster">
+  <div ng-loadmaster>
+    <%= render 'shared/navbar'%>
 
-  <div class="container">
-    <div class="content">
-    	<% flash.each do |name, msg| %>
-    	 <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
-    	  <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
-    	 </div>
-    	<% end %>
+    <div class="container">
+      <div class="content">
+      	<% flash.each do |name, msg| %>
+      	 <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
+      	  <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
+      	 </div>
+      	<% end %>
+      </div>
     </div>
-  </div>
-	<div class="container">
-	  <div class="content">
-	    <%= yield %>
-	  </div>
-	</div>
+  	<div class="container">
+  	  <div class="content">
+  	    <%= yield %>
+  	  </div>
+  	</div>
 	
-  <div class="footer"></div>
+    <div class="footer"></div>
+  </div>
 </body>
 </html>

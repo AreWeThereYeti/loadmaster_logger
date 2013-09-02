@@ -1,39 +1,51 @@
 <div ng-trips>
   <h1>Ture</h1>
-  <%= render :partial => 'trips/search' %>
+  <%= render :partial => 'shared/search', :locals => {:placeholder => 'Søg efter en faktura'} %>
 
-  <table id="trips-table" class="table table-hover">
-    <thead>
-      <tr>
-        <th><%= sortable 'Nummer Plade', 'license_plate' %></th>
-        <th><%= sortable 'Last', 'cargo' %></th>
-        <th><%= sortable 'Start Adresse', 'start_address' %></th>
-        <th><%= sortable 'Slut Adresse', 'end_address' %></th>
-        <th><%= sortable 'Tur Start','start_timestamp' %></th>
-        <th><%= sortable 'Tur Slut', 'end_timestamp' %></th>
-        <th><%= sortable 'Vægt', 'weight' %></th>
-        <th><%= sortable 'Kunde', 'costumer' %></th>
-      </tr>
-    </thead>
+  <div class="row">
+	  <div class="col-md-12">
+      <table id="trips-table" class="table table-hover">
+        <thead>
+          <tr>
+            <th><%= sortable 'Nummer Plade', 'license_plate' %></th>
+            <th><%= sortable 'Last', 'cargo' %></th>
+            <th><%= sortable 'Start Adresse', 'start_address' %></th>
+            <th><%= sortable 'Slut Adresse', 'end_address' %></th>
+            <th><%= sortable 'Tur Start','start_timestamp' %></th>
+            <th><%= sortable 'Tur Slut', 'end_timestamp' %></th>
+            <th><%= sortable 'Vægt', 'weight' %></th>
+            <th><%= sortable 'Kunde', 'costumer' %></th>
+          </tr>
+        </thead>
 
-    <tbody>
-      <% @trips.each do |trip| %>
-        <tr id="<%= trip.id %>" ng-click="selectTrip('<%= trip.id %>')" class="hand-cursor">
-			<td><%= trip.license_plate %></td>
-  			  <td><%= trip.cargo %></td>
-  			  <td><%= trip.start_address %></td>
-  			  <td><%= trip.end_address %></td>
-  			  <td><%= trip.start_timestamp %></td>
-  			  <td><%= trip.end_timestamp %></td>
-  			  <td><%= trip.weight %></td>
-  			  <td><%= trip.costumer %></td>
-          <!-- <td><%= link_to 'Show', trip %></td>
-          <td><%= link_to 'Edit', edit_trip_path(trip) %></td> -->
-          <td><%= link_to 'Slet', trip, method: :delete, data: { confirm: 'Are you sure?' }, :class =>"btn btn-danger btn-xs" %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+        <tbody>
+          <% @trips.each do |trip| %>
+            <tr id="<%= trip.id %>" ng-click="selectTableRow('trips','<%= trip.id %>')" class="hand-cursor">
+    			<td><%= trip.license_plate %></td>
+      			  <td><%= trip.cargo %></td>
+      			  <td><%= trip.start_address %></td>
+      			  <td><%= trip.end_address %></td>
+      			  <td><%= trip.start_timestamp %></td>
+      			  <td><%= trip.end_timestamp %></td>
+      			  <td><%= trip.weight %></td>
+      			  <td><%= trip.costumer %></td>
+              <!-- <td><%= link_to 'Show', trip %></td>
+              <td><%= link_to 'Edit', edit_trip_path(trip) %></td> -->
+              <td><%= link_to 'Slet', trip, method: :delete, data: { confirm: 'Are you sure?' }, :class =>"btn btn-danger btn-xs" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <div class="row">
+	  <div class="col-md-12">
+	    <div class="center">
+        <%= paginate @trips %>
+	    </div>
+	  </div>
+	</div>
 
   <br>
 

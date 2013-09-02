@@ -50,6 +50,9 @@ gem 'jbuilder', '~> 1.0.1'
 gem 'devise', '3.0.0.rc'
 gem 'cancan', '~> 1.6.10'
 
+#pagination
+gem 'kaminari'
+
 group :assets do
   gem 'less'
 end

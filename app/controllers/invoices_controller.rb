@@ -2,13 +2,14 @@ class InvoicesController < ApplicationController
   load_and_authorize_resource except: [:create]
   
   before_action :set_invoice, only: [:show, :edit, :update, :destroy]
-
   before_filter :authenticate_user!
+  
+  helper_method :sort_column, :sort_direction
 
   # GET /invoices
   # GET /invoices.json
   def index
-    @invoices = Invoice.where(:user_id => current_user.id.to_s)
+    @invoices = Invoice.where(:user_id => current_user.id.to_s).order_by([[sort_column, sort_direction]]).page(params[:page]).per(25)
   end
 
   # GET /invoices/1
@@ -68,6 +69,11 @@ class InvoicesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def search
+    @invoices = string_search(params[:search],Invoice,25).page(params[:page]).per(25)    #(search_str,the_model,max_results)
+    render 'index'
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -78,5 +84,9 @@ class InvoicesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def invoice_params
       params.require(:invoice).permit(:timestamp, :hauler_id, :trips, :price, :costumer, :description, :due_date, :cvr, :commentary, :end_note, :invoice_number, :sales_taxes)
+    end
+    
+    def sort_column
+      Invoice.fields.keys.include?(params[:sort]) ? params[:sort] : 'timestamp'
     end
 end

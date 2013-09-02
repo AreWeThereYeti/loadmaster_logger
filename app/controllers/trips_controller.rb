@@ -8,7 +8,7 @@ class TripsController < ApplicationController
   # GET /trips
   # GET /trips.json
   def index
-    @trips = Trip.where(:user_id => current_user.user_id).order_by([[sort_column, sort_direction]])
+    @trips = Trip.where(:user_id => current_user.user_id).order_by([[sort_column, sort_direction]]).page(params[:page]).per(25) 
   end
 
   # GET /trips/1
@@ -69,7 +69,7 @@ class TripsController < ApplicationController
   end
   
   def search
-    @trips = string_search(params[:search],Trip,50)   #(search_str,the_model,max_results)
+    @trips = string_search(params[:search],Trip,25).page(params[:page]).per(25)   #(search_str,the_model,max_results)
     render 'index'
   end
 
@@ -98,10 +98,7 @@ class TripsController < ApplicationController
     end
     
     def sort_column
-      Trip.fields.keys.include?(params[:sort]) ? params[:sort] : "start_timestamp"
+      Trip.fields.keys.include?(params[:sort]) ? params[:sort] : 'start_timestamp'
     end
-
-    def sort_direction
-      %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
-    end
+    
 end

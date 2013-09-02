@@ -2,12 +2,14 @@ class Admin::UsersController < ApplicationController
   load_and_authorize_resource except: [:create]
   before_filter :verify_admin
   
+  helper_method :sort_column, :sort_direction
+  
   layout "admin"
   
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    @users = User.all.order_by([[sort_column, sort_direction]]).page(params[:page]).per(25)
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => @users }
@@ -45,8 +47,6 @@ class Admin::UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    puts 'edit ran in admin user controller'
-    #redirect_to root_url, :alert => "You are not authorized to access this ressource..." unless current_user.role? :admin
     @user = User.find(params[:id])
   end
 
@@ -105,7 +105,7 @@ class Admin::UsersController < ApplicationController
   end
   
   def search
-    @users = string_search(params[:search],User,50)   #(search_str,the_model,max_results)
+    @users = string_search(params[:search],User,25).page(params[:page]).per(25)    #(search_str,the_model,max_results)
     render 'index'
   end
   
@@ -123,6 +123,10 @@ class Admin::UsersController < ApplicationController
         :password,
         :password_confirmation,
         :role_id)
+    end
+    
+    def sort_column
+      User.fields.keys.include?(params[:sort]) ? params[:sort] : 'username'
     end
 
 end
