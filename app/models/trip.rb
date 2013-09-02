@@ -22,6 +22,6 @@ class Trip
   
   field :access_token, type: String
   
-  search_in :start_address, :end_address, :cargo
+  search_in :start_address, :end_address, :cargo, :license_plate  
   
 end

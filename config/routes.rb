@@ -4,11 +4,15 @@ LoadmasterLogger::Application.routes.draw do
   resources :mobile_devices
 
   get "users/index"
+  get "trips/search" => 'trips#search'
+  resources :trips
+
   #devise_for :users, :skip => [:registrations] 
   devise_for :users
   resources :users
   
-  resources :trips
+
+  
   resources :homes
   
 
