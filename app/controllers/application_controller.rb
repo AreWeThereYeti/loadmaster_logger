@@ -56,4 +56,8 @@ class ApplicationController < ActionController::Base
       25
     end
     
+    def max_search_results
+      100
+    end
+    
 end

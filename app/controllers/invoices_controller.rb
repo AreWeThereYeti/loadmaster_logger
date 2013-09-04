@@ -74,7 +74,7 @@ class InvoicesController < ApplicationController
     if params[:search].empty? || params[:search][0].empty?
       redirect_to invoices_path
     else
-      @invoices = sort_search_results(string_search(params[:search],Invoice,100))
+      @invoices = sort_search_results(string_search(params[:search],Invoice,max_search_results))
       render 'index'
     end
   end

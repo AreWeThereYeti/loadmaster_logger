@@ -1,31 +1,42 @@
-<h1>Listing mobile_devices</h1>
+<h1>Registrede mobile enheder</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Bruger</th>
-      <th>ID</th>
-      <th>Access Token</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+<%= render :partial => 'shared/search', :locals => {:placeholder => 'Søg efter en mobil enhed'} %>
+<div class="row">
+  <div class="col-md-12">
+    <table id="mobile-devices-table" class="table table-hover">
+      <thead>
+        <tr>
+          <th><%= sortable 'Username', 'user_id' %></th>
+          <th><%= sortable 'ID', 'device_id' %></th>
+          <th>Access Token</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
 
-  <tbody>
-    <% @mobile_devices.each do |mobile_device| %>
-      <tr>
-        <td><%= username(mobile_device) %></td>
-        <td><%= mobile_device.device_id%></td>
-        <td><%= mobile_device.access_token%></td>
-        <td><%= link_to 'Show', mobile_device, :class =>"btn btn-info btn-xs" %></td>
-        <td><%= link_to 'Edit', edit_mobile_device_path(mobile_device), :class =>"btn btn-warning btn-xs" %></td>
-        <td><%= link_to 'Destroy', mobile_device, method: :delete, data: { confirm: 'Are you sure?' }, :class =>"btn btn-danger btn-xs" %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <tbody>
+        <% @mobile_devices.each do |mobile_device| %>
+          <tr id="<%= mobile_device.id %>" ng-click="selectTableRow('mobile_devices','<%= mobile_device.id %>')" class="hand-cursor">
+            <td><%= mobile_device.username %></td>
+            <td><%= mobile_device.device_id%></td>
+            <td><%= mobile_device.access_token%></td>
+            <td><%= link_to 'Slet', mobile_device, method: :delete, data: { confirm: 'Are you sure?' }, :class =>"btn btn-danger btn-xs" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
 
-<br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="center">
+      <%= paginate @mobile_devices %>
+    </div>
+  </div>
+</div>
 
-<%= link_to 'New Mobile device', new_mobile_device_path, :class => 'btn btn-primary' %>
+<div class="row">
+  <%= link_to 'Ny Mobil Enhed', new_mobile_device_path, :class =>"btn btn-success float-right" %>
+</div>

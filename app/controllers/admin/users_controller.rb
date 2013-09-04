@@ -108,7 +108,7 @@ class Admin::UsersController < ApplicationController
     if params[:search].empty? || params[:search][0].empty?
       redirect_to admin_users_path
     else
-      @users = sort_search_results(string_search(params[:search],User,100))
+      @users = sort_search_results(string_search(params[:search],User,max_search_results))
       render 'index'
     end
   end

@@ -19,9 +19,8 @@ class Trip
   field :end_comments, type: String
   
   field :user_id, type: String
-  
   field :access_token, type: String
   
-  search_in :start_address, :end_address, :cargo, :license_plate, :costumer  
+  search_in :start_address, :end_address, :cargo, :license_plate, :costumer, :weight
   
 end

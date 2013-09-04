@@ -1,12 +1,13 @@
 class MobileDevicesController < ApplicationController
   before_action :set_mobile_device, only: [:show, :edit, :update, :destroy]
   before_filter :verify_admin
-  helper_method :user
+  helper_method :user, :sort_column, :sort_direction
+  
 
   # GET /mobile_devices
   # GET /mobile_devices.json
   def index
-    @mobile_devices = MobileDevice.limit(15)
+    @mobile_devices = MobileDevice.all.order_by([[sort_column, sort_direction]]).page(params[:page]).per(results_per_page)
   end
 
   # GET /mobile_devices/1
@@ -36,7 +37,6 @@ class MobileDevicesController < ApplicationController
         if !User.find_by(:id => @mobile_device.user_id.to_s).add_to_set(:devices => @mobile_device.id)
           format.html { render action: 'new' }
         end
-        
         format.html { redirect_to @mobile_device, notice: 'Den mobile enhed blev oprettet. Indtast nu denne kode på dit android device: '+ @mobile_device.access_token.to_s }
         format.json { render action: 'show', status: :created, location: @mobile_device }
       else
@@ -70,6 +70,15 @@ class MobileDevicesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def search
+    if params[:search].empty? || params[:search][0].empty?
+      redirect_to mobile_devices_path
+    else
+      @mobile_devices = sort_search_results(string_search(params[:search],MobileDevice,max_search_results))
+      render 'index'
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -81,11 +90,16 @@ class MobileDevicesController < ApplicationController
     def mobile_device_params
       params.require(:mobile_device).permit(
         :device_id,
-        :user_id)
+        :user_id,
+        :username)
     end
     
     def verify_admin
       :authenticate_user!
       redirect_to root_url, :alert => "You are not authorized to access this ressource" unless current_user.role? :admin, current_user.role_id
+    end
+    
+    def sort_column
+      MobileDevice.fields.keys.include?(params[:sort]) ? params[:sort] : 'username'
     end
 end

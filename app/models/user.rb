@@ -5,7 +5,8 @@ class User
   has_and_belongs_to_many :roles
   has_many :trips
   has_many :invoices
-  has_many :mobile_devices
+  belongs_to :mobile_devices
+  
   
   accepts_nested_attributes_for :roles
   

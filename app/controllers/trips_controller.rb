@@ -72,7 +72,7 @@ class TripsController < ApplicationController
     if params[:search].empty? || params[:search][0].empty?
       redirect_to trips_path
     else
-      @trips = sort_search_results(string_search(params[:search],Trip,100))
+      @trips = sort_search_results(string_search(params[:search],Trip,max_search_results))
       render 'index'
     end
   end

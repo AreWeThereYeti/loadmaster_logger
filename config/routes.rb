@@ -2,8 +2,6 @@ LoadmasterLogger::Application.routes.draw do
   
   # You can have the root of your site routed with "root"
   root :to => 'home#index'
-  
-  resources :mobile_devices
 
   get "users/index"
   
@@ -17,6 +15,9 @@ LoadmasterLogger::Application.routes.draw do
   
   get "invoices/search" => 'invoices#search'
   resources :invoices
+  
+  get "mobile_devices/search" => 'mobile_devices#search'
+  resources :mobile_devices
 
   namespace :admin do
   	get '/' => 'users#index'
