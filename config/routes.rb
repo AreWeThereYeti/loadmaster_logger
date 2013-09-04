@@ -14,6 +14,7 @@ LoadmasterLogger::Application.routes.draw do
   resources :homes
   
   get "invoices/search" => 'invoices#search'
+  get "invoices/render_pdf" => 'invoices#render_pdf'
   resources :invoices
   
   get "mobile_devices/search" => 'mobile_devices#search'

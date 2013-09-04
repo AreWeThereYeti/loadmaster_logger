@@ -15,7 +15,7 @@ class InvoicesController < ApplicationController
   # GET /invoices/1
   # GET /invoices/1.json
   def show
-    puts '--------show ran-----------'
+    #@invoice = Invoice.find(params[:id])
   end
 
   # GET /invoices/new
@@ -77,6 +77,12 @@ class InvoicesController < ApplicationController
       @invoices = sort_search_results(string_search(params[:search],Invoice,max_search_results))
       render 'index'
     end
+  end
+  
+  def render_pdf   
+    render :pdf => "my_file_name",
+           :template => 'invoices/show.pdf.html.erb',
+           :layout => 'pdf'
   end
 
   private

@@ -53,6 +53,10 @@ gem 'cancan', '~> 1.6.10'
 #pagination
 gem 'kaminari'
 
+#pdf generation
+gem 'wkhtmltopdf-binary'
+gem 'wicked_pdf'
+
 group :assets do
   gem 'less'
 end

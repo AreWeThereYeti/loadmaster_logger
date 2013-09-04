@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Loadmaster Logger</title>
+  	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+  	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <%= wicked_pdf_stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => false %>
+    <%= wicked_pdf_javascript_include_tag "application", "data-turbolinks-track" => false %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <div>
+    	<div class="container">
+    	  <div class="content">
+    	    <%= yield %>
+    	  </div>
+    	</div>
+      <div class="footer">
+      </div>
+    </div>
+  </body>
+</html>
