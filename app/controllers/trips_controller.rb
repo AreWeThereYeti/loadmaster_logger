@@ -69,9 +69,14 @@ class TripsController < ApplicationController
   end
   
   def search
-    @trips = string_search(params[:search],Trip,25).page(params[:page]).per(25)   #(search_str,the_model,max_results)
-    render 'index'
+    if params[:search].empty? || params[:search][0].empty?
+      redirect_to trips_path
+    else
+      @trips = sort_search_results(string_search(params[:search],Trip,100))
+      render 'index'
+    end
   end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

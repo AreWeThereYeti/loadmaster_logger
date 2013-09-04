@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
   
   helper ApplicationHelper
   
+  helper_method :results_per_page
+  
   before_filter :authenticate_user!
   
   def has_role?(role)
@@ -40,6 +42,18 @@ class ApplicationController < ActionController::Base
 
     def sort_direction
       %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
+    end
+    
+    def sort_search_results(results)
+      if results.kind_of?(Array)
+        return Kaminari.paginate_array(results.sort_by{|h| sort_column}).page(params[:page]).per(results_per_page)
+      else
+        return results.order_by([[sort_column, sort_direction]]).page(params[:page]).per(results_per_page)
+      end
+    end
+    
+    def results_per_page
+      25
     end
     
 end

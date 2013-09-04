@@ -24,7 +24,7 @@ module ApplicationHelper
     direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
     #for default last first use:
     #direction = column == sort_column && sort_direction == "desc" ? "asc" : "desc"
-    link_to(title, {:sort => column, :direction => direction}) + content_tag(:i, '',:class=>css_class)
+    link_to(title, {:sort => column, :direction => direction, :search => params[:search]}) + content_tag(:i, '',:class=>css_class)
   end
   
 end

@@ -105,8 +105,12 @@ class Admin::UsersController < ApplicationController
   end
   
   def search
-    @users = string_search(params[:search],User,25).page(params[:page]).per(25)    #(search_str,the_model,max_results)
-    render 'index'
+    if params[:search].empty? || params[:search][0].empty?
+      redirect_to admin_users_path
+    else
+      @users = sort_search_results(string_search(params[:search],User,100))
+      render 'index'
+    end
   end
   
   private

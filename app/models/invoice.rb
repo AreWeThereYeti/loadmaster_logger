@@ -17,6 +17,6 @@ class Invoice
   field :invoice_number,    :type => Integer 
   field :sales_taxes,       :type => Integer
   
-  search_in :price, :invoice_number, :costumer
+  search_in :price, :invoice_number, :costumer, :cvr, :due_date, :timestamp
   
 end

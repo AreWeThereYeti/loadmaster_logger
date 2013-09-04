@@ -15,6 +15,7 @@ class InvoicesController < ApplicationController
   # GET /invoices/1
   # GET /invoices/1.json
   def show
+    puts '--------show ran-----------'
   end
 
   # GET /invoices/new
@@ -29,7 +30,6 @@ class InvoicesController < ApplicationController
   # POST /invoices
   # POST /invoices.json
   def create
-    puts 'create ran'
     @invoice = Invoice.new(invoice_params)
     @invoice.timestamp=get_timestamp(params[:timestamp])
     @invoice.due_date=get_timestamp(params[:due_date])
@@ -71,8 +71,12 @@ class InvoicesController < ApplicationController
   end
   
   def search
-    @invoices = string_search(params[:search],Invoice,25).page(params[:page]).per(25)    #(search_str,the_model,max_results)
-    render 'index'
+    if params[:search].empty? || params[:search][0].empty?
+      redirect_to invoices_path
+    else
+      @invoices = sort_search_results(string_search(params[:search],Invoice,100))
+      render 'index'
+    end
   end
 
   private
