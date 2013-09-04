@@ -27,4 +27,11 @@ module ApplicationHelper
     link_to(title, {:sort => column, :direction => direction, :search => params[:search]}) + content_tag(:i, '',:class=>css_class)
   end
   
+  def profile_username
+    if !current_user.username.empty?
+      current_user.username 
+    else
+      current_user.email
+    end
+  end
 end
