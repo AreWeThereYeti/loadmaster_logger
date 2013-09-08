@@ -37,7 +37,7 @@ module Api
         end
         respond_to do |format|
           if !error
-            format.json { render json: 'success', status: :created }
+            format.json { render json: {:msg => "success"}, status: :created }
           else
             format.json { render json: {:msg => "Could not save the following trips. Please check that all required fields are filled out (license_plate, cargo, start_location, end_location, start_timestamp, end_timestamp)", :err_ids => err_objs}, status: :unprocessable_entity }
           end
