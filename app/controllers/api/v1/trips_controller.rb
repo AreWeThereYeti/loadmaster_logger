@@ -12,7 +12,9 @@ module Api
       #   end
       # end
       
-      before_filter :authenticate_user!, except: [:create]  #overwrite devise and cancan auth
+      #before_filter :authenticate_user!, except: [:create]  #overwrite devise and cancan auth
+      skip_before_filter :authenticate_user!
+      skip_before_filter :verify_authenticity_token#, :if => Proc.new { |c| c.request.format == 'application/json' }
       before_filter :restrict_access
       
       respond_to :json
@@ -35,7 +37,7 @@ module Api
         end
         respond_to do |format|
           if !error
-            format.json { render json: 'success', status: :created, location: @trip }
+            format.json { render json: 'success', status: :created }
           else
             format.json { render json: {:msg => "Could not save the following trips. Please check that all required fields are filled out (license_plate, cargo, start_location, end_location, start_timestamp, end_timestamp)", :err_ids => err_objs}, status: :unprocessable_entity }
           end
@@ -66,7 +68,7 @@ module Api
         # as url query: e.g http://localhost:3000/api/v1/trips?access_token={api_key}
         unless ApiKey.where(access_token: params[:access_token]).exists? && MobileDevice.where(access_token: params[:access_token]).first.device_id == params[:device_id]
           respond_to do |format| 
-            format.json { render json: "Your mobile device's ID doesn't match the ID we have in our records. Please register the mobile device in the Loadmaster Logger web application and try again", status: :unauthorized } 
+            format.json { render json: "Your mobile device's ID doesnt match the ID we have in our records. Please register the mobile device in the Loadmaster Logger web application and try again", status: :unauthorized } 
           end
         end 
       end

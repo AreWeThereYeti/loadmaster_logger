@@ -2,9 +2,9 @@
   <h1>Ture</h1>
   <%= render :partial => 'shared/search', :locals => {:placeholder => 'Søg efter en faktura'} %>
 
-  <div class="row">
+  <div class="row" ng-trips-list>
 	  <div class="col-md-12">
-      <table id="trips-table" class="table table-hover">
+      <table id="trips-table" class="table table-hover" ng-trip-list>
         <thead>
           <tr>
             <th><%= sortable 'Nummer Plade', 'license_plate' %></th>
@@ -18,10 +18,10 @@
           </tr>
         </thead>
 
-        <tbody>
+        <tbody ng-trips-list>
           <% @trips.each do |trip| %>
-            <tr id="<%= trip.id %>" ng-click="selectTableRow('trips','<%= trip.id %>')" class="hand-cursor">
-    			<td><%= trip.license_plate %></td>
+            <tr id="<%= trip.id %>" ng-click="selectTableRow('<%= trip.id %>')" class="hand-cursor">
+    					<td><%= trip.license_plate %></td>
       			  <td><%= trip.cargo %></td>
       			  <td><%= trip.start_address %></td>
       			  <td><%= trip.end_address %></td>
@@ -29,10 +29,12 @@
       			  <td><%= trip.end_timestamp %></td>
       			  <td><%= trip.weight %></td>
       			  <td><%= trip.costumer %></td>
-              <!-- <td><%= link_to 'Show', trip %></td>
-              <td><%= link_to 'Edit', edit_trip_path(trip) %></td> -->
               <td><%= link_to 'Slet', trip, method: :delete, data: { confirm: 'Are you sure?' }, :class =>"btn btn-danger btn-xs" %></td>
-            </tr>
+            	<td ng-show="showDetails">Showing the details</td>
+						</tr>
+						<tr class="trip-list-details" ng-trips-list-item tripid="<%= trip.id.to_s.to_json %>" ng-show="showDetails">
+							<td> <div>show details here</div> </td>
+						</tr>
           <% end %>
         </tbody>
       </table>
