@@ -68,6 +68,18 @@ class TripsController < ApplicationController
     end
   end
   
+  # DELETE /trips/destroy_multiple
+  
+  def destroy_multiple
+    @objects=Trip.find(params[:ids])
+    @objects.each do |item|
+      if !item.delete
+        render :json => {:error => true, :msg => 'Trips could not be deleted'}
+      end
+    end
+    render :json => {:success => true, :msg => 'Trips were succesfully deleted'}
+  end
+  
   def search
     if params[:search].empty? || params[:search][0].empty?
       redirect_to trips_path

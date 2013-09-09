@@ -5,4 +5,9 @@ function loadmasterCtrl($scope,$element,$attrs) {
 		window.location.href="/"+controller+"/"+id
 	}
 	
+	$scope.preventDefault = function($event){
+		$event.preventDefault();
+		$event.stopImmediatePropagation();
+	}
+	
 }

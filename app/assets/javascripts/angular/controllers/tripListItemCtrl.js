@@ -13,4 +13,8 @@ function tripsListItemCtrl($scope,$element,$attrs) {
 		id==$scope.id ? $scope.select() : $scope.unselect()
 	})
 	
+	$scope.showDetails = function(){
+		return $scope.showDetails
+	}
+	
 }

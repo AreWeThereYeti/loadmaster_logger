@@ -84,6 +84,13 @@ class InvoicesController < ApplicationController
            :template => 'invoices/show.pdf.html.erb',
            :layout => 'pdf'
   end
+  
+  def render_pdfs 
+    @invoices = Trip.find(params[:ids])
+    render :pdf => "my_file_name",
+           :template => 'invoices/show_multiple.pdf.html.erb',
+           :layout => 'pdf'
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

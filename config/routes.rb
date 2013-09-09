@@ -6,6 +6,7 @@ LoadmasterLogger::Application.routes.draw do
   get "users/index"
   
   get "trips/search" => 'trips#search'
+  delete "/trips/destroy_multiple" => 'trips#destroy_multiple'
   resources :trips
   
   devise_for :users
@@ -15,6 +16,7 @@ LoadmasterLogger::Application.routes.draw do
   
   get "invoices/search" => 'invoices#search'
   get "invoices/render_pdf" => 'invoices#render_pdf'
+  get "invoices/render_pdfs" =>  "invoices#render_pdfs"
   resources :invoices
   
   get "mobile_devices/search" => 'mobile_devices#search'
