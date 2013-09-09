@@ -1,6 +1,15 @@
 <div ng-trips>
   <h1>Ture</h1>
-  <%= render :partial => 'shared/search', :locals => {:placeholder => 'Søg efter en faktura'} %>
+
+  
+  <div class="row">
+    <div class="col-md-6 col-sm-6 col-xs-6">
+      <%= render :partial => 'shared/search', :locals => {:placeholder => 'Søg efter en faktura'} %>
+    </div>
+    <div class="col-md-6 col-sm-6 col-xs-6">
+      <%= link_to 'Ny Tur', new_trip_path, :class =>"btn btn-success float-right" %>
+    </div>
+  </div>
 
   <div class="row" ng-trips-list>
 	  <div class="col-md-12">
@@ -57,11 +66,4 @@
 	  </div>
 	</div>
 	
-	<div class='trip-table-map' ng-map><div class="map-container"></div></div>
-
-  <br>
-
-  <div class="row">
-    <%= link_to 'Ny Tur', new_trip_path, :class =>"btn btn-success float-right" %>
-  </div>
 </div>
