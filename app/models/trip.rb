@@ -21,6 +21,10 @@ class Trip
   field :user_id, type: String
   field :access_token, type: String
   
+  field :chauffeur, type: String
+  field :distance, type: Float
+  
+  
   search_in :start_address, :end_address, :cargo, :license_plate, :costumer, :weight
   
 end

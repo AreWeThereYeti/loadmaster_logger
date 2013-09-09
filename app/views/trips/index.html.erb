@@ -33,7 +33,15 @@
             	<td ng-show="showDetails">Showing the details</td>
 						</tr>
 						<tr class="trip-list-details" ng-trips-list-item tripid="<%= trip.id.to_s.to_json %>" ng-show="showDetails">
-							<td> <div>show details here</div> </td>
+              <td colspan="2">  Chauffør: <%= trip.chauffeur %> </td>
+              <td colspan="3"> <div class='trip-table-map' ng-map start="<%= trip.start_location.to_json %>" end="<%= trip.end_location.to_json %>"><div class="map-container" width="400px" height="250px"></div></div> </td>
+              <td colspan="3"> 
+                <div>Distance: <%= trip.distance %> </div>
+                <div>Kommentarer: <%= trip.start_comments %></div>
+              </td>
+              <td> 
+                <%= link_to 'Vis detaljer', 'trips/'+trip.id, :class => 'btn btn-info btn-xs'%>
+              </td>
 						</tr>
           <% end %>
         </tbody>
@@ -48,6 +56,8 @@
 	    </div>
 	  </div>
 	</div>
+	
+	<div class='trip-table-map' ng-map><div class="map-container"></div></div>
 
   <br>
 

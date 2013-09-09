@@ -20,6 +20,10 @@
     <%= f.text_field :cargo %>
   </div>
   <div class="field">
+    <%= f.label :chauffør %><br>
+    <%= f.text_field :chauffeur%>
+  </div>
+  <div class="field">
     <%= f.label :start_adresse %><br>
     <%= f.text_field :start_address %>
   </div>
@@ -36,7 +40,11 @@
     <%= select_datetime Date.today, :prefix => :end_timestamp %>
   </div>
   <div class="field">
-    <%= f.label :vægt %><br>
+    <%= f.label 'kørt_distance (km)' %><br>
+    <%= f.text_field :distance%>
+  </div>
+  <div class="field">
+    <%= f.label 'Vægt (kg)' %><br>
     <%= f.text_field :weight %>
   </div>
   <div class="field">

@@ -2,6 +2,7 @@ function tripsListItemCtrl($scope,$element,$attrs) {
 	
 	$scope.select = function(){
 		$scope.showDetails=true;
+		$scope.$broadcast('resfreshMap')
 	} 
 	
 	$scope.unselect = function(){

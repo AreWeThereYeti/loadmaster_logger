@@ -28,12 +28,16 @@ module Api
         err_objs=[]
         error=false
         user_id=MobileDevice.where(:access_token=>params[:access_token]).first.user_id
-        params[:trips].each do |trip|
-          trip_id=trip[1][:trip_id]         #save ref to trip id in case @trip.save fails (used in return response)
-          if !create_trip(trip[1],user_id)
-            error=true
-            err_objs.push(trip_id)
+        if params.has_key?('trips')
+          params[:trips].each do |trip|
+            trip_id=trip[1][:trip_id]         #save ref to trip id in case @trip.save fails (used in return response)
+            if !create_trip(trip[1],user_id)
+              error=true
+              err_objs.push(trip_id)
+            end
           end
+        else
+          error=true
         end
         respond_to do |format|
           if !error
@@ -52,6 +56,8 @@ module Api
         trip.delete("trip_id")
         @trip = Trip.new(trip)
         @trip.user_id=user_id
+        @trip.start_timestamp=Time.at(trip.start_timestamp)
+        @trip.end_timestamp=Time.at(trip.end_timestamp)
         if @trip.save
           return true
         else

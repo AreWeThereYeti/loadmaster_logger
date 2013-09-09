@@ -22,10 +22,46 @@ User.new({
   :role_id => Role.find_by(:name => :Admin).id
 }).save
 
-User.new({ 
+hauler_user = User.new({ 
   :username => 'hauler', 
   :email => 'hauler@loadmaster.dk', 
   :password => 'loadmaster',
   :password_confirmation => 'loadmaster',
   :role_id => Role.find_by(:name => :Hauler).id
+})
+
+hauler_user.save
+
+Trip.new({ 
+  :license_plate => 'GX 234 543',
+  :cargo => 'Sand',
+  :chauffeur => 'Mikkel',
+  :start_address => 'Carl Jacobsensvej 16, Valby',
+  :start_location => [55.630225,12.049255],
+  :end_address => 'Holtegade 11 3.tv 2200 København N',
+  :end_location => [55.754506,12.495575],
+  :start_timestamp => "2013-09-09T16:00:00Z",
+  :end_timestamp => "2013-09-09T18:00:00Z",
+  :distance => '7',
+  :weight => '600',
+  :costumer => 'Bilka',
+  :start_comments => 'Bilka skal have mange flere sten',
+  :user_id => hauler_user.id
+}).save
+
+Trip.new({ 
+  :license_plate => 'GX 234 543',
+  :cargo => 'Grus',
+  :chauffeur => 'Andreas',
+  :start_address => 'Holtegade 11 3.tv 2200 København N',,
+  :start_location => [55.630225,12.049255],
+  :end_address => 'Lærkevej 1, 3450 Allerød',
+  :end_location => [55.754506,12.495575],
+  :start_timestamp => "2013-09-10T16:00:00Z",
+  :end_timestamp => "2013-09-10T18:00:00Z",
+  :distance => '24',
+  :weight => '1000',
+  :costumer => 'Wasa',
+  :start_comments => 'Wasa skal have meget grus i deres knækbrød',
+  :user_id => hauler_user.id
 }).save

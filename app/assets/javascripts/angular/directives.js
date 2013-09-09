@@ -31,5 +31,26 @@ angular.module('loadmaster', [])
 	   	}
 		}
 	})
+	.directive('ngMap',function(){
+   	return {
+	   	controller:'mapCtrl',
+			scope:{
+				start_location:'=start',
+				end_location:'=end'
+			},
+	   	link:function(scope,element,attrs){
+				scope.initialize()
+				if(!!scope.start_location){
+					var lat_lon=scope.start_location.split(',')
+					scope.drawMarker(lat_lon[0],lat_lon[1])
+				}
+				if(!!scope.end_location){
+					var lat_lon=scope.end_location.split(',')
+					scope.drawMarker(lat_lon[0],lat_lon[1])
+				}
+				scope.centerOnMarkers()
+	   	}
+		}
+	})
 	
 	
