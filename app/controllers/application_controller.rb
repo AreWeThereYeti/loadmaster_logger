@@ -62,4 +62,10 @@ class ApplicationController < ActionController::Base
       100
     end
     
+    def append_zero(number)
+      if number<10
+        '0'+number.to_s
+      end
+    end
+    
 end

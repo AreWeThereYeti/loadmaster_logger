@@ -39,7 +39,4 @@ module ApplicationHelper
     date.day.to_s+'.'+date.month.to_s+'.'+date.year.to_s+' '+date.hour.to_s+':'+date.min.to_s
   end
   
-  def append_zero(number)
-  end
-  
 end
