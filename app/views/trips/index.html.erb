@@ -36,8 +36,8 @@
         			  <td><%= trip.cargo %></td>
         			  <td><%= trip.start_address %></td>
         			  <td><%= trip.end_address %></td>
-        			  <td><%= trip.start_timestamp %></td>
-        			  <td><%= trip.end_timestamp %></td>
+        			  <td><%= format_date(trip.start_timestamp) %></td>
+        			  <td><%= format_date(trip.end_timestamp) %></td>
         			  <td><%= trip.weight %></td>
         			  <td><%= trip.costumer %></td>
                 <td><input type="checkbox" name="trip_checkbox" value="<%=trip.id%>"></td>

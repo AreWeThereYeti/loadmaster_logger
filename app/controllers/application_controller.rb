@@ -8,6 +8,8 @@ class ApplicationController < ActionController::Base
   
   helper_method :results_per_page
   
+  helper :all
+  
   before_filter :authenticate_user!
   
   def has_role?(role)

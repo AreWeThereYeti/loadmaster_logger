@@ -54,10 +54,10 @@ module Api
       def create_trip(trip,user_id)
         return false unless check_required_params(trip)
         trip.delete("trip_id")
+        trip[:start_timestamp]=Time.at(trip[:start_timestamp].to_i)
+        trip[:end_timestamp]=Time.at(trip[:end_timestamp].to_i)
         @trip = Trip.new(trip)
         @trip.user_id=user_id
-        @trip.start_timestamp=Time.at(trip.start_timestamp)
-        @trip.end_timestamp=Time.at(trip.end_timestamp)
         if @trip.save
           return true
         else
