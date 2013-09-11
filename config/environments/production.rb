@@ -27,10 +27,10 @@ LoadmasterLogger::Application.configure do
 
   # Compress JavaScripts and CSS.
   
-  config.assets.compress=true
+  config.assets.compress=false
   
   #config.assets.js_compressor = :uglifier
-  config.assets.js_compressor = Transformer.compress
+  #config.assets.js_compressor = Transformer.compress
   # config.assets.css_compressor = :sass
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
@@ -89,8 +89,8 @@ LoadmasterLogger::Application.configure do
 end
 
 
-class Transformer
-  def compress(string)
-    string
-  end
-end
+# class Transformer
+#   def compress(string)
+#     string
+#   end
+# end
