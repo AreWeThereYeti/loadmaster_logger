@@ -1,53 +1,65 @@
 <h1>Dine Fakturaer</h1>
 
-<%= render :partial => 'shared/search', :locals => {:placeholder => 'Søg efter en faktura'} %>
 
 <div class="row">
-  <div class="col-md-12">
-    <table id="invoices-table" class="table table-hover">
-      <thead>
-        <tr>
-          <th><%= sortable 'Dato', 'timestamp' %></th>
-          <th><%= sortable 'Pris', 'price' %></th>
-          <th><%= sortable 'Køber', 'costumer' %></th>
-          <th>Beskrivelse</th>
-          <th><%= sortable 'Betalings Dato', 'due_date' %></th>
-          <th>CVR</th>
-          <th>Kommentarer</th>
-          <th><%= sortable 'Faktura Nr.', 'invoice_number' %></th>
-          <th></th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <% @invoices.each do |invoice| %>
-          <tr id="<%= invoice.id %>" ng-click="selectTableRow('invoices','<%= invoice.id %>')" class="hand-cursor">
-            <td><%= invoice.timestamp %></td>
-            <td><%= invoice.price %></td>
-            <td><%= invoice.costumer %></td>
-            <td><%= invoice.description %></td>
-            <td><%= invoice.due_date %></td>
-            <td><%= invoice.cvr %></td>
-            <td><%= invoice.commentary %></td>
-            <td><%= invoice.invoice_number %></td>
-            <td><%= link_to 'Slet', invoice, method: :delete, data: { confirm: 'Er du sikker?' }, :class =>"btn btn-danger btn-xs" %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+  <%= render :partial => 'shared/search', :locals => {:placeholder => 'Søg efter en faktura'} %>
+  <div class="col-md-6 col-sm-6 col-xs-6">
+    <%= link_to 'Ny Faktura', new_invoice_path, :class =>"btn btn-success float-right" %>
   </div>
 </div>
 
-<div class="row">
-  <div class="col-md-12">
-    <div class="center">
-      <%= paginate @invoices %>
+<% if @invoices.count == 0 %>
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <h4> Du har ingen gemte fakturaer. For at lave en faktura, klik <%= link_to 'her', new_invoice_path %> 
     </div>
   </div>
-</div>
 
-<div class="row">
-  <%= link_to 'Ny Faktura', new_invoice_path, :class =>"btn btn-success float-right" %>
-</div>
+<% else %>
+
+  <div class="row">
+    <div class="col-md-12">
+      <table id="invoices-table" class="table table-hover">
+        <thead>
+          <tr>
+            <th><%= sortable 'Dato', 'timestamp' %></th>
+            <th><%= sortable 'Pris', 'price' %></th>
+            <th><%= sortable 'Køber', 'costumer' %></th>
+            <th>Beskrivelse</th>
+            <th><%= sortable 'Betalings Dato', 'due_date' %></th>
+            <th>CVR</th>
+            <th>Kommentarer</th>
+            <th><%= sortable 'Faktura Nr.', 'invoice_number' %></th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @invoices.each do |invoice| %>
+            <tr id="<%= invoice.id %>" ng-click="selectTableRow('invoices','<%= invoice.id %>')" class="hand-cursor">
+              <td><%= invoice.timestamp %></td>
+              <td><%= invoice.price %></td>
+              <td><%= invoice.costumer %></td>
+              <td><%= invoice.description %></td>
+              <td><%= invoice.due_date %></td>
+              <td><%= invoice.cvr %></td>
+              <td><%= invoice.commentary %></td>
+              <td><%= invoice.invoice_number %></td>
+              <td><%= link_to 'Slet', invoice, method: :delete, data: { confirm: 'Er du sikker?' }, :class =>"btn btn-danger btn-xs" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="center">
+        <%= paginate @invoices %>
+      </div>
+    </div>
+  </div>
+<% end %>

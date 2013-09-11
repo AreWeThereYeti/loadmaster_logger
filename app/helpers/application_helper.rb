@@ -36,7 +36,15 @@ module ApplicationHelper
   end
   
   def format_date(date)
-    date.day.to_s+'.'+date.month.to_s+'.'+date.year.to_s+' '+date.hour.to_s+':'+date.min.to_s
+    append_zero(date.day)+'.'+append_zero(date.month)+'.'+append_zero(date.year)+' '+append_zero(date.hour)+':'+append_zero(date.min)
+  end
+  
+  def append_zero(number)
+    if number<10
+      '0'+number.to_s
+    else
+      number.to_s
+    end
   end
   
 end

@@ -62,12 +62,6 @@ class ApplicationController < ActionController::Base
       100
     end
     
-    def append_zero(number)
-      if number<10
-        '0'+number.to_s
-      end
-    end
-    
     def after_sign_in_path_for(resource_or_scope)
       respond_to?('/trips', true) ? send(root_path) : '/trips'
     end

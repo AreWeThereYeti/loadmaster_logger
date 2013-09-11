@@ -29,7 +29,7 @@
                 <th><%= sortable 'Slut Adresse', 'end_address' %></th>
                 <th><%= sortable 'Tur Start','start_timestamp' %></th>
                 <th><%= sortable 'Tur Slut', 'end_timestamp' %></th>
-                <th><%= sortable 'Vægt', 'weight' %></th>
+                <!-- <th><%= sortable 'Vægt', 'weight' %></th> -->
                 <th><%= sortable 'Kunde', 'costumer' %></th>
                 <th>Vælg</th>
               </tr>
@@ -44,7 +44,7 @@
           			  <td><%= trip.end_address %></td>
           			  <td><%= format_date(trip.start_timestamp) %></td>
           			  <td><%= format_date(trip.end_timestamp) %></td>
-          			  <td><%= trip.weight %></td>
+                  <!-- <td><%= trip.weight %></td> -->
           			  <td><%= trip.costumer %></td>
                   <td><input type="checkbox" name="trip_checkbox" value="<%=trip.id%>"></td>
     						</tr>
