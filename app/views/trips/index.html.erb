@@ -3,84 +3,90 @@
 
   
   <div class="row">
-    <div class="col-md-6 col-sm-6 col-xs-6">
-      <%= render :partial => 'shared/search', :locals => {:placeholder => 'Søg efter en faktura'} %>
-    </div>
+    <%= render :partial => 'shared/search', :locals => {:placeholder => 'Søg efter en tur'} %>
     <div class="col-md-6 col-sm-6 col-xs-6">
       <%= link_to 'Ny Tur', new_trip_path, :class =>"btn btn-success float-right" %>
     </div>
   </div>
-
-  <div ng-trips-list>
-    <div class="row" >
-  	  <div class="col-md-12">
-        <table id="trips-table" class="table table-hover" ng-trip-list>
-          <thead>
-            <tr>
-              <th><%= sortable 'Nummer Plade', 'license_plate' %></th>
-              <th><%= sortable 'Last', 'cargo' %></th>
-              <th><%= sortable 'Start Adresse', 'start_address' %></th>
-              <th><%= sortable 'Slut Adresse', 'end_address' %></th>
-              <th><%= sortable 'Tur Start','start_timestamp' %></th>
-              <th><%= sortable 'Tur Slut', 'end_timestamp' %></th>
-              <th><%= sortable 'Vægt', 'weight' %></th>
-              <th><%= sortable 'Kunde', 'costumer' %></th>
-              <th>Vælg</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <% @trips.each do |trip| %>
-              <tr id="<%= trip.id %>" ng-click="selectTableRow($event,'<%= trip.id %>')" class="hand-cursor" ng-class="{true:'active', false:'nottrue'}[selectedTripId==<%= trip.id.to_s.to_json %>]">
-      					<td><%= trip.license_plate %></td>
-        			  <td><%= trip.cargo %></td>
-        			  <td><%= trip.start_address %></td>
-        			  <td><%= trip.end_address %></td>
-        			  <td><%= format_date(trip.start_timestamp) %></td>
-        			  <td><%= format_date(trip.end_timestamp) %></td>
-        			  <td><%= trip.weight %></td>
-        			  <td><%= trip.costumer %></td>
-                <td><input type="checkbox" name="trip_checkbox" value="<%=trip.id%>"></td>
-  						</tr>
-  						<tr class="trip-list-details" ng-trips-list-item tripid="<%= trip.id.to_s.to_json %>" ng-show="showDetails">
-                <td colspan="2">  Chauffør: <%= trip.chauffeur %> </td>
-                <td colspan="2"> <div class='trip-table-map' ng-map start="<%= trip.start_location.to_json %>" end="<%= trip.end_location.to_json %>"><div class="map-container" width="400px" height="250px"></div></div> </td>
-                <td colspan="3"> 
-                  <div>Distance: <%= trip.distance %> </div>
-                  <div>Kommentarer: <%= trip.start_comments %></div>
-                </td>
-                <td>
-                  <%= link_to 'Slet', trip, method: :delete, data: { confirm: 'Are you sure?' }, :class =>"btn btn-danger btn-xs" %>
-                </td>
-                <td> 
-                  <%= link_to 'Vis detaljer', 'trips/'+trip.id, :class => 'btn btn-info btn-xs'%>
-                </td>
-  						</tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    
+  
+  <% if @trips.count == 0 %>
     <div class="row">
-  	  <div class="col-md-2 col-sm-4 col-xs-6">
-  	    <button class="btn btn-danger" ng-click="deleteSelectedTrips()">Slet valgte ture</button>
-  	  </div>
-  	  <div class="col-md-2 col-sm-4 col-xs-6 float-right">
-        <button class="btn btn-success float-right" ng-click="printSelectedTrips()">Print faktura af valgte ture</button>
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <h4> Du har ingen gemte ture endnu. For at registrere en afholdt tur, klik <%= link_to 'her', new_trip_path %> 
       </div>
     </div>
+  
+  <% else %>
+    <div ng-trips-list>
+      <div class="row" >
+    	  <div class="col-md-12">
+          <table id="trips-table" class="table table-hover" ng-trip-list>
+            <thead>
+              <tr>
+                <th><%= sortable 'Nummer Plade', 'license_plate' %></th>
+                <th><%= sortable 'Last', 'cargo' %></th>
+                <th><%= sortable 'Start Adresse', 'start_address' %></th>
+                <th><%= sortable 'Slut Adresse', 'end_address' %></th>
+                <th><%= sortable 'Tur Start','start_timestamp' %></th>
+                <th><%= sortable 'Tur Slut', 'end_timestamp' %></th>
+                <th><%= sortable 'Vægt', 'weight' %></th>
+                <th><%= sortable 'Kunde', 'costumer' %></th>
+                <th>Vælg</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% @trips.each do |trip| %>
+                <tr id="<%= trip.id %>" ng-click="selectTableRow($event,'<%= trip.id %>')" class="hand-cursor" ng-class="{true:'active', false:'nottrue'}[selectedTripId==<%= trip.id.to_s.to_json %>]">
+        					<td><%= trip.license_plate %></td>
+          			  <td><%= trip.cargo %></td>
+          			  <td><%= trip.start_address %></td>
+          			  <td><%= trip.end_address %></td>
+          			  <td><%= format_date(trip.start_timestamp) %></td>
+          			  <td><%= format_date(trip.end_timestamp) %></td>
+          			  <td><%= trip.weight %></td>
+          			  <td><%= trip.costumer %></td>
+                  <td><input type="checkbox" name="trip_checkbox" value="<%=trip.id%>"></td>
+    						</tr>
+    						<tr class="trip-list-details" ng-trips-list-item tripid="<%= trip.id.to_s.to_json %>" ng-show="showDetails">
+                  <td colspan="2">  Chauffør: <%= trip.chauffeur %> </td>
+                  <td colspan="2"> <div class='trip-table-map' ng-map start="<%= trip.start_location.to_json %>" end="<%= trip.end_location.to_json %>"><div class="map-container" width="400px" height="250px"></div></div> </td>
+                  <td colspan="3"> 
+                    <div>Distance: <%= trip.distance %> </div>
+                    <div>Kommentarer: <%= trip.start_comments %></div>
+                  </td>
+                  <td>
+                    <%= link_to 'Slet', trip, method: :delete, data: { confirm: 'Are you sure?' }, :class =>"btn btn-danger btn-xs" %>
+                  </td>
+                  <td> 
+                    <%= link_to 'Vis detaljer', 'trips/'+trip.id, :class => 'btn btn-info btn-xs'%>
+                  </td>
+    						</tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
     
-  </div><!-- ng-trips-list -- >
+      <div class="row">
+    	  <div class="col-md-2 col-sm-4 col-xs-6">
+    	    <button class="btn btn-danger" ng-click="deleteSelectedTrips()">Slet valgte ture</button>
+    	  </div>
+    	  <div class="col-md-2 col-sm-4 col-xs-6 float-right">
+          <button class="btn btn-success float-right" ng-click="printSelectedTrips()">Print faktura af valgte ture</button>
+        </div>
+      </div>
+    
+    </div><!-- ng-trips-list -- >
   
 
   
-  <div class="row">
-	  <div class="col-md-12">
-	    <div class="center">
-        <%= paginate @trips %>
-	    </div>
-	  </div>
-	</div>
-	
+    <div class="row">
+  	  <div class="col-md-12">
+  	    <div class="center">
+          <%= paginate @trips %>
+  	    </div>
+  	  </div>
+  	</div>
+  <% end %>	
 </div>
