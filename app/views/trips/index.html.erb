@@ -41,7 +41,6 @@
         			  <td><%= trip.weight %></td>
         			  <td><%= trip.costumer %></td>
                 <td><input type="checkbox" name="trip_checkbox" value="<%=trip.id%>"></td>
-              	<td ng-show="showDetails">Showing the details</td>
   						</tr>
   						<tr class="trip-list-details" ng-trips-list-item tripid="<%= trip.id.to_s.to_json %>" ng-show="showDetails">
                 <td colspan="2">  Chauffør: <%= trip.chauffeur %> </td>

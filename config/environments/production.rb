@@ -26,7 +26,10 @@ LoadmasterLogger::Application.configure do
   config.serve_static_assets = true
 
   # Compress JavaScripts and CSS.
-  #config.assets.js_compressor = :uglifier
+  
+  config.assets.compress=false
+  
+  config.assets.js_compressor = :uglifier
   # config.assets.css_compressor = :sass
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
@@ -82,7 +85,4 @@ LoadmasterLogger::Application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
   
-  config.assets.compress = true
-  config.assets.js_compressor = NoCompression.new
-  config.assets.css_compressor = NoCompression.new
 end
