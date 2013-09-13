@@ -57,8 +57,11 @@ gem 'kaminari'
 gem 'wkhtmltopdf-binary'
 gem 'wicked_pdf'
 
+
 group :assets do
   gem 'less'
+  #gem 'loadmaster_assets', :git => 'git@github.com:AreWeThereYeti/loadmaster_assets.git'
+  #gem 'loadmaster_assets', :path => "../loadmaster_assets"
 end
 
 group :doc do

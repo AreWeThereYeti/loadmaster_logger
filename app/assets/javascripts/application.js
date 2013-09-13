@@ -15,8 +15,8 @@
 //= require jquery.turbolinks
 //= require_tree ./bootstrap
 //= require_tree ./libs
-//= require_tree ./angular
-//= require_tree ./angular/controllers
+//= require_tree ../../../vendor/gems/loadmaster_assets/assets/angular
+//= require_tree ../../../vendor/gems/loadmaster_assets/assets/angular/controllers
 //= require_tree ./loadmaster
 //= require turbolinks
 //= require_tree .

@@ -30,5 +30,6 @@ module LoadmasterLogger
     end
     
     config.filter_parameters += [:password, :password_confirmation]
+    config.assets.paths << Rails.root.join("vendor","gems","loadmaster_assets", "assets","angular")
   end
 end
