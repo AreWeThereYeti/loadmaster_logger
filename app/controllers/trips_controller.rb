@@ -111,7 +111,8 @@ class TripsController < ApplicationController
         :weight,
         :costumer,
         :commentary,
-        :user_id)
+        :user_id,
+        :chauffeur)
     end
     
     def sort_column

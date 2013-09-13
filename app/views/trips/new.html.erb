@@ -1,3 +1,17 @@
 <h1>Ny Tur</h1>
 
-<%= render 'form' %>
+<div class="row">
+  <div class="col-md-6 col-sm-6 col-xs-6">
+    <%= render 'form' %>
+  </div>
+  <div class="col-md-6 col-sm-6 col-xs-6">
+    <div ng-map startinputid="'trip_start_address'" endinputid="'trip_end_address'">
+      <div class="map-container" width="400px" height="250px">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
