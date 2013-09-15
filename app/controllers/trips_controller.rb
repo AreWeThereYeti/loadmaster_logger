@@ -31,6 +31,8 @@ class TripsController < ApplicationController
     @trip = Trip.new(trip_params)
     @trip.start_timestamp=get_timestamp(params[:start_timestamp])
     @trip.end_timestamp=get_timestamp(params[:end_timestamp])
+    @trip.start_location=[@trip.start_lat,@trip.start_lon]
+    @trip.end_location=[@trip.end_lat,@trip.end_lon]
     
     @trip.user_id=current_user.id
     respond_to do |format|
@@ -103,16 +105,21 @@ class TripsController < ApplicationController
         :device_id,
         :cargo,
         :start_location,
+        :start_lat,
+        :start_lon,
         :start_address,
         :end_location,
+        :end_lat,
+        :end_lon,
         :end_address,
         :start_timestamp,
         :end_timestamp,
         :weight,
         :costumer,
-        :commentary,
         :user_id,
-        :chauffeur)
+        :chauffeur,
+        :distance,
+        :start_comments)
     end
     
     def sort_column

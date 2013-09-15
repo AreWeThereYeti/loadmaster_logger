@@ -20,7 +20,7 @@
     <div ng-trips-list>
       <div class="row" >
     	  <div class="col-md-12">
-          <table id="trips-table" class="table table-hover" ng-trip-list>
+          <table id="trips-table" class="table table-hover table-bordered" ng-trip-list>
             <thead>
               <tr>
                 <th><%= sortable 'Nummer Plade', 'license_plate' %></th>
@@ -49,17 +49,19 @@
                   <td><input type="checkbox" name="trip_checkbox" value="<%=trip.id%>"></td>
     						</tr>
     						<tr class="trip-list-details" ng-trips-list-item tripid="<%= trip.id.to_s.to_json %>" ng-show="showDetails">
-                  <td colspan="2">  Chauffør: <%= trip.chauffeur %> </td>
-                  <td colspan="2"> <div class='trip-table-map' ng-map start="<%= trip.start_location.to_json %>" end="<%= trip.end_location.to_json %>"><div class="map-container" width="400px" height="250px"></div></div> </td>
+                  <td colspan="2"><span class="bold">  Chauffør: </span><span> <%= trip.chauffeur %></span> </td>
+                  <td colspan="2">
+                    <div class='trip-table-map' ng-map startlat="<%= trip.start_location[0] %>" startlon="<%= trip.start_location[1] %>" endlat="<%= trip.end_location[0] %>" endlon="<%= trip.end_location[1] %>">
+                      <div class="map-container" width="400px" height="250px"></div></div> </td>
                   <td colspan="3"> 
-                    <div>Distance: <%= trip.distance %> </div>
-                    <div class="more-margin top">Kommentarer: <%= trip.start_comments %></div>
+                    <div class="bold">Distance: <%= trip.distance %> </div>
+                    <div class="more-margin top double bold">Kommentarer: <%= trip.start_comments %></div>
+                  </td>
+                  <td> 
+                    <%= link_to 'Rediger', 'trips/'+trip.id, :class => 'btn btn-info btn-xs'%>
                   </td>
                   <td>
                     <%= link_to 'Slet', trip, method: :delete, data: { confirm: 'Are you sure?' }, :class =>"btn btn-danger btn-xs" %>
-                  </td>
-                  <td> 
-                    <%= link_to 'Vis detaljer', 'trips/'+trip.id, :class => 'btn btn-info btn-xs'%>
                   </td>
     						</tr>
               <% end %>

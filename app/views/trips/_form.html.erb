@@ -13,47 +13,51 @@
 
   <div class="field">
     <%= f.label :nummerplade %><br>
-    <%= f.text_field :license_plate %>
+    <%= f.text_field :license_plate, :class=>"form-control", :placeholder => "Nummerplade" %>
   </div>
   <div class="field">
     <%= f.label :last %><br>
-    <%= f.text_field :cargo %>
+    <%= f.text_field :cargo, :class=>"form-control", :placeholder => "Last" %>
   </div>
   <div class="field">
     <%= f.label :chauffør %><br>
-    <%= f.text_field :chauffeur %>
+    <%= f.text_field :chauffeur, :class=>"form-control", :placeholder => "Chauffør" %>
   </div>
   <div class="field">
     <%= f.label :start_adresse %><br>
-    <%= f.text_field :start_address %>
+    <%= f.text_field :start_address, :class=>"form-control", :placeholder => "Start Adresse" %>
+    <%= f.hidden_field :start_lat %>
+    <%= f.hidden_field :start_lon %>
   </div>
   <div class="field">
     <%= f.label :slut_adress %><br>
-    <%= f.text_field :end_address %>
+    <%= f.text_field :end_address, :class=>"form-control", :placeholder => "Slut Adresse" %>
+    <%= f.hidden_field :end_lat %>
+    <%= f.hidden_field :end_lon %>
   </div>
   <div class="field">
     <%= f.label :tur_start %><br>
-    <%= select_datetime Date.today, :prefix => :start_timestamp %>
+    <%= select_datetime Date.today, :prefix => :start_timestamp, :placeholder => "Tur Start" %>
   </div>
   <div class="field">
     <%= f.label :tur_slut %><br>
-    <%= select_datetime Date.today, :prefix => :end_timestamp %>
+    <%= select_datetime Date.today, :prefix => :end_timestamp, :placeholder => "Tur Slut" %>
   </div>
   <div class="field">
-    <%= f.label 'kørt_distance (km)' %><br>
-    <%= f.text_field :distance%>
+    <%= f.label 'kørt_distance (Km)' %><br>
+    <%= f.text_field :distance, :class=>"form-control", :placeholder => "Kør Distance (Km)"%>
   </div>
   <div class="field">
     <%= f.label 'Vægt (kg)' %><br>
-    <%= f.text_field :weight %>
+    <%= f.text_field :weight, :class=>"form-control", :placeholder => "Vægt (kg)" %>
   </div>
   <div class="field">
     <%= f.label :kunde %><br>
-    <%= f.text_field :costumer %>
+    <%= f.text_field :costumer, :class=>"form-control", :placeholder => "Kunde" %>
   </div>
   <div class="field">
     <%= f.label :kommentarer %><br>
-    <%= f.text_area :start_comments %>
+    <%= f.text_area :start_comments, :class=>"form-control", :placeholder => "Kommentarer" %>
   </div>
   <div class="actions">
     <div class="row">

@@ -15,8 +15,12 @@
 //= require jquery.turbolinks
 //= require_tree ./bootstrap
 //= require_tree ./libs
-//= require_tree ../../../vendor/gems/loadmaster_assets/assets/angular
-//= require_tree ../../../vendor/gems/loadmaster_assets/assets/angular/controllers
+//= require ../../../vendor/gems/loadmaster_assets/assets/angular/controller_web
+//= require ../../../vendor/gems/loadmaster_assets/assets/angular/directives_web
+//= require ../../../vendor/gems/loadmaster_assets/assets/angular/controllers/mapCtrl
+//= require ../../../vendor/gems/loadmaster_assets/assets/angular/controllers/tripCtrl_web
+//= require ../../../vendor/gems/loadmaster_assets/assets/angular/controllers/tripsListCtrl
+//= require ../../../vendor/gems/loadmaster_assets/assets/angular/controllers/tripListItemCtrl
 //= require_tree ./loadmaster
 //= require turbolinks
 //= require_tree .
