@@ -51,7 +51,7 @@
     						<tr class="trip-list-details" ng-trips-list-item tripid="<%= trip.id.to_s.to_json %>" ng-show="showDetails">
                   <td colspan="2"><span class="bold">  Chauffør: </span><span> <%= trip.chauffeur %></span> </td>
                   <td colspan="2">
-                    <div class='trip-table-map' ng-map startlat="<%= trip.start_location[0] %>" startlon="<%= trip.start_location[1] %>" endlat="<%= trip.end_location[0] %>" endlon="<%= trip.end_location[1] %>">
+                    <div class='trip-table-map' ng-static-map startlat="<%= trip.start_location[0] %>" startlon="<%= trip.start_location[1] %>" endlat="<%= trip.end_location[0] %>" endlon="<%= trip.end_location[1] %>">
                       <div class="map-container" width="400px" height="250px"></div></div> </td>
                   <td colspan="3"> 
                     <div class="bold">Distance: <%= trip.distance %> </div>
