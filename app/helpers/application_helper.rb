@@ -36,6 +36,7 @@ module ApplicationHelper
   end
   
   def format_date(date)
+    date=date.localtime
     append_zero(date.day)+'.'+append_zero(date.month)+'.'+append_zero(date.year)+' '+append_zero(date.hour)+':'+append_zero(date.min)
   end
   

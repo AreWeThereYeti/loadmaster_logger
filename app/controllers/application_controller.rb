@@ -66,4 +66,8 @@ class ApplicationController < ActionController::Base
       respond_to?('/trips', true) ? send(root_path) : '/trips'
     end
     
+    def has_key_and_not_empty(obj,param)
+      return obj.has_key?(param) && !obj[param].empty?
+    end
+    
 end

@@ -31,7 +31,7 @@
                 <th><%= sortable 'Tur Slut', 'end_timestamp' %></th>
                 <!-- <th><%= sortable 'Vægt', 'weight' %></th> -->
                 <th colspan="2"><%= sortable 'Kunde', 'costumer' %></th>
-                <th>Vælg</th>
+                <th>Vælg <input type="checkbox" name="trip_all_checkbox" ng-click="checkOrUncheckAllTrips($event)"></th>
               </tr>
             </thead>
 
@@ -71,12 +71,12 @@
       </div>
     
       <div class="row">
-    	  <div class="col-md-2 col-sm-4 col-xs-6">
-    	    <button class="btn btn-danger" ng-click="deleteSelectedTrips()">Slet valgte ture</button>
-    	  </div>
     	  <div class="col-md-2 col-sm-4 col-xs-6 float-right">
+    	    <button class="btn btn-danger float-right" ng-click="deleteSelectedTrips()">Slet valgte ture</button>
+    	  </div>
+        <!-- <div class="col-md-2 col-sm-4 col-xs-6 float-right">
           <button class="btn btn-success float-right" ng-click="printSelectedTrips()">Print faktura af valgte ture</button>
-        </div>
+        </div> -->
       </div>
     
     </div><!-- ng-trips-list -- >

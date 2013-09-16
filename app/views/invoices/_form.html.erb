@@ -10,52 +10,52 @@
       </ul>
     </div>
   <% end %>
+  
+  <div class="row">
+    <div class="col-md-6 col-sm-10 col-xs-12">
 
-  <div class="field">
-    <%= f.label :faktura_dato %><br>
-    <%= select_datetime Date.today, :prefix => :timestamp %>
-  </div>
-  <div class="field">
-    <%= f.label :trips %><br>
-    <%= f.text_field :trips %>
-  </div>
-  <div class="field">
-    <%= f.label :price %><br>
-    <%= f.text_field :price %>
-  </div>
-  <div class="field">
-    <%= f.label :costumer %><br>
-    <%= f.text_field :costumer %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_field :description %>
-  </div>
-  <div class="field">
-    <%= f.label :due_date %><br>
-    <%= select_datetime Date.today, :prefix => :due_date %>
-  </div>
-  <div class="field">
-    <%= f.label :cvr %><br>
-    <%= f.number_field :cvr %>
-  </div>
-  <div class="field">
-    <%= f.label :commentary %><br>
-    <%= f.text_field :commentary %>
-  </div>
-  <div class="field">
-    <%= f.label :end_note %><br>
-    <%= f.text_field :end_note %>
-  </div>
-  <div class="field">
-    <%= f.label :invoice_number %><br>
-    <%= f.number_field :invoice_number %>
-  </div>
-  <div class="field">
-    <%= f.label :sales_taxes %><br>
-    <%= f.number_field :sales_taxes %>
+      <div class="field">
+        <%= f.label :fakturerings_dato %><br>
+        <%= select_datetime Date.today, :prefix => :timestamp, :class=>"form-control"  %>
+      </div>
+      <div class="field">
+        <%= f.label :pris %><br>
+        <%= f.text_field :price, :class=>"form-control", :placeholder => "Pris" %>
+      </div>
+      <div class="field">
+        <%= f.label :kunde %><br>
+        <%= f.text_field :costumer, :class=>"form-control", :placeholder => "Kunde" %>
+      </div>
+      <div class="field">
+        <%= f.label :beskrivelse %><br>
+        <%= f.text_field :description, :class=>"form-control", :placeholder => "Beskrivelse" %>
+      </div>
+      <div class="field">
+        <%= f.label :betales_inden %><br>
+        <%= select_datetime Date.today, :prefix => :due_date%>
+      </div>
+      <div class="field">
+        <%= f.label :kommentarer %><br>
+        <%= f.text_field :commentary, :class=>"form-control", :placeholder => "Kommentarer" %>
+      </div>
+      <div class="field">
+        <%= f.label :faktura_nummer %><br>
+        <%= f.number_field :invoice_number, :class=>"form-control"  %>
+      </div>
+      <div class="field">
+        <%= f.label :moms %><br>
+        <%= f.number_field :sales_taxes, :class=>"form-control"  %>
+      </div>
+    </div>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <div class="row">
+      <div class="col-md-6">
+        <%= link_to 'Annuller', invoices_path, :class =>"btn btn-primary" %>
+      </div>
+      <div class="col-md-6">
+        <%= f.submit 'Gem Fakura', :class => 'btn btn-success float-right'%>
+      </div>
+    </div>
   </div>
 <% end %>
