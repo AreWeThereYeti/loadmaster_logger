@@ -42,6 +42,8 @@ module Api
         trip.delete("trip_id")
         trip[:start_timestamp]=Time.parse(trip[:start_timestamp])
         trip[:end_timestamp]=Time.parse(trip[:end_timestamp])
+        trip[:start_location]=trip[:start_location].split(',')
+        trip[:end_location]=trip[:end_location].split(',')
         @trip = Trip.new(trip)
         @trip.user_id=user_id
         if @trip.save

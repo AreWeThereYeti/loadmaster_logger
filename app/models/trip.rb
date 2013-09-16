@@ -13,12 +13,8 @@ class Trip
   field :device_id, type: String
   field :cargo, type: String
   field :start_location, type: Array #[lat,lon]
-  # field :start_lat, type: Float
-  # field :start_lon, type: Float
   field :start_address, type: String
   field :end_location, type: Array #[lat,lon]
-  # field :end_lat, type: Float
-  # field :end_lon, type: Float
   field :end_address, type: String
   field :start_timestamp, type: Time
   field :end_timestamp, type: Time
