@@ -1,6 +1,8 @@
 <div class="container">
 	<h1>Users</h1>
-	  <%= render :partial => 'shared/search', :locals => {:placeholder => 'Søg efter en faktura'} %>
+	<div class="row">
+	  <%= render :partial => 'shared/search', :locals => {:placeholder => 'Søg efter en bruger'} %>
+	</div>
 	
 	<div class="row">
     <div class="col-md-12">
@@ -21,9 +23,7 @@
     	      <%= link_to user.email, admin_user_path(user) %>
     	    </td>
     	    <td>
-    	      <%= link_to "Show", admin_user_path(user), :class =>"btn btn-info btn-xs" %>
-    	      <%= link_to "Edit", edit_admin_user_path(user), :class =>"btn btn-warning btn-xs" %>
-    	      <%= link_to "Destroy", admin_user_path(user), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}", :class =>"btn btn-danger btn-xs" %>
+    	      <%= link_to "Slet", admin_user_path(user), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}", :class =>"btn btn-danger btn-xs" %>
     	    </td>
     	    </tr>
     	    <% end -%>
