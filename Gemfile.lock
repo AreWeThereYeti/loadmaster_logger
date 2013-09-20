@@ -1,12 +1,19 @@
 GIT
   remote: git://github.com/mongoid/mongoid.git
-  revision: 7087ec96de927f347f754e1907ca64527df6b4ea
+  revision: a0021858bbb405b3e99dfdda4e81a1e9c3d9dc4e
   specs:
     mongoid (4.0.0)
       activemodel (~> 4.0.0)
       moped (~> 1.5)
       origin (~> 1.0)
       tzinfo (~> 0.3.37)
+
+GIT
+  remote: git@github.com:AreWeThereYeti/loadmaster_assets.git
+  revision: 370d6579c9f97b4f8cb928de7226bf64492e217a
+  specs:
+    loadmaster_assets (0.0.12)
+      rails (~> 4.0.0)
 
 GEM
   remote: http://rubygems.org/
@@ -157,7 +164,7 @@ GEM
       multi_json (~> 1.0, >= 1.0.2)
     warden (1.2.3)
       rack (>= 1.0)
-    wicked_pdf (0.9.6)
+    wicked_pdf (0.9.7)
       rails
     wkhtmltopdf-binary (0.9.9.1)
 
@@ -175,6 +182,7 @@ DEPENDENCIES
   kaminari
   less
   less-rails
+  loadmaster_assets!
   mongo_mapper
   mongoid!
   mongoid_search
