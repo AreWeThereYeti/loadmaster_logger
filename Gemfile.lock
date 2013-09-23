@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/mongoid/mongoid.git
-  revision: a0021858bbb405b3e99dfdda4e81a1e9c3d9dc4e
+  revision: e3beb2588616ed01e047c559318303addad72488
   specs:
     mongoid (4.0.0)
       activemodel (~> 4.0.0)
@@ -8,9 +8,8 @@ GIT
       origin (~> 1.0)
       tzinfo (~> 0.3.37)
 
-GIT
-  remote: git@github.com:AreWeThereYeti/loadmaster_assets.git
-  revision: 370d6579c9f97b4f8cb928de7226bf64492e217a
+PATH
+  remote: ../loadmaster_assets
   specs:
     loadmaster_assets (0.0.12)
       rails (~> 4.0.0)
