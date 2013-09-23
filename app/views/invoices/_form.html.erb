@@ -98,7 +98,47 @@
 
   <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
-      
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Varenr</th>
+            <th>Varebetegnelse / Tekst</th>
+            <th>Antal Enheder</th>
+            <th>Pris</th>
+            <th>Ialt</th>
+          <tr>
+        </thead>
+        <tbody>
+          <tr class="description">
+            <td></td>
+            <td colspan="2"><%= f.text_area :description, :class=>"form-control", :placeholder => "Beskrivelse" %></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>64</td>
+            <td>Haveaffald / Rødder</td>
+            <td>2.30 Tons</td>
+            <td>230,00</td>
+            <td>529,00</td>
+          </tr>
+          <tr class="table-footer">
+            <td colspan="2"></td>
+            <td>
+              <p class="bold">Netto ialt</p>
+              <p class="bold">230,00</p>
+            </td>
+            <td>
+              <p class="bold">Moms ialt</p>
+              <p class="bold">57,50</p>
+            </td>
+            <td>
+              <p class="bold">Btrutto ialt</p>
+              <p class="bold">287,50</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 

@@ -24,6 +24,10 @@ class Invoice
   field :costumer_postal_code,    :type => String 
   field :costumer_city,           :type => String 
   
+  field :company_name,            :type => String 
+  field :company_street,          :type => String
+  field :company_phone,           :type => String 
+
   search_in :price, :invoice_number, :costumer, :cvr
   
 end

@@ -100,7 +100,28 @@ class InvoicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def invoice_params
-      params.require(:invoice).permit(:timestamp, :hauler_id, :trips, :price, :costumer, :description, :due_date, :cvr, :commentary, :end_note, :invoice_number, :sales_taxes)
+      params.require(:invoice).permit(
+        :timestamp, 
+        :hauler_id, 
+        :trips, 
+        :price, 
+        :costumer, 
+        :description, 
+        :due_date, 
+        :cvr, 
+        :commentary, 
+        :end_note, 
+        :invoice_number, 
+        :sales_taxes,
+        :company_name, 
+        :company_street, 
+        :company_phone, 
+        :costumer_name, 
+        :costumer_contact_name, 
+        :costumer_address_street, 
+        :costumer_postal_code, 
+        :costumer_city)
+        
     end
     
     def sort_column
