@@ -76,10 +76,19 @@ test:
         retry_interval: 0
  
 production:
-  sessions:
-    default:
-      database: loadmaster_logger_production
-      hosts:
-        - 195.231.85.192:27017
-      options:
+    sessions:
+      default:
+        database: loadmaster_logger_production
+        hosts:
+          - 195.231.85.192:27017
+        username: <%= ENV['MONGOID_USERNAME'] %>
+        password: <%= ENV['MONGOID_PASSWORD'] %>
+        options:
         consistency: :strong
+
+# production:
+#   host: 195.231.85.192
+#   port: 27017
+#   username: <%= ENV['MONGOID_USERNAME'] %>
+#   password: <%= ENV['MONGOID_PASSWORD'] %>
+#   database: loadmaster_logger_production

@@ -1,0 +1,45 @@
+<div class="container">
+	<h1>Users</h1>
+	<div class="row">
+	  <%= render :partial => 'shared/search', :locals => {:placeholder => 'Søg efter en bruger'} %>
+	</div>
+	
+	<div class="row">
+    <div class="col-md-12">
+    	<table class="table table-striped table-bordered table-hover">
+    	 <thead>
+    	  <tr>
+    	    <th><%= sortable 'Username', 'username' %></th>
+    	    <th><%= sortable 'Email', 'email' %>
+    	    </th>
+    	    <th></th>
+    	  </tr>
+    	  </thead>
+    	  <tbody>
+    	  <% @users.each do |user| -%>
+    	   <tr id="<%= user.id %>" ng-click="selectTableRow('admin/users','<%= user.id %>')" class="hand-cursor">
+    	    <td><%= user.username %></td>
+    	    <td>
+    	      <%= link_to user.email, admin_user_path(user) %>
+    	    </td>
+    	    <td>
+    	      <%= link_to "Slet", admin_user_path(user), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}", :class =>"btn btn-danger btn-xs" %>
+    	    </td>
+    	    </tr>
+    	    <% end -%>
+    	   </tbody>
+    	</table>
+    	<div class="row">
+    	  <div class="col-md-12">
+    	    <div class="center">
+    	      <%= paginate @users %>
+    	    </div>
+    	  </div>
+    	</div>
+    </div>
+  </div>
+	
+	<%= link_to "Opret Ny Vognmand", new_admin_user_path, :class => 'btn btn-primary' %>
+	<%= link_to "Opret Ny Mobil Enhed", '/mobile_devices/new', :class => 'btn btn-primary' %>
+
+</div>

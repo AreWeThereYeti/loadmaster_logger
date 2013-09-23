@@ -13,6 +13,9 @@ LoadmasterLogger::Application.configure do
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
+  
+  #OBS remember to set to mailer host!!
+  #config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
   # Add `rack-cache` to your Gemfile before enabling this.
@@ -23,11 +26,15 @@ LoadmasterLogger::Application.configure do
   config.serve_static_assets = true
 
   # Compress JavaScripts and CSS.
-  config.assets.js_compressor = :uglifier
+  
+  config.assets.compress=false
+  
+  #config.assets.js_compressor = :uglifier
+  #config.assets.js_compressor = Transformer.compress
   # config.assets.css_compressor = :sass
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
-  config.assets.compile = false
+  config.assets.compile = true
 
   # Generate digests for assets URLs.
   config.assets.digest = true
@@ -43,7 +50,8 @@ LoadmasterLogger::Application.configure do
   # config.force_ssl = true
 
   # Set to :debug to see everything in the log.
-  config.log_level = :info
+  #config.log_level = :info   #show only rails info (not db queries)
+  config.log_level = :debug   #show all rails logging
 
   # Prepend all log lines with the following tags.
   # config.log_tags = [ :subdomain, :uuid ]
@@ -77,4 +85,12 @@ LoadmasterLogger::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+  
 end
+
+
+# class Transformer
+#   def compress(string)
+#     string
+#   end
+# end

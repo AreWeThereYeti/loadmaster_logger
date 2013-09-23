@@ -1,4 +1,60 @@
 <p id="notice"><%= notice %></p>
 
-<%= link_to 'Edit', edit_trip_path(@trip) %> |
-<%= link_to 'Back', trips_path %>
+<div class="row">
+  <div class="col-md-12 com-sm-12 col-xs-12">
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Chauffør</th>
+          <th class="no-bold"><%= @trip.chauffeur %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="bold">Last</td>
+          <td><%= @trip.cargo %></td>
+        </tr>
+        <tr>
+          <td class="bold">Start adresse</td>
+          <td><%= @trip.start_address %></td>
+        </tr>
+        <tr>
+          <td class="bold">Slut adresse</td>
+          <td><%= @trip.end_address %></td>
+        </tr>
+        <tr>
+          <td class="bold">Nummerplade</td>
+          <td><%= @trip.license_plate %></td>
+        </tr>
+        <tr>
+          <td class="bold">Tur start</td>
+          <td><%= format_date(@trip.start_timestamp) %></td>
+        </tr>
+        <tr>
+          <td class="bold">Tur Slut</td>
+          <td><%= format_date(@trip.end_timestamp) %></td>
+        </tr>
+        <tr>
+          <td class="bold">Vægt</td>
+          <td><%= @trip.weight %></td>
+        </tr>
+        <tr>
+          <td class="bold">Kunde</td>
+          <td><%= @trip.costumer %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <%= link_to 'Tilbage', trips_path,:class=>'btn btn-danger'  %>
+  </div>
+  <div class="col-md-6">
+   <%= link_to 'Rediger', edit_trip_path(@trip), :class=>'btn btn-info float-right' %>
+  </div>
+</div>
+
+
+

@@ -1,25 +1,59 @@
-<%= form_for(@user) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+<% if @user.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@user.errors.count, "error") %> prohibited this trip from being saved:</h2>
 
-      <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :username %><br>
-    <%= f.text_field :username %>
-  </div>
-  <div class="field">
-    <%= f.label :password %><br>
-    <%= f.text_field :password %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+    <ul>
+    <% @user.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
   </div>
 <% end %>
+
+<div class="control-group">
+   <%= f.label :username, t("activerecord.attributes.user.email", :default => "Username"), :class => 'control-label' %>
+  <div class="input">
+    <%= f.text_field :username, :class => 'text_field' %>
+  </div>
+</div>
+
+<div class="control-group">
+   <%= f.label :password, t("activerecord.attributes.user.password", :default => "password"), :class => 'control-label' %>
+  <div class="input">
+    <%= f.password_field :password, :class => 'password_field' %>
+  </div>
+</div>
+<div class="control-group">
+   <%= f.label :Password, t("activerecord.attributes.user.password_confirmation", :default => "password_confirmation"), :class => 'control-label' %>
+  <div class="input">
+    <%= f.password_field :password_confirmation, :class => 'password_field' %>
+  </div>
+</div>
+
+<div class="control-group">
+   <%= f.label :email, :class => 'control-label' %>
+  <div class="input">
+    <%= f.email_field :email, :class => 'email_field' %>
+  </div>
+</div>
+
+<div class="control-group">
+   <%= f.label :cvr, :class => 'control-label' %>
+  <div class="input">
+    <%= f.text_field :cvr, :class => 'form-control' %>
+  </div>
+</div>
+
+<div class="control-group">
+   <%= f.label :firma_adresse, :class => 'control-label' %>
+  <div class="input">
+    <%= f.text_field :company_address, :class => 'form-control' %>
+  </div>
+</div>
+
+
+
+<div class="form-actions">
+  <button class="btn btn-primary" type="submit">Save</button> or
+	<%= link_to "Cancel", user_path, :class =>'btn btn-default' %>
+</div>

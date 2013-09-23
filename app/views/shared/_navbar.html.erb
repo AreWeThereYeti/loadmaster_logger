@@ -1,0 +1,22 @@
+<div class="navbar navbar-default">
+  <a class="navbar-brand" href="/">Loadmaster Logger</a>
+  <ul class="nav navbar-nav">
+    <% if is_admin %>
+      <%= render 'shared/navbar_items_admin'%>
+    <% elsif user_signed_in? %>
+      <%= render 'shared/navbar_items_hauler'%>
+    <% end %>
+  </ul>
+  <% if user_signed_in? %>
+    <ul class="nav navbar-nav pull-right">
+      <li class="nav navbar-nav dropdownt">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= profile_username %><b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><%= link_to "Min Profil", user_path(current_user) %></li>
+          <li class="divider"></li>
+          <li><%= link_to('Log Ud', destroy_user_session_path, :method=>'delete') %></li>
+        </ul>
+      </li>
+    </ul>
+  <%end%>
+</div>

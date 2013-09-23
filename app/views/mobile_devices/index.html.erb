@@ -1,0 +1,54 @@
+<h1>Registrede mobile enheder</h1>
+
+<div class="row">
+  <%= render :partial => 'shared/search', :locals => {:placeholder => 'Søg efter en mobil enhed'} %>
+  <div class="col-md-6 col-sm-6 col-xs-6">
+    <%= link_to 'Ny Mobil Enhed', new_mobile_device_path, :class =>"btn btn-success float-right" %>
+  </div>
+</div>
+
+<% if @mobile_devices.count == 0 %>
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <h4> Der er ingen gemte mobile enheder. For at tilføje en ny mobil enhed, klik <%= link_to 'her', new_mobile_device_path %> 
+    </div>
+  </div>
+<% else %>
+
+  <div class="row">
+    <div class="col-md-12">
+      <table id="mobile-devices-table" class="table table-hover">
+        <thead>
+          <tr>
+            <th><%= sortable 'Username', 'user_id' %></th>
+            <th><%= sortable 'ID', 'device_id' %></th>
+            <th>Access Token</th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @mobile_devices.each do |mobile_device| %>
+            <tr id="<%= mobile_device.id %>" ng-click="selectTableRow('mobile_devices','<%= mobile_device.id %>')" class="hand-cursor">
+              <td><%= mobile_device.username %></td>
+              <td><%= mobile_device.device_id%></td>
+              <td><%= mobile_device.access_token%></td>
+              <td><%= link_to 'Slet', mobile_device, method: :delete, data: { confirm: 'Are you sure?' }, :class =>"btn btn-danger btn-xs" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="center">
+        <%= paginate @mobile_devices %>
+      </div>
+    </div>
+  </div>
+  
+<% end%>

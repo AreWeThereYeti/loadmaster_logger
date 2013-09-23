@@ -1,47 +1,94 @@
-<h1>Listing trips</h1>
+<div ng-trips>
+  <h1>Ture</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>license_plate</th>
-      <th>device_id</th>
-      <th>license_plate</th>
-      <th>cargo</th>
-      <th>start_location</th>
-      <th>start_address</th>
-      <th>end_location</th>
-      <th>end_address</th>
-      <th>start_timestamp</th>
-      <th>end_timestamp</th>
-      <th>weight</th>
-      <th>costumer</th>
-      <th>commentary</th>
-    </tr>
-  </thead>
+  
+  <div class="row">
+    <%= render :partial => 'shared/search', :locals => {:placeholder => 'Søg efter en tur'} %>
+    <div class="col-md-6 col-sm-6 col-xs-6">
+      <%= link_to 'Ny Tur', new_trip_path, :class =>"btn btn-success float-right" %>
+    </div>
+  </div>
+  
+  <% if @trips.count == 0 %>
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <h4> Du har ingen gemte ture endnu. For at registrere en afholdt tur, klik <%= link_to 'her', new_trip_path %> 
+      </div>
+    </div>
+  
+  <% else %>
+    <div ng-trips-list>
+      <div class="row" >
+    	  <div class="col-md-12">
+          <table id="trips-table" class="table table-hover table-bordered" ng-trip-list>
+            <thead>
+              <tr>
+                <th><%= sortable 'Nummer Plade', 'license_plate' %></th>
+                <th><%= sortable 'Last', 'cargo' %></th>
+                <th><%= sortable 'Start Adresse', 'start_address' %></th>
+                <th><%= sortable 'Slut Adresse', 'end_address' %></th>
+                <th><%= sortable 'Tur Start','start_timestamp' %></th>
+                <th><%= sortable 'Tur Slut', 'end_timestamp' %></th>
+                <!-- <th><%= sortable 'Vægt', 'weight' %></th> -->
+                <th colspan="2"><%= sortable 'Kunde', 'costumer' %></th>
+                <th>Vælg <input type="checkbox" name="trip_all_checkbox" ng-click="checkOrUncheckAllTrips($event)"></th>
+              </tr>
+            </thead>
 
-  <tbody>
-    <% @trips.each do |trip| %>
-      <tr>
-				<td><%= trip.license_plate %></td>
-			  <td><%= trip.device_id %></td>
-			  <td><%= trip.cargo %></td>
-			  <td><%= trip.start_location %></td>
-			 	<td><%= trip.start_address %></td>
-			  <td><%= trip.end_location %></td>
-			  <td><%= trip.end_address %></td>
-			  <td><%= trip.start_timestamp %></td>
-			  <td><%= trip.end_timestamp %></td>
-			  <td><%= trip.weight %></td>
-			  <td><%= trip.costumer %></td>
-			  <td><%= trip.commentary %></td>
-        <td><%= link_to 'Show', trip %></td>
-        <td><%= link_to 'Edit', edit_trip_path(trip) %></td>
-        <td><%= link_to 'Destroy', trip, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+            <tbody>
+              <% @trips.each do |trip| %>
+                <tr id="<%= trip.id %>" ng-click="selectTableRow($event,'<%= trip.id %>')" class="hand-cursor" ng-class="{true:'active', false:'nottrue'}[selectedTripId==<%= trip.id.to_s.to_json %>]">
+        					<td><%= trip.license_plate %></td>
+          			  <td><%= trip.cargo %></td>
+          			  <td><%= trip.start_address %></td>
+          			  <td><%= trip.end_address %></td>
+          			  <td><%= format_date(trip.start_timestamp) %></td>
+          			  <td><%= format_date(trip.end_timestamp) %></td>
+                  <!-- <td><%= trip.weight %></td> -->
+          			  <td colspan="2"><%= trip.costumer %></td>
+                  <td><input type="checkbox" name="trip_checkbox" value="<%=trip.id%>"></td>
+    						</tr>
+    						<tr class="trip-list-details" ng-trips-list-item tripid="<%= trip.id.to_s.to_json %>" ng-show="showDetails">
+                  <td colspan="2"><span class="bold">  Chauffør: </span><span> <%= trip.chauffeur %></span> </td>
+                  <td colspan="2">
+                    <div class='trip-table-map' ng-static-map startlat="<%= trip.start_location[0] %>" startlon="<%= trip.start_location[1] %>" endlat="<%= trip.end_location[0] %>" endlon="<%= trip.end_location[1] %>">
+                      <div class="map-container" width="400px" height="250px"></div></div> </td>
+                  <td colspan="3"> 
+                    <div class="bold">Distance: <%= trip.distance %> </div>
+                    <div class="more-margin top double bold">Kommentarer: <%= trip.start_comments %></div>
+                  </td>
+                  <td> 
+                    <%= link_to 'Rediger', 'trips/'+trip.id, :class => 'btn btn-info btn-xs'%>
+                  </td>
+                  <td>
+                    <%= link_to 'Slet', trip, method: :delete, data: { confirm: 'Are you sure?' }, :class =>"btn btn-danger btn-xs" %>
+                  </td>
+    						</tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    
+      <div class="row">
+    	  <div class="col-md-2 col-sm-4 col-xs-6 float-right">
+    	    <button class="btn btn-danger float-right" ng-click="deleteSelectedTrips()">Slet valgte ture</button>
+    	  </div>
+        <!-- <div class="col-md-2 col-sm-4 col-xs-6 float-right">
+          <button class="btn btn-success float-right" ng-click="printSelectedTrips()">Print faktura af valgte ture</button>
+        </div> -->
+      </div>
+    
+    </div><!-- ng-trips-list -- >
+  
 
-<br>
-
-<%= link_to 'New Trip', new_trip_path %>
+  
+    <div class="row">
+  	  <div class="col-md-12">
+  	    <div class="center">
+          <%= paginate @trips %>
+  	    </div>
+  	  </div>
+  	</div>
+  <% end %>	
+</div>

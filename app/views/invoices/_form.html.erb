@@ -1,0 +1,61 @@
+<%= form_for(@invoice) do |f| %>
+  <% if @invoice.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@invoice.errors.count, "error") %> prohibited this invoice from being saved:</h2>
+
+      <ul>
+      <% @invoice.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div class="row">
+    <div class="col-md-6 col-sm-10 col-xs-12">
+
+      <div class="field">
+        <%= f.label :fakturerings_dato %><br>
+        <%= select_datetime Date.today, :prefix => :timestamp, :class=>"form-control"  %>
+      </div>
+      <div class="field">
+        <%= f.label :pris %><br>
+        <%= f.text_field :price, :class=>"form-control", :placeholder => "Pris" %>
+      </div>
+      <div class="field">
+        <%= f.label :kunde %><br>
+        <%= f.text_field :costumer, :class=>"form-control", :placeholder => "Kunde" %>
+      </div>
+      <div class="field">
+        <%= f.label :beskrivelse %><br>
+        <%= f.text_field :description, :class=>"form-control", :placeholder => "Beskrivelse" %>
+      </div>
+      <div class="field">
+        <%= f.label :betales_inden %><br>
+        <%= select_datetime Date.today, :prefix => :due_date%>
+      </div>
+      <div class="field">
+        <%= f.label :kommentarer %><br>
+        <%= f.text_field :commentary, :class=>"form-control", :placeholder => "Kommentarer" %>
+      </div>
+      <div class="field">
+        <%= f.label :faktura_nummer %><br>
+        <%= f.number_field :invoice_number, :class=>"form-control"  %>
+      </div>
+      <div class="field">
+        <%= f.label :moms %><br>
+        <%= f.number_field :sales_taxes, :class=>"form-control"  %>
+      </div>
+    </div>
+  </div>
+  <div class="actions">
+    <div class="row">
+      <div class="col-md-6">
+        <%= link_to 'Annuller', invoices_path, :class =>"btn btn-primary" %>
+      </div>
+      <div class="col-md-6">
+        <%= f.submit 'Gem Fakura', :class => 'btn btn-success float-right'%>
+      </div>
+    </div>
+  </div>
+<% end %>

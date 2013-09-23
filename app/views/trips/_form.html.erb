@@ -11,55 +11,62 @@
     </div>
   <% end %>
 
-	<div class="field">
-    <%= f.label :license_plate %><br>
-    <%= f.text_field :license_plate %>
+  <div class="field">
+    <%= f.label :nummerplade %><br>
+    <%= f.text_field :license_plate, :class=>"form-control", :placeholder => "Nummerplade" %>
   </div>
   <div class="field">
-    <%= f.label :device_id %><br>
-    <%= f.text_field :device_id %>
+    <%= f.label :last %><br>
+    <%= f.text_field :cargo, :class=>"form-control", :placeholder => "Last" %>
   </div>
   <div class="field">
-    <%= f.label :cargo %><br>
-    <%= f.text_field :cargo %>
+    <%= f.label :chauffør %><br>
+    <%= f.text_field :chauffeur, :class=>"form-control", :placeholder => "Chauffør" %>
   </div>
   <div class="field">
-    <%= f.label :start_location %><br>
-    <%= f.text_field :start_location %>
+    <%= f.label :start_adresse %><br>
+    <%= f.text_field :start_address, :class=>"form-control", :placeholder => "Start Adresse" %>
+    <%= f.hidden_field :start_lat %>
+    <%= f.hidden_field :start_lon %>
   </div>
   <div class="field">
-    <%= f.label :start_address %><br>
-    <%= f.text_field :start_address %>
+    <%= f.label :slut_adress %><br>
+    <%= f.text_field :end_address, :class=>"form-control", :placeholder => "Slut Adresse" %>
+    <%= f.hidden_field :end_lat %>
+    <%= f.hidden_field :end_lon %>
   </div>
   <div class="field">
-    <%= f.label :end_location %><br>
-    <%= f.text_field :end_location %>
+    <%= f.label :tur_start %><br>
+    <%= select_datetime Date.today, :prefix => :start_timestamp, :placeholder => "Tur Start" %>
   </div>
   <div class="field">
-    <%= f.label :end_address %><br>
-    <%= f.text_field :end_address %>
+    <%= f.label :tur_slut %><br>
+    <%= select_datetime Date.today, :prefix => :end_timestamp, :placeholder => "Tur Slut" %>
   </div>
   <div class="field">
-    <%= f.label :start_timestamp %><br>
-    <%= f.text_field :start_timestamp %>
+    <%= f.label 'kørt_distance (Km)' %><br>
+    <%= f.text_field :distance, :class=>"form-control", :placeholder => "Kør Distance (Km)"%>
   </div>
   <div class="field">
-    <%= f.label :end_timestamp %><br>
-    <%= f.text_field :end_timestamp %>
+    <%= f.label 'Vægt (kg)' %><br>
+    <%= f.text_field :weight, :class=>"form-control", :placeholder => "Vægt (kg)" %>
   </div>
   <div class="field">
-    <%= f.label :weight %><br>
-    <%= f.text_field :weight %>
+    <%= f.label :kunde %><br>
+    <%= f.text_field :costumer, :class=>"form-control", :placeholder => "Kunde" %>
   </div>
   <div class="field">
-    <%= f.label :costumer %><br>
-    <%= f.text_field :costumer %>
-  </div>
-  <div class="field">
-    <%= f.label :commentary %><br>
-    <%= f.text_field :commentary %>
+    <%= f.label :kommentarer %><br>
+    <%= f.text_area :start_comments, :class=>"form-control", :placeholder => "Kommentarer" %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <div class="row">
+      <div class="col-md-6">
+        <%= link_to "Annuller", '/trips' , :class => 'btn btn-danger' %>
+      </div>
+      <div class="col-md-6">
+        <%= f.submit 'Gem Tur', :class => 'btn btn-success float-right'%>
+      </div>
+    </div>
   </div>
 <% end %>

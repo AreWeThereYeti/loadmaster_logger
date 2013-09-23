@@ -1,0 +1,11 @@
+<h1>Mobil Enhed tilhørende bruger: <%= @mobile_device_user %> </h3>
+
+<p id="notice"><%= notice %></p>
+
+<label class="">ID</label>
+<p><%= @mobile_device.device_id %></p>
+<label class="">access_token:</label>
+<p><%= @mobile_device.access_token %></p>
+
+<%= link_to 'Edit', edit_mobile_device_path(@mobile_device) %> |
+<%= link_to 'Back', mobile_devices_path %>

@@ -1,10 +1,14 @@
 class TripsController < ApplicationController
+  load_and_authorize_resource except: [:create]
   before_action :set_trip, only: [:show, :edit, :update, :destroy]
+  before_filter :authenticate_user!
+  
+  helper_method :sort_column, :sort_direction
 
   # GET /trips
   # GET /trips.json
   def index
-    @trips = Trip.all
+    @trips = Trip.where(:user_id => current_user.user_id).order_by([[sort_column, sort_direction]]).page(params[:page]).per(25) 
   end
 
   # GET /trips/1
@@ -25,7 +29,12 @@ class TripsController < ApplicationController
   # POST /trips.json
   def create
     @trip = Trip.new(trip_params)
-
+    @trip.start_timestamp=get_timestamp(params[:start_timestamp])
+    @trip.end_timestamp=get_timestamp(params[:end_timestamp])
+    @trip.start_location=[@trip.start_lat,@trip.start_lon]
+    @trip.end_location=[@trip.end_lat,@trip.end_lon]
+    
+    @trip.user_id=current_user.id
     respond_to do |format|
       if @trip.save
         format.html { redirect_to @trip, notice: 'Trip was successfully created.' }
@@ -60,6 +69,28 @@ class TripsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  # DELETE /trips/destroy_multiple
+  
+  def destroy_multiple
+    @objects=Trip.find(params[:ids])
+    @objects.each do |item|
+      if !item.delete
+        render :json => {:error => true, :msg => 'Trips could not be deleted'}
+      end
+    end
+    render :json => {:success => true, :msg => 'Trips were succesfully deleted'}
+  end
+  
+  def search
+    if params[:search].empty? || params[:search][0].empty?
+      redirect_to trips_path
+    else
+      @trips = sort_search_results(string_search(params[:search],Trip,max_search_results))
+      render 'index'
+    end
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -72,16 +103,27 @@ class TripsController < ApplicationController
       params.require(:trip).permit(
         :license_plate,
         :device_id,
-        :license_plate,
         :cargo,
         :start_location,
-        :start_address, 
+        :start_lat,
+        :start_lon,
+        :start_address,
         :end_location,
+        :end_lat,
+        :end_lon,
         :end_address,
         :start_timestamp,
         :end_timestamp,
         :weight,
         :costumer,
-        :commentary)
+        :user_id,
+        :chauffeur,
+        :distance,
+        :start_comments)
     end
+    
+    def sort_column
+      Trip.fields.keys.include?(params[:sort]) ? params[:sort] : 'start_timestamp'
+    end
+    
 end
