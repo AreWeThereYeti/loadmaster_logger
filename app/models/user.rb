@@ -39,7 +39,16 @@ class User
   field :user_id,             :type => String
   
   field :cvr,                 :type => String
-  field :company_address,     :type => String
+  field :company_name,        :type => String
+  field :company_street,      :type => String
+  field :company_city,        :type => String
+  field :company_postal_code, :type => String
+  field :phone,               :type => String
+  field :phone_mobile,        :type => String
+  
+  field :bank,                :type => String
+  field :bank_reg_nr,         :type => String 
+  field :bank_account_nr,     :type => String 
 
   ## Confirmable
   # field :confirmation_token,   :type => String

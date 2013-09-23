@@ -48,4 +48,12 @@ module ApplicationHelper
     end
   end
   
+  def user_property(property)
+    if !!current_user[property]
+      current_user[property].to_s
+    else
+      ''
+    end
+  end
+  
 end

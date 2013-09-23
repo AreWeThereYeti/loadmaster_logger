@@ -17,6 +17,13 @@ class Invoice
   field :invoice_number,    :type => Integer 
   field :sales_taxes,       :type => Integer
   
+  
+  field :costumer_name,           :type => String 
+  field :costumer_contact_name,   :type => String 
+  field :costumer_address_street, :type => String 
+  field :costumer_postal_code,    :type => String 
+  field :costumer_city,           :type => String 
+  
   search_in :price, :invoice_number, :costumer, :cvr
   
 end

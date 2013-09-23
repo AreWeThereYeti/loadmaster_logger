@@ -2,35 +2,42 @@
   <div class="col-md-2 col-sm-2 col-xs-2">
     <p class="bold">Email:</p>
   </div>
-  <div class="col-md-2 col-sm-2 col-xs-2">
+  <div class="col-md-4 col-sm-2 col-xs-2">
     <p><%= @user.email %></p>
   </div>
 </div>
 <div class="row">
   <div class="col-md-2 col-sm-2 col-xs-2">
-    <p class="bold">Username:</p>
+    <p class="bold">Brugernavn</p>
   </div>
-  <div class="col-md-2 col-sm-2 col-xs-2">
+  <div class="col-md-4 col-sm-2 col-xs-2">
     <p><%= @user.username %></p>
   </div>
 </div>
 <div class="row">
   <div class="col-md-2 col-sm-2 col-xs-2">
-    <p class="bold">CVR:</p>
+    <p class="bold">Firma oplysninger</p>
   </div>
-  <div class="col-md-2 col-sm-2 col-xs-2">
-    <p><%= @user.cvr %></p>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-2 col-sm-2 col-xs-2">
-    <p class="bold">Firma Adresse:</p>
-  </div>
-  <div class="col-md-2 col-sm-2 col-xs-2">
-    <p><%= @user.company_address %></p>
+  <div class="col-md-4 col-sm-2 col-xs-2">
+    <p><%= @user.company_name %></p>
+    <p>CVR: <%= @user.cvr %></p>
+    <p><%= @user.company_street %></p>
+    <p><%= @user.company_postal_code.to_s + ' ' + @user.company_city %></p>
+    <p>Tlf: <%= @user.phone %></p>
+    <p>Mobil: <%= @user.phone_mobile %></p>
   </div>
 </div>
 
+<div class="row">
+  <div class="col-md-2 col-sm-2 col-xs-2">
+    <p class="bold">Bank oplysninger</p>
+  </div>
+  <div class="col-md-4 col-sm-2 col-xs-2">
+    <p>Bank: <%= @user.bank %></p>
+    <p>Reg: <%= @user.bank_reg_nr %></p>
+    <p>Konto: <%= @user.bank_account_nr %></p>
+  </div>
+</div>
 
 <div class="form-actions">
   

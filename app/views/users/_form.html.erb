@@ -10,50 +10,140 @@
   </div>
 <% end %>
 
-<div class="control-group">
-   <%= f.label :username, t("activerecord.attributes.user.email", :default => "Username"), :class => 'control-label' %>
-  <div class="input">
-    <%= f.text_field :username, :class => 'text_field' %>
+
+<h3>Brugernavn og adgangskode</h3>
+
+<div class="row">
+  <div class="col-md-6 col-sm-8 col-xs-12">
+    <div class="control-group">
+       <%= f.label :brugernavn, :class => 'control-label' %>
+      <div class="input">
+        <%= f.text_field :username, :class => 'form-control' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+       <%= f.label :adganskode, :class => 'control-label' %>
+      <div class="input">
+        <%= f.password_field :password, :class => 'form-control' %>
+      </div>
+    </div>
+    <div class="control-group">
+       <%= f.label :bekræft_adgangskode, :class => 'control-label' %>
+      <div class="input">
+        <%= f.password_field :password_confirmation, :class => 'form-control' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+       <%= f.label :email, :class => 'control-label' %>
+      <div class="input">
+        <%= f.email_field :email, :class => 'form-control' %>
+      </div>
+    </div>
   </div>
 </div>
 
-<div class="control-group">
-   <%= f.label :password, t("activerecord.attributes.user.password", :default => "password"), :class => 'control-label' %>
-  <div class="input">
-    <%= f.password_field :password, :class => 'password_field' %>
+<h3>Dit firmas Oplysninger</h3>
+
+
+<div class="row">
+  <div class="col-md-6 col-sm-8 col-xs-12">
+    <div class="control-group">
+       <%= f.label :cvr, :class => 'control-label' %>
+      <div class="input">
+        <%= f.text_field :cvr, :class => 'form-control' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+       <%= f.label :firma_navn, :class => 'control-label' %>
+      <div class="input">
+        <%= f.text_field :company_name, :class => 'form-control' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+       <%= f.label :vej_og_nr, :class => 'control-label' %>
+      <div class="input">
+        <%= f.text_field :company_street, :class => 'form-control' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+       <%= f.label :by, :class => 'control-label' %>
+      <div class="input">
+        <%= f.text_field :company_city, :class => 'form-control' %>
+      </div>
+    </div>
+
+
+    <div class="control-group">
+       <%= f.label :post_nummer, :class => 'control-label' %>
+      <div class="input">
+        <%= f.text_field :company_postal_code, :class => 'form-control' %>
+      </div>
+    </div>
   </div>
 </div>
-<div class="control-group">
-   <%= f.label :Password, t("activerecord.attributes.user.password_confirmation", :default => "password_confirmation"), :class => 'control-label' %>
-  <div class="input">
-    <%= f.password_field :password_confirmation, :class => 'password_field' %>
+
+
+<h3>Dit firmas kontakt oplysninger</h3>
+
+<div class="row">
+  <div class="col-md-6 col-sm-8 col-xs-12">
+    <div class="control-group">
+       <%= f.label :tlf_nummer, :class => 'control-label' %>
+      <div class="input">
+        <%= f.text_field :phone, :class => 'form-control' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+       <%= f.label :mobil_tlf_nummer, :class => 'control-label' %>
+      <div class="input">
+        <%= f.text_field :phone_mobile, :class => 'form-control' %>
+      </div>
+    </div>
   </div>
 </div>
 
-<div class="control-group">
-   <%= f.label :email, :class => 'control-label' %>
-  <div class="input">
-    <%= f.email_field :email, :class => 'email_field' %>
+<h3>Konto og registrerings nummer (de bankoplysninger du gerne vil have til at stå på dine faktura)</h3>
+
+<div class="row">
+  <div class="col-md-6 col-sm-8 col-xs-12">
+    <div class="control-group">
+       <%= f.label :bank, :class => 'control-label' %>
+      <div class="input">
+        <%= f.text_field :bank, :class => 'form-control' %>
+      </div>
+    </div>
   </div>
 </div>
 
-<div class="control-group">
-   <%= f.label :cvr, :class => 'control-label' %>
-  <div class="input">
-    <%= f.text_field :cvr, :class => 'form-control' %>
+<div class="row">
+  <div class="col-md-2 col-sm-3 col-xs-4">
+     <%= f.label :reg_nummer, :class => 'control-label' %>
+    <div class="input">
+      <%= f.text_field :bank_reg_nr, :class => 'form-control', :maxlength=>"4", :placeholder=>'xxxx' %>
+    </div>
+  </div>
+  <div class="col-md-4 col-sm-5 col-xs-8">
+     <%= f.label :konto_nummer, :class => 'control-label' %>
+    <div class="input">
+      <%= f.text_field :bank_account_nr, :class => 'form-control', :maxlength=>"10", :placeholder=>'xxxxxxxxxx' %>
+    </div>
   </div>
 </div>
 
-<div class="control-group">
-   <%= f.label :firma_adresse, :class => 'control-label' %>
-  <div class="input">
-    <%= f.text_field :company_address, :class => 'form-control' %>
+<div class="actions">
+  <div class="row">
+    <div class="col-md-6">
+      <%= link_to "Annuller", user_path , :class => 'btn btn-danger' %>
+    </div>
+    <div class="col-md-6">
+      <button class="btn btn-success float-right" type="submit">Gem</button>
+    </div>
   </div>
 </div>
 
-
-
-<div class="form-actions">
-  <button class="btn btn-primary" type="submit">Save</button> or
-	<%= link_to "Cancel", user_path, :class =>'btn btn-default' %>
-</div>

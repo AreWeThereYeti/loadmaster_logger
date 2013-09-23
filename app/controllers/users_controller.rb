@@ -75,7 +75,17 @@ class UsersController < ApplicationController
         :password,
         :password_confirmation,
         :cvr,
-        :company_address)
+        :company_address,
+        :cvr,                 
+        :company_name,        
+        :company_street,      
+        :company_city,        
+        :company_postal_code, 
+        :phone,               
+        :phone_mobile,        
+        :bank,                
+        :bank_reg_nr,          
+        :bank_account_nr)
     end
     
     def match_self

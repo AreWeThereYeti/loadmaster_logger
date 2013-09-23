@@ -12,9 +12,44 @@
   <% end %>
   
   <div class="row">
-    <div class="col-md-6 col-sm-10 col-xs-12">
+    <div class="col-md-8 col-sm-8 col-xs-6">
+      <%= f.text_field :company_name, :class=>"form-control", :placeholder => "Firma Navn", :value=>user_property('company_name') %>
+       <%= f.text_field :company_street, :class=>"form-control", :placeholder => "vej og husnummer", :value=>user_property('company_street') %>
+    </div>
+    <div class="col-md-4 col-sm-4 col-xs-6">
+      <div class="bold"><span class="col-md-2 col-sm-4 no-padding">Tlf:</span><span class="col-md-10 col-sm-8 no-padding"> <%= f.text_field :company_phone, :class=>"form-control", :placeholder => "Tlf", :value=>user_property('phone') %></span>
+      </div>
+      
+      <div class="bold"><span class="col-md-2 col-sm-4 no-padding">Mobiltlf: </span><span class="col-md-10 col-sm-8 no-padding"><%= f.text_field :company_phone, :class=>"form-control", :placeholder => "Mobil Tlf", :value=>user_property('phone_mobile') %></span>
+      </div>
+      
+      <div class="bold"><span class="col-md-2 col-sm-4 no-padding">CVR: </span><span class="col-md-10 col-sm-8 no-padding"><%= f.text_field :company_phone, :class=>"form-control", :placeholder => "CVR", :value=>user_property('cvr') %></span>
+      </div>
+      
+      <div class="bold"><span class="col-md-2 col-sm-4 no-padding">Bank: </span><span class="col-md-3 col-sm-4 no-padding"><%= f.text_field :company_phone, :class=>"form-control", :placeholder => "Reg", :value=>user_property('bank_reg_nr') %></span><span class="col-md-7 col-sm-4 no-padding"> <%= f.text_field :company_phone, :class=>"form-control", :placeholder => "Reg", :value=>user_property('bank_account_nr') %></span>
+      </div>
+    </div>
+  </div>
 
-      <div class="field">
+  <div class="row">
+    <div class="col-md-4 col-sm-6 col-xs-12">
+      <h5>Køber:</h5>
+      <%= f.text_field :costumer_name, :class=>"form-control", :placeholder => "Kunde Navn" %>
+      <%= f.text_field :costumer_contact_name, :class=>"form-control", :placeholder => "ATT" %>
+      <%= f.text_field :costumer_address_street, :class=>"form-control", :placeholder => "Vej og husnummer" %>
+      <%= f.text_field :costumer_postal_code, :class=>"form-control", :placeholder => "Post Nr" %>
+      <%= f.text_field :costumer_city, :class=>"form-control", :placeholder => "By" %>
+    </div>
+    
+    <div class="col-md-4 col-sm-6 col-xs-12 float-right">
+      <h4>FAKTURA</h4>
+      <%= f.number_field :invoice_number, :class=>"form-control", :placeholder => "xxxx"   %>
+      <%= select_datetime Date.today, :prefix => :timestamp, :class=>"form-control"  %>
+      <%= select_datetime Date.today, :prefix => :due_date%>
+    </div>
+  
+
+      <!-- <div class="field">
         <%= f.label :fakturerings_dato %><br>
         <%= select_datetime Date.today, :prefix => :timestamp, :class=>"form-control"  %>
       </div>
@@ -46,6 +81,10 @@
         <%= f.label :moms %><br>
         <%= f.number_field :sales_taxes, :class=>"form-control"  %>
       </div>
+      <div class="field">
+        <%= f.label :bank %><br>
+        <%= f.text_field :sales_taxes, :class=>"form-control", :value=>user_property('bank')  %>
+      </div> -->
     </div>
   </div>
   <div class="actions">
