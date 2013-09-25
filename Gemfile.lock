@@ -9,7 +9,7 @@ GIT
       tzinfo (~> 0.3.37)
 
 PATH
-  remote: /Users/mikkelmarkvardsen/loadmasterlogger_Tablet/www/src
+  remote: ../loadmaster_assets
   specs:
     loadmaster_assets (0.0.12)
       rails (~> 4.0.0)
