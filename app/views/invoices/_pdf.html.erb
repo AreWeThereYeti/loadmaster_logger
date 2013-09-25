@@ -92,9 +92,7 @@
        <tbody>
          <tr class="description">
            <td></td>
-           <td colspan="2"><%= @invoice.description %></td>
-           <td></td>
-           <td></td>
+           <td colspan="10"><%= @invoice.description %></td>
          </tr>
          <% @invoice.trips.each_with_index do |trip,i| %>
            <tr>
