@@ -39,7 +39,16 @@ class User
   field :user_id,             :type => String
   
   field :cvr,                 :type => String
-  field :company_address,     :type => String
+  field :company_name,        :type => String
+  field :company_street,      :type => String
+  field :company_city,        :type => String
+  field :company_postal_code, :type => String
+  field :phone,               :type => String
+  field :phone_mobile,        :type => String
+  
+  field :bank,                :type => String
+  field :bank_reg_nr,         :type => String 
+  field :bank_account_nr,     :type => String 
 
   ## Confirmable
   # field :confirmation_token,   :type => String
@@ -96,8 +105,11 @@ class User
   
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
-    if login = conditions.delete(:login)
-      self.any_of({ :username =>  /^#{Regexp.escape(login)}$/i }, { :email =>  /^#{Regexp.escape(login)}$/i }).first
+    if login = conditions.delete(:login).downcase
+      user=self.where({ :username =>  /^#{Regexp.escape(login)}$/i }, { :email =>  /^#{Regexp.escape(login)}$/i })
+      if !user.nil?
+        user.first
+      end
     else
       super
     end
@@ -106,7 +118,10 @@ class User
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
     if login = conditions.delete(:login).downcase
-      where(conditions).where('$or' => [ {:username => /^#{Regexp.escape(login)}$/i}, {:email => /^#{Regexp.escape(login)}$/i} ]).first
+      user=where(conditions).where('$or' => [ {:username => /^#{Regexp.escape(login)}$/i}, {:email => /^#{Regexp.escape(login)}$/i} ])
+      if !user.nil?
+        user.first
+      end
     else
       where(conditions).first
     end

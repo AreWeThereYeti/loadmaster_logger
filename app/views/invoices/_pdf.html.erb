@@ -1,0 +1,124 @@
+<div class="row">
+   <div class="col-md-8 col-sm-8 col-xs-8">
+     <h2><%= @invoice.company_name %></h2>
+     <h4><%= @invoice.company_street %></h4>
+   </div>
+   <div class="col-md-4 col-sm-4 col-xs-4">
+     <div class="bold">
+       <span class="col-md-2 col-sm-4 no-padding">Tlf:
+       </span>
+       <span class="col-md-10 col-sm-8 no-padding"> 
+         <p class="pull-right"><%= @invoice.company_phone %></p>
+       </span>
+     </div>
+ 
+ <!-- Contact information -->
+ 
+     <div class="bold">
+       <span class="col-md-2 col-sm-4 no-padding">Mobiltlf: 
+       </span>
+       <span class="col-md-10 col-sm-8 no-padding">
+         <p class="pull-right"> <%= @invoice.company_phone_mobile %></p>
+       </span>
+     </div>
+ 
+     <div class="bold">
+       <span class="col-md-2 col-sm-4 no-padding">CVR: 
+       </span>
+       <span class="col-md-10 col-sm-8 no-padding">
+         <p class="pull-right"> <%= @invoice.cvr %></p>
+       </span>
+     </div>
+ 
+     <div class="bold">
+       <span class="col-md-2 col-sm-4 no-padding">Bank: </span>
+       <span class="col-md-3 col-sm-4 no-padding">
+         <p class="pull-right"><%= @invoice.company_bank_reg_nr %></p>
+       </span>
+       <span class="col-md-7 col-sm-4 no-padding"> 
+         <p class="pull-right"><%= @invoice.company_bank_account_nr %></p>
+       </span>
+     </div>
+   </div>
+ </div>
+
+ <!-- Buyer -->
+
+ <div class="row">
+   <div class="col-md-4 col-sm-6 col-xs-6">
+     <h4>Køber :</h4>
+     <p><%= @invoice.costumer_name %></p>
+     <p><%= @invoice.costumer_contact_name %></p>
+     <p><%= @invoice.costumer_address_street %></p>
+     <p><%= @invoice.costumer_postal_code %><%= @invoice.costumer_city %></p>
+   </div>
+
+ <!-- invoice number -->
+
+   <div class="col-md-4 col-sm-6 col-xs-4 float-right">
+     <h4>FAKTURA</h4>
+     <div class="bold">
+       <span class="col-md-2 col-sm-4 no-padding">NR  <%= @invoice.invoice_number %></span>
+     </div>
+     <div class="bold">
+       <span class="col-md-2 col-sm-4 no-padding">Dato 
+       </span>
+       <span class="col-md-10 col-sm-8 no-padding more-margin bottom double">
+        <p class="pull-right"> <%= format_date_only_date(@invoice.timestamp) %></p>
+       </span>
+     </div>
+     <div class="bold">
+       <span class="col-md-2 col-sm-4 no-padding">Forf.:
+       </span>
+       <span class="col-md-10 col-sm-8 no-padding">
+        <p class="pull-right"> <%= format_date_only_date(@invoice.due_date) %> </p>
+       </span>
+     </div>
+   </div>
+ </div>
+
+ <div class="row">
+   <div class="col-md-12 col-sm-12 col-xs-12">
+     <table class="table table-bordered">
+       <thead>
+         <tr>
+           <th>Varenr</th>
+           <th>Varebetegnelse / Tekst</th>
+           <th>Antal Enheder</th>
+           <th>Pris</th>
+           <th>Ialt</th>
+         <tr>
+       </thead>
+       <tbody>
+         <tr class="description">
+           <td></td>
+           <td colspan="10"><%= @invoice.description %></td>
+         </tr>
+         <% @invoice.trips.each_with_index do |trip,i| %>
+           <tr>
+             <td><%= trip['nr'] %></td>
+             <td><%= trip['description'] %></td>
+             <td><%= trip['units'] %></td>
+             <td><%= trip['unit_price'] %></td>
+             <td><%= trip['total_price'] %></td>
+           </tr>
+         <% end %>
+         <tr class="table-footer">
+           <td colspan="2"></td>
+           <td>
+             <p class="bold">Netto ialt</p>
+             <p class="bold"><%= @invoice.netto_price %></p>
+           </td>
+           <td>
+             <p class="bold">Moms ialt</p>
+             <p class="bold"><%= @invoice.taxes %></p>
+           </td>
+           <td>
+             <p class="bold">Brutto ialt</p>
+             <p class="bold"><%= @invoice.brutto_price %></p>
+           </td>
+         </tr>
+       </tbody>
+     </table>
+   </div>
+ </div>

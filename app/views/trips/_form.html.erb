@@ -10,6 +10,10 @@
       </ul>
     </div>
   <% end %>
+  
+  <% if !!@errors %>
+  	<p><%= @errors %></p>
+  <% end %>
 
   <div class="field">
     <%= f.label :nummerplade %><br>

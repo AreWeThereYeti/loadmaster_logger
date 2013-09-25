@@ -4,14 +4,13 @@ source 'http://rubygems.org/'
 require 'rubygems'
 
 gem 'rails', '4.0.0'
-gem "mongo_mapper"
+#gem "mongo", "~> 1.9.2"
+#gem "mongo_mapper"
 
 gem 'mongoid', github: 'mongoid/mongoid'
 gem 'mongoid_search'
-#gem 'mongoid', git: 'https://github.com/mongoid/mongoid.git'
-#gem "bson", "~> 1.8.6"
-
-#gem 'bson_ext', '~> 1.8.6'
+#gem "bson", "~> 1.9.2"
+#gem 'bson_ext'
 #gem "bcrypt-ruby", :require => "bcrypt"
 
 # Use SCSS for stylesheets
@@ -27,9 +26,6 @@ gem 'sass-rails'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
-
-# Use CoffeeScript for .js.coffee assets and views
-#gem 'coffee-rails', '~> 4.0.0'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby

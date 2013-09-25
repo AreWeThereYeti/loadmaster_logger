@@ -21,6 +21,7 @@
 //= require loadmaster_assets/angular/controllers/tripCtrl_web
 //= require loadmaster_assets/angular/controllers/tripsListCtrl
 //= require loadmaster_assets/angular/controllers/tripListItemCtrl
+//= require loadmaster_assets/angular/controllers/invoiceCtrl
 //= require_tree ./loadmaster
 //= require turbolinks
 //= require_tree .

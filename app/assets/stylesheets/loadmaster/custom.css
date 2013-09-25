@@ -8,8 +8,12 @@
   margin-bottom: 10px;
 }
 .form-signin .checkbox {
-  font-weight: normal;
+	font-weight: normal;
+	display: inline-block;
+	margin-right: 5px;
+	vertical-align: middle;
 }
+
 .form-signin .form-control {
   position: relative;
   font-size: 16px;
@@ -36,3 +40,5 @@
 .dropdown-menu .divider{
 	height:2px;
 }
+
+.description
