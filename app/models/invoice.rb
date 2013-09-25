@@ -27,7 +27,14 @@ class Invoice
   field :company_name,            :type => String 
   field :company_street,          :type => String
   field :company_phone,           :type => String 
+  field :company_phone_mobile,    :type => String 
+  field :company_bank_reg_nr,     :type => String 
+  field :company_bank_account_nr,     :type => String 
+  
+  field :netto_price,             :type => String 
+  field :brutto_price,            :type => String 
+  field :taxes,                   :type => String 
 
-  search_in :price, :invoice_number, :costumer, :cvr
+  search_in :price, :invoice_number, :costumer, :cvr, :description, :due_date, :timestamp, :costumer_name, :costumer_address_street, :costumer_postal_code,:costumer_city,:company_name,:company_street, :company_phone
   
 end

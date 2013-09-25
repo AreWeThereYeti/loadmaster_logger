@@ -34,11 +34,19 @@ class InvoicesController < ApplicationController
     @invoice.timestamp=get_timestamp(params[:timestamp])
     @invoice.due_date=get_timestamp(params[:due_date])
     @invoice.user_id=current_user.id
+    @invoice.trips=format_trips(params[:trips])
+    @invoice.brutto_price=params[:brutto_price]
+    @invoice.netto_price=params[:netto_price]
+    @invoice.taxes=params[:taxes]
 
     respond_to do |format|
       if @invoice.save
-        format.html { redirect_to @invoice, notice: 'Invoice was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @invoice }
+        #format.html { redirect_to @invoice, notice: 'Invoice was successfully created.' }
+        format.json { 
+          puts 'format.json ran'
+          render json: {:redirect_url => '/invoices/'+@invoice.id.to_s}, status: :created 
+          #render action: 'show', status: :created, location: @invoice 
+        }
       else
         format.html { render action: 'new' }
         format.json { render json: @invoice.errors, status: :unprocessable_entity }
@@ -103,7 +111,6 @@ class InvoicesController < ApplicationController
       params.require(:invoice).permit(
         :timestamp, 
         :hauler_id, 
-        :trips, 
         :price, 
         :costumer, 
         :description, 
@@ -116,15 +123,34 @@ class InvoicesController < ApplicationController
         :company_name, 
         :company_street, 
         :company_phone, 
+        :company_phone_mobile, 
+        :company_phone_mobile,
+        :company_bank_reg_nr, 
+        :company_bank_account_nr,
         :costumer_name, 
         :costumer_contact_name, 
         :costumer_address_street, 
         :costumer_postal_code, 
-        :costumer_city)
-        
+        :costumer_city,
+        :netto_price,
+        :brutto_price,
+        :taxes,
+        :trips => [])
     end
     
     def sort_column
       Invoice.fields.keys.include?(params[:sort]) ? params[:sort] : 'timestamp'
+    end
+    
+    def format_trips(trips)
+      puts 'trips: '
+      puts trips
+      formatted_trips=[]
+      trips.each_with_index{ |(key,value),index|
+        value.delete('$$hashKey')
+        formatted_trips.push(value)
+      }
+      puts formatted_trips
+      return formatted_trips
     end
 end

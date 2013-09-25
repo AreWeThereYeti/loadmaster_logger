@@ -1,4 +1,4 @@
-<div ng-invoice>
+<div ng-invoice id="invoice-form-page">
   <%= form_for(@invoice) do |f| %>
     <% if @invoice.errors.any? %>
       <div id="error_explanation">
@@ -33,7 +33,7 @@
           <span class="col-md-2 col-sm-4 no-padding">Mobiltlf: 
           </span>
           <span class="col-md-10 col-sm-8 no-padding">
-            <%= f.text_field :company_phone, :class=>"form-control", :placeholder => "Mobil Tlf", :value=>user_property('phone_mobile') %>
+            <%= f.text_field :company_phone_mobile, :class=>"form-control", :placeholder => "Mobil Tlf", :value=>user_property('phone_mobile') %>
           </span>
         </div>
       
@@ -41,17 +41,17 @@
           <span class="col-md-2 col-sm-4 no-padding">CVR: 
           </span>
           <span class="col-md-10 col-sm-8 no-padding">
-          <%= f.text_field :company_phone, :class=>"form-control", :placeholder => "CVR", :value=>user_property('cvr') %>
+          <%= f.text_field :cvr, :class=>"form-control", :placeholder => "CVR", :value=>user_property('cvr') %>
           </span>
         </div>
       
         <div class="bold">
           <span class="col-md-2 col-sm-4 no-padding">Bank: </span>
           <span class="col-md-3 col-sm-4 no-padding">
-            <%= f.text_field :company_phone, :class=>"form-control", :placeholder => "Reg", :value=>user_property('bank_reg_nr') %>
+            <%= f.text_field :company_bank_reg_nr, :class=>"form-control", :placeholder => "Reg", :value=>user_property('bank_reg_nr') %>
           </span>
           <span class="col-md-7 col-sm-4 no-padding"> 
-            <%= f.text_field :company_phone, :class=>"form-control", :placeholder => "Reg", :value=>user_property('bank_account_nr') %>
+            <%= f.text_field :company_bank_account_nr, :class=>"form-control", :placeholder => "Reg", :value=>user_property('bank_account_nr') %>
           </span>
         </div>
       </div>
@@ -84,14 +84,14 @@
           <span class="col-md-2 col-sm-4 no-padding">Dato 
           </span>
           <span class="col-md-10 col-sm-8 no-padding">
-            <%= select_datetime Date.today, :prefix => :timestamp, :class=>"form-control"  %>
+            <%= select_date Date.today, :prefix => :timestamp, :class=>"form-control"  %>
           </span>
         </div>
         <div class="bold">
           <span class="col-md-2 col-sm-4 no-padding">Forf.:
           </span>
           <span class="col-md-10 col-sm-8 no-padding">
-            <%= select_datetime Date.today, :prefix => :due_date%>
+            <%= select_date Date.today, :prefix => :due_date%>
           </span>
         </div>
       </div>
@@ -138,7 +138,7 @@
                 <p class="bold">{{taxes}}</p>
               </td>
               <td>
-                <p class="bold">Btrutto ialt</p>
+                <p class="bold">Brutto ialt</p>
                 <p class="bold">{{total_price_with_taxes}}</p>
               </td>
             </tr>
@@ -152,7 +152,7 @@
           <%= link_to 'Annuller', invoices_path, :class =>"btn btn-primary" %>
         </div>
         <div class="col-md-6">
-          <button class="btn btn-success float-right" ng-click="submit()">Gem Faktura</button>
+          <button class="btn btn-success float-right" ng-click="submit($event)">Gem Faktura</button>
           <!-- <%= f.submit 'Gem Fakura', :class => 'btn btn-success float-right'%> -->
         </div>
       </div>
