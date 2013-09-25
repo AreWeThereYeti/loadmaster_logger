@@ -1,193 +1,161 @@
-<%= form_for(@invoice) do |f| %>
-  <% if @invoice.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@invoice.errors.count, "error") %> prohibited this invoice from being saved:</h2>
+<div ng-invoice>
+  <%= form_for(@invoice) do |f| %>
+    <% if @invoice.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@invoice.errors.count, "error") %> prohibited this invoice from being saved:</h2>
 
-      <ul>
-      <% @invoice.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+        <ul>
+        <% @invoice.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+  
+    <!-- head line -->
+  
+    <div class="row">
+      <div class="col-md-8 col-sm-8 col-xs-6">
+        <%= f.text_field :company_name, :class=>"form-control", :placeholder => "Firma Navn", :value=>user_property('company_name') %>
+         <%= f.text_field :company_street, :class=>"form-control", :placeholder => "vej og husnummer", :value=>user_property('company_street') %>
+      </div>
+      <div class="col-md-4 col-sm-4 col-xs-6">
+        <div class="bold">
+          <span class="col-md-2 col-sm-4 no-padding">Tlf:
+          </span>
+          <span class="col-md-10 col-sm-8 no-padding"> <%= f.text_field :company_phone, :class=>"form-control", :placeholder => "Tlf", :value=>user_property('phone') %>
+          </span>
+        </div>
+      
+    <!-- Contact information -->
+      
+        <div class="bold">
+          <span class="col-md-2 col-sm-4 no-padding">Mobiltlf: 
+          </span>
+          <span class="col-md-10 col-sm-8 no-padding">
+            <%= f.text_field :company_phone, :class=>"form-control", :placeholder => "Mobil Tlf", :value=>user_property('phone_mobile') %>
+          </span>
+        </div>
+      
+        <div class="bold">
+          <span class="col-md-2 col-sm-4 no-padding">CVR: 
+          </span>
+          <span class="col-md-10 col-sm-8 no-padding">
+          <%= f.text_field :company_phone, :class=>"form-control", :placeholder => "CVR", :value=>user_property('cvr') %>
+          </span>
+        </div>
+      
+        <div class="bold">
+          <span class="col-md-2 col-sm-4 no-padding">Bank: </span>
+          <span class="col-md-3 col-sm-4 no-padding">
+            <%= f.text_field :company_phone, :class=>"form-control", :placeholder => "Reg", :value=>user_property('bank_reg_nr') %>
+          </span>
+          <span class="col-md-7 col-sm-4 no-padding"> 
+            <%= f.text_field :company_phone, :class=>"form-control", :placeholder => "Reg", :value=>user_property('bank_account_nr') %>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Buyer -->
+
+    <div class="row">
+      <div class="col-md-4 col-sm-6 col-xs-12">
+        <h5>Køber:</h5>
+        <%= f.text_field :costumer_name, :class=>"form-control", :placeholder => "Kunde Navn" %>
+        <%= f.text_field :costumer_contact_name, :class=>"form-control", :placeholder => "ATT" %>
+        <%= f.text_field :costumer_address_street, :class=>"form-control", :placeholder => "Vej og husnummer" %>
+        <%= f.text_field :costumer_postal_code, :class=>"form-control", :placeholder => "Post Nr" %>
+        <%= f.text_field :costumer_city, :class=>"form-control", :placeholder => "By" %>
+      </div>
+    
+    <!-- invoice number -->
+    
+      <div class="col-md-4 col-sm-6 col-xs-12 float-right">
+        <h4>FAKTURA</h4>
+        <div class="bold">
+          <span class="col-md-2 col-sm-4 no-padding">NR 
+          </span>
+          <span class="col-md-10 col-sm-8 no-padding">
+            <%= f.number_field :invoice_number, :class=>"form-control", :placeholder => "Faktura Nummer"   %>
+          </span>
+        </div>
+        <div class="bold">
+          <span class="col-md-2 col-sm-4 no-padding">Dato 
+          </span>
+          <span class="col-md-10 col-sm-8 no-padding">
+            <%= select_datetime Date.today, :prefix => :timestamp, :class=>"form-control"  %>
+          </span>
+        </div>
+        <div class="bold">
+          <span class="col-md-2 col-sm-4 no-padding">Forf.:
+          </span>
+          <span class="col-md-10 col-sm-8 no-padding">
+            <%= select_datetime Date.today, :prefix => :due_date%>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Varenr</th>
+              <th>Varebetegnelse / Tekst</th>
+              <th>Antal Enheder</th>
+              <th>Pris</th>
+              <th>Ialt</th>
+            <tr>
+          </thead>
+          <tbody>
+            <tr class="description">
+              <td></td>
+              <td colspan="2"><%= f.text_area :description, :class=>"form-control", :placeholder => "Beskrivelse" %></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr ng-repeat="item in items">
+              <td><input value="{{item.nr}}" placeholder="vare nr" ng-model="item.nr"/></td>
+              <td><input value="{{item.description}}" placeholder="beskrivelse" ng-model="item.description"/></td>
+              <td><input value="{{item.units}}" placeholder="antal enheder" ng-model="item.units"/></td>
+              <td><input value="{{item.unit_price}}" placeholder="enheds pris" ng-model="item.unit_price"/></td>
+              <td><input value="{{item.total_price}}" placeholder="pris ialt" ng-model="item.total_price"/></td>
+            </tr>
+            <tr>
+              <td colspan="4"></td>
+              <td ng-click="addItemRow()">tilføj vare</td>
+            </tr>
+            <tr class="table-footer">
+              <td colspan="2"></td>
+              <td>
+                <p class="bold">Netto ialt</p>
+                <p class="bold">{{total_price}}</p>
+              </td>
+              <td>
+                <p class="bold">Moms ialt</p>
+                <p class="bold">{{taxes}}</p>
+              </td>
+              <td>
+                <p class="bold">Btrutto ialt</p>
+                <p class="bold">{{total_price_with_taxes}}</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="actions">
+      <div class="row">
+        <div class="col-md-6">
+          <%= link_to 'Annuller', invoices_path, :class =>"btn btn-primary" %>
+        </div>
+        <div class="col-md-6">
+          <button class="btn btn-success float-right" ng-click="submit()">Gem Faktura</button>
+          <!-- <%= f.submit 'Gem Fakura', :class => 'btn btn-success float-right'%> -->
+        </div>
+      </div>
     </div>
   <% end %>
-  
-  <!-- head line -->
-  
-  <div class="row">
-    <div class="col-md-8 col-sm-8 col-xs-6">
-      <%= f.text_field :company_name, :class=>"form-control", :placeholder => "Firma Navn", :value=>user_property('company_name') %>
-       <%= f.text_field :company_street, :class=>"form-control", :placeholder => "vej og husnummer", :value=>user_property('company_street') %>
-    </div>
-    <div class="col-md-4 col-sm-4 col-xs-6">
-      <div class="bold">
-        <span class="col-md-2 col-sm-4 no-padding">Tlf:
-        </span>
-        <span class="col-md-10 col-sm-8 no-padding"> <%= f.text_field :company_phone, :class=>"form-control", :placeholder => "Tlf", :value=>user_property('phone') %>
-        </span>
-      </div>
-      
-  <!-- Contact information -->
-      
-      <div class="bold">
-        <span class="col-md-2 col-sm-4 no-padding">Mobiltlf: 
-        </span>
-        <span class="col-md-10 col-sm-8 no-padding">
-          <%= f.text_field :company_phone, :class=>"form-control", :placeholder => "Mobil Tlf", :value=>user_property('phone_mobile') %>
-        </span>
-      </div>
-      
-      <div class="bold">
-        <span class="col-md-2 col-sm-4 no-padding">CVR: 
-        </span>
-        <span class="col-md-10 col-sm-8 no-padding">
-        <%= f.text_field :company_phone, :class=>"form-control", :placeholder => "CVR", :value=>user_property('cvr') %>
-        </span>
-      </div>
-      
-      <div class="bold">
-        <span class="col-md-2 col-sm-4 no-padding">Bank: </span>
-        <span class="col-md-3 col-sm-4 no-padding">
-          <%= f.text_field :company_phone, :class=>"form-control", :placeholder => "Reg", :value=>user_property('bank_reg_nr') %>
-        </span>
-        <span class="col-md-7 col-sm-4 no-padding"> 
-          <%= f.text_field :company_phone, :class=>"form-control", :placeholder => "Reg", :value=>user_property('bank_account_nr') %>
-        </span>
-      </div>
-    </div>
-  </div>
-
-  <!-- Buyer -->
-
-  <div class="row">
-    <div class="col-md-4 col-sm-6 col-xs-12">
-      <h5>Køber:</h5>
-      <%= f.text_field :costumer_name, :class=>"form-control", :placeholder => "Kunde Navn" %>
-      <%= f.text_field :costumer_contact_name, :class=>"form-control", :placeholder => "ATT" %>
-      <%= f.text_field :costumer_address_street, :class=>"form-control", :placeholder => "Vej og husnummer" %>
-      <%= f.text_field :costumer_postal_code, :class=>"form-control", :placeholder => "Post Nr" %>
-      <%= f.text_field :costumer_city, :class=>"form-control", :placeholder => "By" %>
-    </div>
-    
-  <!-- invoice number -->
-    
-    <div class="col-md-4 col-sm-6 col-xs-12 float-right">
-      <h4>FAKTURA</h4>
-      <div class="bold">
-        <span class="col-md-2 col-sm-4 no-padding">NR 
-        </span>
-        <span class="col-md-10 col-sm-8 no-padding">
-          <%= f.number_field :invoice_number, :class=>"form-control", :placeholder => "Faktura Nummer"   %>
-        </span>
-      </div>
-      <div class="bold">
-        <span class="col-md-2 col-sm-4 no-padding">Dato 
-        </span>
-        <span class="col-md-10 col-sm-8 no-padding">
-          <%= select_datetime Date.today, :prefix => :timestamp, :class=>"form-control"  %>
-        </span>
-      </div>
-      <div class="bold">
-        <span class="col-md-2 col-sm-4 no-padding">Forf.:
-        </span>
-        <span class="col-md-10 col-sm-8 no-padding">
-          <%= select_datetime Date.today, :prefix => :due_date%>
-        </span>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12">
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>Varenr</th>
-            <th>Varebetegnelse / Tekst</th>
-            <th>Antal Enheder</th>
-            <th>Pris</th>
-            <th>Ialt</th>
-          <tr>
-        </thead>
-        <tbody>
-          <tr class="description">
-            <td></td>
-            <td colspan="2"><%= f.text_area :description, :class=>"form-control", :placeholder => "Beskrivelse" %></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>64</td>
-            <td>Haveaffald / Rødder</td>
-            <td>2.30 Tons</td>
-            <td>230,00</td>
-            <td>529,00</td>
-          </tr>
-          <tr class="table-footer">
-            <td colspan="2"></td>
-            <td>
-              <p class="bold">Netto ialt</p>
-              <p class="bold">230,00</p>
-            </td>
-            <td>
-              <p class="bold">Moms ialt</p>
-              <p class="bold">57,50</p>
-            </td>
-            <td>
-              <p class="bold">Btrutto ialt</p>
-              <p class="bold">287,50</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-      <!-- <div class="field">
-        <%= f.label :fakturerings_dato %><br>
-        <%= select_datetime Date.today, :prefix => :timestamp, :class=>"form-control"  %>
-      </div>
-      <div class="field">
-        <%= f.label :pris %><br>
-        <%= f.text_field :price, :class=>"form-control", :placeholder => "Pris" %>
-      </div>
-      <div class="field">
-        <%= f.label :kunde %><br>
-        <%= f.text_field :costumer, :class=>"form-control", :placeholder => "Kunde" %>
-      </div>
-      <div class="field">
-        <%= f.label :beskrivelse %><br>
-        <%= f.text_field :description, :class=>"form-control", :placeholder => "Beskrivelse" %>
-      </div>
-      <div class="field">
-        <%= f.label :betales_inden %><br>
-        <%= select_datetime Date.today, :prefix => :due_date%>
-      </div>
-      <div class="field">
-        <%= f.label :kommentarer %><br>
-        <%= f.text_field :commentary, :class=>"form-control", :placeholder => "Kommentarer" %>
-      </div>
-      <div class="field">
-        <%= f.label :faktura_nummer %><br>
-        <%= f.number_field :invoice_number, :class=>"form-control"  %>
-      </div>
-      <div class="field">
-        <%= f.label :moms %><br>
-        <%= f.number_field :sales_taxes, :class=>"form-control"  %>
-      </div>
-      <div class="field">
-        <%= f.label :bank %><br>
-        <%= f.text_field :sales_taxes, :class=>"form-control", :value=>user_property('bank')  %>
-      </div> 
-    </div>
-  </div>-->
-  <div class="actions">
-    <div class="row">
-      <div class="col-md-6">
-        <%= link_to 'Annuller', invoices_path, :class =>"btn btn-primary" %>
-      </div>
-      <div class="col-md-6">
-        <%= f.submit 'Gem Fakura', :class => 'btn btn-success float-right'%>
-      </div>
-    </div>
-  </div>
-<% end %>
+</div>
