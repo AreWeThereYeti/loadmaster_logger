@@ -6,7 +6,7 @@ class MobileDevice
   field :access_token
   field :user_id
   field :username
-  
+    
   search_in :device_id, :username
   
   before_create :generate_access_token, :get_username
