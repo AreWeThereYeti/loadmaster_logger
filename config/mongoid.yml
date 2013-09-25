@@ -65,15 +65,13 @@ development:
 test:
   sessions:
     default:
-      database: loadmaster_logger_test
+      database: loadmaster_logger_production
       hosts:
-        - localhost:27017
+        - 195.231.85.192:27017
+      username: <%= ENV['MONGOID_USERNAME'] %>
+      password: <%= ENV['MONGOID_PASSWORD'] %>
       options:
-        consistency: :strong
-        # In the test environment we lower the retries and retry interval to
-        # low amounts for fast failures.
-        max_retries: 1
-        retry_interval: 0
+      consistency: :strong
  
 production:
     sessions:

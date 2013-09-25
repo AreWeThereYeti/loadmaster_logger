@@ -106,7 +106,7 @@ class User
   def self.find_first_by_auth_conditions(warden_conditions)
     puts 'self.find_first_by_auth_conditions ran'
     conditions = warden_conditions.dup
-    if login = conditions.delete(:login)
+    if login = conditions.delete(:login).downcase
       self.where({ :username =>  /^#{Regexp.escape(login)}$/i }, { :email =>  /^#{Regexp.escape(login)}$/i }).first
     else
       super
