@@ -35,15 +35,23 @@ class TripsController < ApplicationController
     @trip.end_location=[@trip.end_lat,@trip.end_lon]
     
     @trip.user_id=current_user.id
-    respond_to do |format|
-      if @trip.save
-        format.html { redirect_to @trip, notice: 'Trip was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @trip }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @trip.errors, status: :unprocessable_entity }
-      end
-    end
+	if @trip.start_location.empty? && @trip.end_location.empty? && @trip.start_address.empty? && @trip.end_address.empty?
+	    respond_to do |format|
+	      if @trip.save
+	        format.html { redirect_to @trip, notice: 'Trip was successfully created.' }
+	        format.json { render action: 'show', status: :created, location: @trip }
+	      else
+	        format.html { render action: 'new' }
+	        format.json { render json: @trip.errors, status: :unprocessable_entity }
+	      end
+	    end
+	else
+		@errors='Du glemte at vælge en start og/eller slut adresse'
+		respond_to do |format|
+			format.html { render action: 'new' }
+	        format.json { render json: @errors , status: :unprocessable_entity }
+	    end
+	end
   end
 
   # PATCH/PUT /trips/1

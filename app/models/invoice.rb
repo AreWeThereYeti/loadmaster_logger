@@ -34,6 +34,12 @@ class Invoice
   field :netto_price,             :type => String 
   field :brutto_price,            :type => String 
   field :taxes,                   :type => String 
+  
+    validates_presence_of :cvr, :invoice_number, :costumer_name, :costumer_contact_name, :costumer_address_street, :costumer_postal_code, :costumer_city, :company_name, :company_street, :company_phone, :company_bank_reg_nr, :company_bank_account_nr 
+
+validates_numericality_of   :cvr, :costumer_postal_code, :company_phone, :company_bank_reg_nr, :company_bank_account_nr,              
+                            :only_integer => true,   
+                            :allow_nil => true 
 
   search_in :price, :invoice_number, :costumer, :cvr, :description, :due_date, :timestamp, :costumer_name, :costumer_address_street, :costumer_postal_code,:costumer_city,:company_name,:company_street, :company_phone
   
