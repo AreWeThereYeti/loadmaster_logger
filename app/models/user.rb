@@ -104,20 +104,24 @@ class User
   end
   
   def self.find_first_by_auth_conditions(warden_conditions)
-    puts 'self.find_first_by_auth_conditions ran'
     conditions = warden_conditions.dup
     if login = conditions.delete(:login).downcase
-      self.where({ :username =>  /^#{Regexp.escape(login)}$/i }, { :email =>  /^#{Regexp.escape(login)}$/i }).first
+      user=self.where({ :username =>  /^#{Regexp.escape(login)}$/i }, { :email =>  /^#{Regexp.escape(login)}$/i })
+      if !user.nil?
+        user.first
+      end
     else
       super
     end
   end
   
   def self.find_for_database_authentication(warden_conditions)
-    puts 'self.find_first_by_auth_conditions ran'
     conditions = warden_conditions.dup
     if login = conditions.delete(:login).downcase
-      where(conditions).where('$or' => [ {:username => /^#{Regexp.escape(login)}$/i}, {:email => /^#{Regexp.escape(login)}$/i} ]).first
+      user=where(conditions).where('$or' => [ {:username => /^#{Regexp.escape(login)}$/i}, {:email => /^#{Regexp.escape(login)}$/i} ])
+      if !user.nil?
+        user.first
+      end
     else
       where(conditions).first
     end
