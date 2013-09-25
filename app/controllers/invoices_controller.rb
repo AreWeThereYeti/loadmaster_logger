@@ -43,12 +43,13 @@ class InvoicesController < ApplicationController
       if @invoice.save
         #format.html { redirect_to @invoice, notice: 'Invoice was successfully created.' }
         format.json { 
-          puts 'format.json ran'
+          puts 'success ran'
           render json: {:redirect_url => '/invoices/'+@invoice.id.to_s}, status: :created 
           #render action: 'show', status: :created, location: @invoice 
         }
       else
-        format.html { render action: 'new' }
+      	puts 'error ran'
+        #format.html { render action: 'new' }
         format.json { render json: @invoice.errors, status: :unprocessable_entity }
       end
     end
