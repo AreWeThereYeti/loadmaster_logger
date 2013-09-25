@@ -22,7 +22,9 @@
     <p><%= @user.company_name %></p>
     <p>CVR: <%= @user.cvr %></p>
     <p><%= @user.company_street %></p>
-    <p><%= @user.company_postal_code.to_s + ' ' + @user.company_city %></p>
+    <% if !!@user.company_postal_code  && !!@user.company_city %>
+    	<p><%= @user.company_postal_code + ' ' + @user.company_city %></p>
+    <% end %>
     <p>Tlf: <%= @user.phone %></p>
     <p>Mobil: <%= @user.phone_mobile %></p>
   </div>

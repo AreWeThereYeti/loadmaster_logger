@@ -1,9 +1,9 @@
 <div class="row">
-   <div class="col-md-8 col-sm-8 col-xs-6">
+   <div class="col-md-8 col-sm-8 col-xs-8">
      <h2><%= @invoice.company_name %></h2>
      <h4><%= @invoice.company_street %></h4>
    </div>
-   <div class="col-md-4 col-sm-4 col-xs-6">
+   <div class="col-md-4 col-sm-4 col-xs-4">
      <div class="bold">
        <span class="col-md-2 col-sm-4 no-padding">Tlf:
        </span>
@@ -45,8 +45,8 @@
  <!-- Buyer -->
 
  <div class="row">
-   <div class="col-md-4 col-sm-6 col-xs-12">
-     <h4>Køber:</h4>
+   <div class="col-md-4 col-sm-6 col-xs-6">
+     <h4>Køber :</h4>
      <p><%= @invoice.costumer_name %></p>
      <p><%= @invoice.costumer_contact_name %></p>
      <p><%= @invoice.costumer_address_street %></p>
@@ -55,27 +55,23 @@
 
  <!-- invoice number -->
 
-   <div class="col-md-4 col-sm-6 col-xs-12 float-right">
+   <div class="col-md-4 col-sm-6 col-xs-4 float-right">
      <h4>FAKTURA</h4>
      <div class="bold">
-       <span class="col-md-2 col-sm-4 no-padding">NR 
-       </span>
-       <span class="col-md-10 col-sm-8 no-padding">
-         <p class="pull-right"><%= @invoice.invoice_number  %></p>
-       </span>
+       <span class="col-md-2 col-sm-4 no-padding">NR  <%= @invoice.invoice_number %></span>
      </div>
      <div class="bold">
        <span class="col-md-2 col-sm-4 no-padding">Dato 
        </span>
-       <span class="col-md-10 col-sm-8 no-padding">
-        <p class="pull-right"> <%= @invoice.timestamp %></p>
+       <span class="col-md-10 col-sm-8 no-padding more-margin bottom double">
+        <p class="pull-right"> <%= format_date_only_date(@invoice.timestamp) %></p>
        </span>
      </div>
      <div class="bold">
        <span class="col-md-2 col-sm-4 no-padding">Forf.:
        </span>
        <span class="col-md-10 col-sm-8 no-padding">
-        <p class="pull-right"> <%= @invoice.due_date %> </p>
+        <p class="pull-right"> <%= format_date_only_date(@invoice.due_date) %> </p>
        </span>
      </div>
    </div>

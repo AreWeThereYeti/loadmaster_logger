@@ -53,7 +53,7 @@ Trip.new({
   :license_plate => 'GX 234 543',
   :cargo => 'Grus',
   :chauffeur => 'Andreas',
-  :start_address => 'Holtegade 11 3.tv 2200 København N',,
+  :start_address => 'Holtegade 11 3.tv 2200 København N',
   :start_location => [55.630225,12.049255],
   :end_address => 'Lærkevej 1, 3450 Allerød',
   :end_location => [55.754506,12.495575],
