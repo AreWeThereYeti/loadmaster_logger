@@ -1,15 +1,16 @@
 GIT
   remote: git://github.com/mongoid/mongoid.git
-  revision: e3beb2588616ed01e047c559318303addad72488
+  revision: f89502d7d0b418c20f5b04f5d106b61b4091cd68
   specs:
     mongoid (4.0.0)
       activemodel (~> 4.0.0)
-      moped (~> 1.5)
+      moped (~> 2.0.beta)
       origin (~> 1.0)
       tzinfo (~> 0.3.37)
 
-PATH
-  remote: ../loadmaster_assets
+GIT
+  remote: git@github.com:AreWeThereYeti/loadmaster_assets.git
+  revision: 101ce2617c264a8bb5703908b452c51269aac4d2
   specs:
     loadmaster_assets (0.0.12)
       rails (~> 4.0.0)
@@ -46,7 +47,7 @@ GEM
     bcrypt-ruby (3.1.2)
     bootstrap-rails-engine (3.0.0.4)
       railties (>= 3.0)
-    bson (1.9.2)
+    bson (2.0.0.rc2)
     builder (3.1.4)
     cancan (1.6.10)
     coffee-rails (4.0.0)
@@ -92,8 +93,8 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.25)
     minitest (4.7.5)
-    mongo (1.9.2)
-      bson (~> 1.9.2)
+    mongo (1.3.1)
+      bson (>= 1.3.1)
     mongo_mapper (0.8.6)
       activesupport (>= 2.3.4)
       jnunemaker-validatable (~> 1.8.4)
@@ -101,8 +102,11 @@ GEM
     mongoid_search (0.3.2)
       fast-stemmer (~> 1.0.0)
       mongoid (>= 3.0.0)
-    moped (1.5.1)
+    moped (2.0.0.beta)
+      bson (~> 2.0.0.rc2)
+      optionable (~> 0.1.1)
     multi_json (1.8.0)
+    optionable (0.1.1)
     origin (1.1.0)
     orm_adapter (0.4.0)
     plucky (0.3.8)
