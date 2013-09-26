@@ -105,7 +105,7 @@
               <th>Varenr</th>
               <th>Varebetegnelse / Tekst</th>
               <th>Antal Enheder</th>
-              <th>Pris</th>
+              <th>Enhedspris</th>
               <th>Ialt</th>
             <tr>
           </thead>
@@ -120,7 +120,7 @@
               <td><input value="{{item.nr}}" placeholder="vare nr" ng-model="item.nr"/></td>
               <td><input value="{{item.description}}" placeholder="beskrivelse" ng-model="item.description"/></td>
               <td><input value="{{item.units}}" placeholder="antal enheder" ng-model="item.units"/></td>
-              <td><input value="{{item.unit_price}}" placeholder="enheds pris" ng-model="item.unit_price"/></td>
+              <td><input value="{{item.unit_price}}" placeholder="enhedspris" ng-model="item.unit_price"/></td>
               <td><input value="{{item.total_price}}" placeholder="pris ialt" ng-model="item.total_price"/></td>
             </tr>
             <tr>
@@ -133,15 +133,15 @@
               <td colspan="2"></td>
               <td>
                 <p class="bold">Netto ialt</p>
-                <p class="bold">{{total_price}}</p>
+                <p class="bold">{{total_price}} kr</p>
               </td>
               <td>
                 <p class="bold">Moms ialt</p>
-                <p class="bold">{{taxes}}</p>
+                <p class="bold">{{taxes}} kr</p>
               </td>
               <td>
                 <p class="bold">Brutto ialt</p>
-                <p class="bold">{{total_price_with_taxes}}</p>
+                <p class="bold">{{total_price_with_taxes}} kr</p>
               </td>
             </tr>
           </tbody>

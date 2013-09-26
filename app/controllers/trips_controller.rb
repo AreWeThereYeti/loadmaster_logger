@@ -35,7 +35,7 @@ class TripsController < ApplicationController
     @trip.end_location=[@trip.end_lat,@trip.end_lon]
     
     @trip.user_id=current_user.id
-	if @trip.start_location.empty? && @trip.end_location.empty? && @trip.start_address.empty? && @trip.end_address.empty?
+	if !@trip.start_location.empty? && !@trip.end_location.empty? && !@trip.start_address.empty? && !@trip.end_address.empty?
 	    respond_to do |format|
 	      if @trip.save
 	        format.html { redirect_to @trip, notice: 'Trip was successfully created.' }
