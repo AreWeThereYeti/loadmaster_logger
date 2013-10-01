@@ -36,9 +36,9 @@ Trip.new({
   :license_plate => 'GX 234 543',
   :cargo => 'Sand',
   :chauffeur => 'Mikkel',
-  :start_address => 'Carl Jacobsensvej 16, Valby',
+  :start_address => '',
   :start_location => [55.630225,12.049255],
-  :end_address => 'Holtegade 11 3.tv 2200 København N',
+  :end_address => '',
   :end_location => [55.754506,12.495575],
   :start_timestamp => "2013-09-09T16:00:00Z",
   :end_timestamp => "2013-09-09T18:00:00Z",
@@ -65,3 +65,24 @@ Trip.new({
   :start_comments => 'Wasa skal have meget grus i deres knækbrød',
   :user_id => hauler_user.id
 }).save
+
+
+
+
+# 
+# Trip.new({ 
+#   :license_plate => 'GX 234 543',
+#   :cargo => 'Sand',
+#   :chauffeur => 'Mikkel',
+#   :start_address => 'null',
+#   :start_location => [55.630225,12.049255],
+#   :end_address => 'null',
+#   :end_location => [55.754506,12.495575],
+#   :start_timestamp => "2013-09-09T16:00:00Z",
+#   :end_timestamp => "2013-09-09T18:00:00Z",
+#   :distance => '7',
+#   :weight => '600',
+#   :costumer => 'Bilka',
+#   :start_comments => 'Bilka skal have mange flere sten',
+#   :user_id =>"565dd255616e648527010000"
+# }).save

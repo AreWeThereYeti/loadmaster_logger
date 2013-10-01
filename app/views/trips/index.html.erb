@@ -40,8 +40,16 @@
                 <tr id="<%= trip.id %>" ng-click="selectTableRow($event,'<%= trip.id %>')" class="hand-cursor" ng-class="{true:'active', false:'nottrue'}[selectedTripId==<%= trip.id.to_s.to_json %>]">
         				<td><%= trip.license_plate %></td>
 						<td><%= trip.cargo %></td>
-						<td><%= trip.start_address %></td>
-						<td><%= trip.end_address %></td>
+						<% if trip.start_address.nil? || trip.start_address.empty? || trip.start_address=="null" %>
+						  <td ng-get-address lat="<%= trip.start_location[0] %>" lon="<%= trip.start_location[1] %>">{{formatted_address}}</td>
+						<% else %>
+						  <td><%= trip.start_address %></td>
+					  <% end %>
+						<% if trip.end_address.nil? || trip.end_address.empty? || trip.end_address=="null" %>
+						  <td ng-get-address lat="<%= trip.end_location[0] %>" lon="<%= trip.end_location[1] %>">{{formatted_address}}</td>
+						<% else %>
+						  <td><%= trip.end_address %></td>
+					  <% end %>
 						<td><%= format_date(trip.start_timestamp) %></td>
 						<td><%= format_date(trip.end_timestamp) %></td>
                   <!-- <td><%= trip.weight %></td> -->
