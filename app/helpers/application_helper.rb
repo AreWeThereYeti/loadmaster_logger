@@ -40,7 +40,7 @@ module ApplicationHelper
     append_zero(date.day)+'.'+append_zero(date.month)+'.'+append_zero(date.year)+' '+append_zero(date.hour)+':'+append_zero(date.min)
   end
   
-    def format_date_only_date(date)
+  def format_date_only_date(date)
     date=date.localtime
     append_zero(date.day)+'.'+append_zero(date.month)+'.'+append_zero(date.year)
   end
@@ -59,6 +59,10 @@ module ApplicationHelper
     else
       ''
     end
+  end
+  
+  def param_undefined(param)
+    param.nil? || param.class==NilClass || param=="undefined" || param=="null" || (param.class==String && param.empty?) ? true : false
   end
   
 end
