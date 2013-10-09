@@ -58,19 +58,19 @@
     						</tr>
     						<tr class="trip-list-details" ng-trips-list-item tripid="<%= trip.id.to_s.to_json %>" ng-show="showDetails">
                   <td colspan="3">
-                    <div class='trip-table-map' ng-static-map startlat="<%= trip.start_location[0] %>" startlon="<%= trip.start_location[1] %>" endlat="<%= trip.end_location[0] %>" endlon="<%= trip.end_location[1] %>">
+                    <div class='trip-table-map' ng-static-map startlat="<%= trip.start_location[0] %>" startlon="<%= trip.start_location[1] %>" endlat="<%= trip.end_location[0] %>" endlon="<%= trip.end_location[1]  %>" startlabel="<%= trip.start_address.to_json  %>" endlabel="<%= trip.end_address.to_json %>" >
                       <div class="map-container" width="400px" height="250px"></div></div> </td>
                       
                     <td colspan="4">
-                    	<div class="more-margin top double bold large-font">Chauffør : <span class="no-bold"><%= trip.chauffeur %></span></div> 
-                    	<div class="more-margin top double bold large-font">Distance : <span class="no-bold"><%= trip.distance %> km</span></div>
-                    	<div class="more-margin top double bold large-font">Vægt : <span class="no-bold"><%= trip.weight %> kg</span></div>
-                    	<div class="more-margin top double bold large-font">Kommentarer skrevet i starten af turen : <div class="no-bold"><%= trip.start_comments %></div></div>
-                    	<div class="more-margin top double bold large-font">Kommentarer skrevet i slutningen af turen : <div class="no-bold"><%= trip.end_comments %></div></div>
+                    	<div class="more-margin top double bold large-font driver">Nummerplade : <span class="no-bold"><%= trip.license_plate %></span></div> 
+                    	<div class="more-margin top double bold large-font distance">Distance : <span class="no-bold"><%= trip.distance %> km</span></div>
+                    	<div class="more-margin top double bold large-font weight">Vægt : <span class="no-bold"><%= trip.weight %> kg</span></div>
+                    	<div class="more-margin top double bold large-font comments">Kommentarer skrevet i starten af turen : <div class="no-bold more-margin left quadruple"><%= trip.start_comments %></div></div>
+                    	<div class="more-margin top double bold large-font comments">Kommentarer skrevet i slutningen af turen : <div class="no-bold more-margin left quadruple"><%= trip.end_comments %></div></div>
 					</td>
 					<td colspan="2" class="force-bottom-align">
-                    	<%= link_to 'Rediger', 'trips/'+trip.id, :class => 'btn btn-info btn-xs'%>
-						<%= link_to 'Slet', trip, method: :delete, data: { confirm: 'Are you sure?' }, :class =>"btn btn-danger btn-xs" %>
+                    	<%= link_to 'Rediger', 'trips/'+trip.id, :class => 'btn btn-info float-right'%>
+<!-- 						<%= link_to 'Slet', trip, method: :delete, data: { confirm: 'Are you sure?' }, :class =>"btn btn-danger btn-xs" %> -->
 					</td>
     			</tr>
               <% end %>
