@@ -8,9 +8,8 @@ GIT
       origin (~> 1.0)
       tzinfo (~> 0.3.37)
 
-GIT
-  remote: git@github.com:AreWeThereYeti/loadmaster_assets.git
-  revision: 79097727e7129f4db5f31ed308605ad26b0d8136
+PATH
+  remote: ../loadmaster_assets
   specs:
     loadmaster_assets (0.0.12)
       rails (~> 4.0.0)

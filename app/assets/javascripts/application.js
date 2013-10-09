@@ -16,6 +16,7 @@
 //= require_tree ./bootstrap
 //= require_tree ./libs
 //= require loadmaster_assets/angular/controller_web
+//= require loadmaster_assets/angular/services/services_web
 //= require loadmaster_assets/angular/directives_web
 //= require loadmaster_assets/angular/controllers/mapCtrl
 //= require loadmaster_assets/angular/controllers/tripCtrl_web

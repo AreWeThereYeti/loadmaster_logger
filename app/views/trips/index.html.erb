@@ -41,12 +41,12 @@
         				<td><%= trip.license_plate %></td>
 						<td><%= trip.cargo %></td>
 						<% if trip.start_address.nil? || trip.start_address.empty? || trip.start_address=="null" %>
-						  <td ng-get-address lat="<%= trip.start_location[0] %>" lon="<%= trip.start_location[1] %>">{{formatted_address}}</td>
+						  <td ng-get-address lat="<%= trip.start_location[0] %>" lon="<%= trip.start_location[1] %>" startorend="'start'">{{formatted_address}}</td>
 						<% else %>
 						  <td><%= trip.start_address %></td>
 					  <% end %>
 						<% if trip.end_address.nil? || trip.end_address.empty? || trip.end_address=="null" %>
-						  <td ng-get-address lat="<%= trip.end_location[0] %>" lon="<%= trip.end_location[1] %>">{{formatted_address}}</td>
+						  <td ng-get-address lat="<%= trip.end_location[0] %>" lon="<%= trip.end_location[1] %>" startorend="'end'">{{formatted_address}}</td>
 						<% else %>
 						  <td><%= trip.end_address %></td>
 					  <% end %>
