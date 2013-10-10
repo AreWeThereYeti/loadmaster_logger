@@ -20,7 +20,7 @@ module ApplicationHelper
   end
   
   def sortable(title, column)
-    css_class = column == sort_column ? "current #{sort_direction} float-right" : nil
+    css_class = column == sort_column ? "current #{sort_direction} float-right white" : nil
     direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
     #for default last first use:
     #direction = column == sort_column && sort_direction == "desc" ? "asc" : "desc"
