@@ -1,6 +1,6 @@
 # Additional translations at https://github.com/plataformatec/devise/wiki/I18n
 
-en:
+dk:
   devise:
     confirmations:
       confirmed: "success! Du er nu logget in."
