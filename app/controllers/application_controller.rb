@@ -37,9 +37,18 @@ class ApplicationController < ActionController::Base
         return Time.new(hash[:year],hash[:month],hash[:day],hash[:hour],hash[:minute])
     end
     
+    # def string_search(search_str,the_model,max_results)
+    #   search_str.kind_of?(Array) ? @search_str=search_str.first.to_s : @search_str=search_str.to_s
+    #   the_model.full_text_search(@search_str, {:max_results => max_results})
+    # end
+    
     def string_search(search_str,the_model,max_results)
       search_str.kind_of?(Array) ? @search_str=search_str.first.to_s : @search_str=search_str.to_s
-      the_model.full_text_search(@search_str, {:max_results => max_results})
+      if is_admin
+        the_model.full_text_search(@search_str, {:max_results => max_results})
+      else
+        the_model.where(:user_id => current_user.id).full_text_search(@search_str, {:max_results => max_results})
+      end
     end
 
     def sort_direction
@@ -68,6 +77,10 @@ class ApplicationController < ActionController::Base
     
     def has_key_and_not_empty(obj,param)
       return obj.has_key?(param) && !obj[param].empty?
+    end
+    
+    def is_admin
+      current_user.role? :admin, current_user.role_id
     end
     
 end

@@ -6,11 +6,11 @@
   
   <div class="actions">
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-6 col-sm-6 col-xs-6">
         <%= link_to 'Tilbage', invoices_path, :class =>"btn btn-primary" %>
       </div>
-      <div class="col-md-6">
-        <%= link_to 'Print Faktura', "/invoices/render_pdf?id=#{@invoice.id}" , :class =>"btn btn-success", :target => 'blank' %>
+      <div class="col-md-6 col-sm-6 col-xs-6">
+        <%= link_to 'Print Faktura', "/invoices/render_pdf?id=#{@invoice.id}" , :class =>"btn btn-success float-right", :target => 'blank' %>
       </div>
     </div>
   </div>

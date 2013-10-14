@@ -1,3 +1,5 @@
+@import 'variables.less';
+
 .table-bordered>thead>tr>th, 
 .table-bordered>tbody>tr>th, 
 .table-bordered>tfoot>tr>th, 
@@ -5,4 +7,16 @@
 .table-bordered>tbody>tr>td, 
 .table-bordered>tfoot>tr>td {
   border: 1px solid #B6B6B6;
+}
+
+.table thead tr th,
+.table thead:first-child tr:first-child th{
+  background-color:@tableHeaderBackgroundColor;
+  color:@tableHeaderFontColor;
+  font-weight:normal;
+  border-top: 1px solid #B6B6B6;
+}
+
+.table-empty-column{
+  padding-bottom:80px !important;
 }
