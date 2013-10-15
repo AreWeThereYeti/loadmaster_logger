@@ -53,7 +53,7 @@ gem 'kaminari'
 gem 'wkhtmltopdf-binary'
 gem 'wicked_pdf'
 
-#gem 'loadmaster_assets', :path => "../loadmaster_assets"
+#gem 'loadmaster_assets', :path => "../loadmasterlogger_Tablet/www/src/loadmaster_assets"
 gem 'loadmaster_assets', :git => 'git@github.com:AreWeThereYeti/loadmaster_assets.git'
 
 group :assets do

@@ -21,6 +21,7 @@ class InvoicesController < ApplicationController
   # GET /invoices/new
   def new
     @invoice = Invoice.new
+    @invoice_nr=Invoice.where(:user_id => current_user.id.to_s).count+1
   end
 
   # GET /invoices/1/edit
@@ -91,14 +92,15 @@ class InvoicesController < ApplicationController
   def render_pdf   
     render :pdf => "my_file_name",
            :template => 'invoices/show.pdf.html.erb',
-           :layout => 'pdf'
+           :layout => 'pdf.html.erb',
+           :show_as_html => params[:debug].present?      # allow debuging bas
   end
   
   def render_pdfs 
     @invoices = Trip.find(params[:ids])
     render :pdf => "my_file_name",
            :template => 'invoices/show_multiple.pdf.html.erb',
-           :layout => 'pdf'
+           :layout => 'pdf.html.erb'
   end
 
   private

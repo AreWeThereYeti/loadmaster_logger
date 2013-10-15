@@ -53,33 +53,29 @@
      <p><%= @invoice.costumer_postal_code %><%= @invoice.costumer_city %></p>
    </div>
 
- <!-- invoice number -->
+   <!-- invoice number -->
+    <div class="col-md-4 col-sm-4 col-xs-4 float-right date-and-nr">
+      <div class="col-md-12 col-sm-12 col-xs-12 no-padding more-margin bottom">
+        <h4 class="no-margin inline">FAKTURA</h4>
+        <p class="pull-right inline bold">NR <%= @invoice.invoice_number %> </p>
+      </div>
 
-   <div class="col-md-4 col-sm-6 col-xs-4 float-right">
-     <h4>FAKTURA</h4>
-     <div class="bold">
-       <span class="col-md-2 col-sm-4 no-padding">NR  <%= @invoice.invoice_number %></span>
-     </div>
-     <div class="bold">
-       <span class="col-md-2 col-sm-4 no-padding">Dato 
-       </span>
-       <span class="col-md-10 col-sm-8 no-padding more-margin bottom double">
-        <p class="pull-right"> <%= format_date_only_date(@invoice.timestamp) %></p>
-       </span>
-     </div>
-     <div class="bold">
-       <span class="col-md-2 col-sm-4 no-padding">Forf.:
-       </span>
-       <span class="col-md-10 col-sm-8 no-padding">
-        <p class="pull-right"> <%= format_date_only_date(@invoice.due_date) %> </p>
-       </span>
-     </div>
-   </div>
+      <div class="col-md-12 col-sm-12 xs-12 no-padding bold">
+        <p class="inline">Dato</p>
+        <p class="pull-right inline"> <%= format_date_only_date(@invoice.timestamp) %></p>
+      </div>
+
+      <div class="col-md-12 col-sm-12 col-xs-12 no-padding bold">
+        <p class="inline">Forf.:</p>
+        <p class="pull-right inline"> <%= format_date_only_date(@invoice.due_date) %> </p>
+      </div>
+    </div>
+  </div>
  </div>
 
  <div class="row">
    <div class="col-md-12 col-sm-12 col-xs-12">
-     <table class="table table-bordered">
+     <table id="invoice-table" class="table table-bordered">
        <thead>
          <tr>
            <th>Varenr</th>
@@ -99,23 +95,24 @@
              <td><%= trip['nr'] %></td>
              <td><%= trip['description'] %></td>
              <td><%= trip['units'] %></td>
-             <td><%= trip['unit_price'] %></td>
-             <td><%= trip['total_price'] %></td>
+             <td><%= trip['unit_price'] %> kr</td>
+             <td><%= trip['total_price'] %> kr</td>
            </tr>
          <% end %>
+         <tr><td class="table-empty-column" colspan="12"></td></tr>
          <tr class="table-footer">
            <td colspan="2"></td>
            <td>
              <p class="bold">Netto ialt</p>
-             <p class="bold"><%= @invoice.netto_price %></p>
+             <p class="bold"><%= @invoice.netto_price %> kr</p>
            </td>
            <td>
              <p class="bold">Moms ialt</p>
-             <p class="bold"><%= @invoice.taxes %></p>
+             <p class="bold"><%= @invoice.taxes %> kr</p>
            </td>
            <td>
              <p class="bold">Brutto ialt</p>
-             <p class="bold"><%= @invoice.brutto_price %></p>
+             <p class="bold"><%= @invoice.brutto_price %> kr</p>
            </td>
          </tr>
        </tbody>
