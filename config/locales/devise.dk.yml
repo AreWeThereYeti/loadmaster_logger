@@ -9,7 +9,7 @@ dk:
   devise:
     confirmations:
       confirmed: "success! Du er nu logget in."
-      send_instructions: "Din modtager en mail med instruktioner om hvordan du aktivere din konto indenfor få minutter."
+      send_instructions: "Du modtager en mail med instruktioner om hvordan du aktiverer din konto indenfor få minutter."
       send_paranoid_instructions: "Hvis din email adresse allerede eksistere i vores database, vil du modtage en mail med instruktioner om hvordan du aktivere din konto indenfor få minutter."
     failure:
       already_authenticated: "Du er allerede logget ind."
@@ -33,10 +33,10 @@ dk:
       success: "Successfully authenticated from %{kind} account."
     passwords:
       no_token: "Du kan ikke tilgå denne side uden at komme fra en 'password reset email'. Hvis du kommer fra en 'password reset email' skal du sikre dig at den fulde URL er til stede."
-      send_instructions: "Din modtager en mail med instruktioner om hvordan du aktivere din konto indenfor få minutter."
+      send_instructions: "Du modtager en mail med instruktioner om hvordan du aktiverer din konto indenfor få minutter."
       send_paranoid_instructions: "Hvis din email adresse allerede eksistere i vores database, vil du modtage en mail med instruktioner om hvordan du aktivere din konto indenfor få minutter."
-      updated: "Success! Dit kodeord er ændret. Du er nu logget ind."
-      updated_not_active: "Success! Dit kodeord er ændret."
+      updated: "Dit kodeord er blevet ændret. Du er nu logget ind."
+      updated_not_active: "Dit kodeord er blevet ændret."
     registrations:
       destroyed: "Farvel! Din konto blev annulleret med success."
       signed_up: "Velkommen! Du er nu tilmeldt."
@@ -49,7 +49,7 @@ dk:
       signed_in: "Du er nu logget ind."
       signed_out: "Du er nu logget ud."
     unlocks:
-      send_instructions: "Din modtager en mail med instruktioner om hvordan du aktivere din konto indenfor få minutter."
+      send_instructions: "Du modtager en mail med instruktioner om hvordan du aktiverer din konto indenfor få minutter."
       send_paranoid_instructions: "Hvis din konto eksisterer, vil du modtage en email med instruktioner om hvordan du aktivere den."
       unlocked: "Din konto er blevet låst op med success! Log ind for at fortsætte."
   errors:

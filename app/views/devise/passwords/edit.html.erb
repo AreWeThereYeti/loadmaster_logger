@@ -1,16 +1,27 @@
-<h2>Change your password</h2>
+<h2>Ny Kode</h2>
 
 <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
   <%= devise_error_messages! %>
   <%= f.hidden_field :reset_password_token %>
 
-  <div><%= f.label :password, "New password" %><br />
-  <%= f.password_field :password, :autofocus => true %></div>
+  <div class="row">
+    <div class="col-md-4 col-sm-6 col-xs-12">
+      <%= f.label :password, "Ny kode" %><br />
+      <%= f.password_field :password, :autofocus => true, :placeholder => 'Ny kode', :class=> 'form-control' %>
+    </div>
+  </div>
 
-  <div><%= f.label :password_confirmation, "Confirm new password" %><br />
-  <%= f.password_field :password_confirmation %></div>
-
-  <div><%= f.submit "Change my password" %></div>
+  <div class="row">
+    <div class="col-md-4 col-sm-6 col-xs-12">
+      <%= f.label :password_confirmation, "Bekræft ny kode" %><br />
+      <%= f.password_field :password_confirmation, :placeholder => 'Bekræft ny kode', :class=> 'form-control' %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4 col-sm-6 col-xs-12">
+      <%= f.submit "Skift mit kodeord", :class=>'btn btn-success' %>
+    </div>
+  </div>
 <% end %>
 
-<%= render "devise/shared/links" %>
+<!-- <%= render "devise/shared/links" %> -->
