@@ -72,7 +72,13 @@ class ApplicationController < ActionController::Base
     end
     
     def after_sign_in_path_for(resource_or_scope)
-      respond_to?('/trips', true) ? send(root_path) : '/trips'
+      if resource_or_scope.sign_in_count == 1
+        puts 'first login'
+        respond_to?(edit_user_path(resource_or_scope), true) ? send(root_path) : edit_user_path(resource_or_scope)
+      else
+        puts 'NOT first login'
+        respond_to?('/trips', true) ? send(root_path) : '/trips'
+      end
     end
     
     def has_key_and_not_empty(obj,param)
