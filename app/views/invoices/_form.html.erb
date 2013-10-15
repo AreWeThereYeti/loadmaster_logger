@@ -77,7 +77,7 @@
           <span class="col-md-2 col-sm-4 no-padding">NR 
           </span>
           <span class="col-md-10 col-sm-8 no-padding">
-            <%= f.number_field :invoice_number, :class=>"form-control", :placeholder => "Faktura Nummer"   %>
+            <%= f.number_field :invoice_number, :value=>@invoice_nr, :class=>"form-control", :placeholder => "Faktura Nummer"   %>
           </span>
         </div>
         <div class="bold">
@@ -121,7 +121,7 @@
               <td><input value="{{item.description}}" placeholder="beskrivelse" ng-model="item.description"/></td>
               <td><input value="{{item.units}}" placeholder="antal enheder" ng-model="item.units"/></td>
               <td><input value="{{item.unit_price}}" placeholder="enhedspris" ng-model="item.unit_price"/></td>
-              <td><input value="{{item.total_price}}" placeholder="pris ialt" ng-model="item.total_price"/></td>
+              <td><input value="{{item.total_price}}" placeholder="pris ialt" ng-model="item.total_price"/><i ng-click="removeItemRow($event,$index)" class="icon-remove hand-cursor float-right"></i></td>
             </tr>
             <tr>
               <td colspan="4"></td>

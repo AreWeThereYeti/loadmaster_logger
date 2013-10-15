@@ -6,11 +6,11 @@ development:
         - localhost:27017
       options:
   options:
-
+    
 test:
   sessions:
     default:
-      database: loadmaster_logger_production
+      database: loadmaster_logger_development
       hosts:
       options:
       consistency: :strong

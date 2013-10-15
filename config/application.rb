@@ -31,5 +31,7 @@ module LoadmasterLogger
     
     config.filter_parameters += [:password, :password_confirmation]
     config.assets.paths << Rails.root.join("vendor","gems","loadmaster_assets", "assets","angular")
+
+    config.i18n.default_locale = :dk
   end
 end
