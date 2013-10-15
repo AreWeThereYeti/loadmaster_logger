@@ -1,9 +1,9 @@
 // $(document).ready(function(){
-// 	$('#trips-index-page').find('table#trips-table').find('tr').each(function(){
-// 		$(this).click(function(){
-// 			window.location.href='/trips/'+$(this).attr('id')
-// 		})
-// 	})
+// 	 fontDetect.onFontLoaded ('MyCoolFont', function(){
+// 			console.log('font loaded	')
+// 		}, function(){
+// 			console.log('font not loaded')
+// 		}, {msTimeout: 3000});
 // })
 // 
-
+// 

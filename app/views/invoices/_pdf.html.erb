@@ -75,7 +75,7 @@
 
  <div class="row">
    <div class="col-md-12 col-sm-12 col-xs-12">
-     <table id="invoices-table" class="table table-bordered">
+     <table id="invoice-table" class="table table-bordered">
        <thead>
          <tr>
            <th>Varenr</th>
@@ -95,8 +95,8 @@
              <td><%= trip['nr'] %></td>
              <td><%= trip['description'] %></td>
              <td><%= trip['units'] %></td>
-             <td><%= trip['unit_price'] %></td>
-             <td><%= trip['total_price'] %></td>
+             <td><%= trip['unit_price'] %> kr</td>
+             <td><%= trip['total_price'] %> kr</td>
            </tr>
          <% end %>
          <tr><td class="table-empty-column" colspan="12"></td></tr>
@@ -104,15 +104,15 @@
            <td colspan="2"></td>
            <td>
              <p class="bold">Netto ialt</p>
-             <p class="bold"><%= @invoice.netto_price %></p>
+             <p class="bold"><%= @invoice.netto_price %> kr</p>
            </td>
            <td>
              <p class="bold">Moms ialt</p>
-             <p class="bold"><%= @invoice.taxes %></p>
+             <p class="bold"><%= @invoice.taxes %> kr</p>
            </td>
            <td>
              <p class="bold">Brutto ialt</p>
-             <p class="bold"><%= @invoice.brutto_price %></p>
+             <p class="bold"><%= @invoice.brutto_price %> kr</p>
            </td>
          </tr>
        </tbody>

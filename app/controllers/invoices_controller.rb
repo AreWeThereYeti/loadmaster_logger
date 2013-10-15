@@ -21,6 +21,7 @@ class InvoicesController < ApplicationController
   # GET /invoices/new
   def new
     @invoice = Invoice.new
+    @invoice_nr=Invoice.where(:user_id => current_user.id.to_s).count+1
   end
 
   # GET /invoices/1/edit
