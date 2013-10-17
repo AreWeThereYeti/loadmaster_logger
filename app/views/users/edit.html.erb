@@ -1,4 +1,11 @@
-
+<% if current_user.sign_in_count==1 %>
+  <div class="row">
+    <div class="col-ms-12 col-sm-12 col-xs-12">
+      <h2>Velkommen til LoadMaster Logger FMS!</h2>
+      <h4>Vi har brug for lidt oplysninger for at sætte dig ordentlig igang med at bruge vores system. Udfyld venligst nedenstående felter</h4>
+    </div>
+  </div>
+<% end %>
 
 <%= form_for [:admin, @user], :url => url_for(:action => 'update'), :html => { :class => "form-horizontal", :id => "edit_user" } do |f| -%>
   <input name="_method" type="hidden" value="put" />

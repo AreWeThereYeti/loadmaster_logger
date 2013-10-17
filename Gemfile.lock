@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: git@github.com:AreWeThereYeti/loadmaster_assets.git
-  revision: 1d9e7b35ec4e4e2e6de6bf7a01e195f56eb9657d
+  revision: e47ce0fe7532ecb7cebf2117c84c06f3e4ddc51a
   specs:
     loadmaster_assets (0.0.12)
       rails (~> 4.0.0)
