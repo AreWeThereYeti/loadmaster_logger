@@ -59,7 +59,7 @@ class InvoicesController < ApplicationController
   def update
     respond_to do |format|
       if @invoice.update(invoice_params)
-        format.html { redirect_to @invoice, notice: 'Invoice was successfully updated.' }
+        format.html { redirect_to @invoice, notice: 'Din tur blevet opdateret og gemt' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

@@ -36,7 +36,7 @@ class TripsController < ApplicationController
 	if !@trip.start_location.empty? && !@trip.end_location.empty? && !@trip.start_address.empty? && !@trip.end_address.empty?
 	    respond_to do |format|
 	      if @trip.save
-	        format.html { redirect_to @trip, notice: 'Trip was successfully created.' }
+	        format.html { redirect_to @trip, notice: 'Vi har oprettet og gemt din tur' }
 	        format.json { render action: 'show', status: :created, location: @trip }
 	      else
 	        format.html { render action: 'new' }
@@ -57,7 +57,7 @@ class TripsController < ApplicationController
   def update
     respond_to do |format|
       if @trip.update(trip_params)
-        format.html { redirect_to @trip, notice: 'Trip was successfully updated.' }
+        format.html { redirect_to @trip, notice: 'Vi har opdateret din tur' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
