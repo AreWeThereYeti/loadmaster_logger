@@ -12,8 +12,6 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    puts '----------- show ran with current_user: ---------'
-    puts current_user
     @user = User.find(params[:id])
       
     respond_to do |format|
@@ -38,9 +36,8 @@ class UsersController < ApplicationController
  
     respond_to do |format|
       if @user.update_attributes(user_params)
-        puts '------------------user was updated-----------------'
         sign_in @user, :bypass => true #should be if password is updated
-        format.html { render :action => 'show', :notice => 'User was successfully updated.' }
+        format.html { render :action => 'show', :notice => 'Din profil blev opdateret og vi har gemt dine ændringer' }
         format.json { head :ok }
       else
         format.html { render :action => "edit" }
@@ -56,7 +53,7 @@ class UsersController < ApplicationController
     @user.destroy
 
     respond_to do |format|
-      format.html { redirect_to '/', :notice => 'Your profile was successfully deleted' }
+      format.html { redirect_to '/', :notice => 'Din profil er nu slettet' }
       format.json { head :ok }
     end
   end

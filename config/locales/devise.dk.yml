@@ -40,8 +40,8 @@ dk:
     registrations:
       destroyed: "Farvel! Din konto blev annulleret med success."
       signed_up: "Velkommen! Du er nu tilmeldt."
-      signed_up_but_inactive: "Du er tilmeldt men success. Men din konto er ikke aktiveret så du kunne ikke logges ind."
-      signed_up_but_locked: "Du er tilmeldt men success. Men din konto er låst, så du kunne ikke logges ind."
+      signed_up_but_inactive: "Du er tilmeldt med success. Men din konto er ikke aktiveret så du kunne ikke logges ind."
+      signed_up_but_locked: "Du er tilmeldt med success. Men din konto er låst, så du kunne ikke logges ind."
       signed_up_but_unconfirmed: "En mail med aktiveringslink er sendt til din mail-adresse. Åbn linket i mailen for at aktivere din konto."
       update_needs_confirmation: "Du opdaterede din konto med success. Vi mangler stadig at verificere din nye mail adresse. Check din mail og tryk på aktiveringslunket for at bekræfte din nye mailadresse."
       updated: "Du opdaterede din konto med success!"
@@ -61,7 +61,7 @@ dk:
       not_locked: "var ikke låst"
       not_saved:
         one: "en fejl gjorde at %{resource} ikke blev gemt :"
-        other: "%{count} fejæ gjorde at denne %{resource} ikke blev gemt:"
+        other: "%{count} fejl gjorde at denne %{resource} ikke blev gemt:"
         
   mongoid:
     errors:
@@ -70,5 +70,6 @@ dk:
           attributes:
             password:
               too_short: "er for kort"
+              blank: "For at kunne gemme dine ændringer skal du indtaste dit password"
             password_confirmation: 
               confirmation: "matcher ikke dit password"
