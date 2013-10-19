@@ -32,8 +32,6 @@ class InvoicesController < ApplicationController
   # POST /invoices.json
   def create
     @invoice = Invoice.new(invoice_params)
-    @invoice.timestamp=get_timestamp(params[:timestamp])
-    @invoice.due_date=get_timestamp(params[:due_date])
     @invoice.user_id=current_user.id
     @invoice.trips=format_trips(params[:trips])
     @invoice.brutto_price=params[:brutto_price]

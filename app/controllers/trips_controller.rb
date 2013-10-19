@@ -29,8 +29,6 @@ class TripsController < ApplicationController
   # POST /trips.json
   def create
     @trip = Trip.new(trip_params)
-    @trip.start_timestamp=get_timestamp(params[:start_timestamp])
-    @trip.end_timestamp=get_timestamp(params[:end_timestamp])
     @trip.start_location=[@trip.start_lat,@trip.start_lon]
     @trip.end_location=[@trip.end_lat,@trip.end_lon]
     
