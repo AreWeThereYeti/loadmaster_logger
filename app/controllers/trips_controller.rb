@@ -96,6 +96,13 @@ class TripsController < ApplicationController
       render 'index'
     end
   end
+  
+  def render_tripstable_pdf                             #pdf over trips table
+    render :pdf => "ture_oversigt",
+           :template => 'trips/index.pdf.html.erb',
+           :layout => 'pdf.html.erb',
+           :show_as_html => params[:debug].present?      # allow debuging bas
+  end
 
 
   private
