@@ -10,7 +10,6 @@ class TripsController < ApplicationController
   def index
     puts 'index rendered...'
     @trips = Trip.where(:user_id => current_user.user_id).order_by([[sort_column, sort_direction]]).page(params[:page]).per(25) 
-    @trip_ids=get_ids_from_obj(@trips)
   end
 
   # GET /trips/1
@@ -100,7 +99,8 @@ class TripsController < ApplicationController
   end
   
   def render_tripstable_pdf                             #pdf over trips table
-    @trips=Trip.where(:_id=>params[:trip_ids])
+    puts '---------- render_tripstable_pdf  --------------'
+    @trips=Trip.find(params[:trips_ids])
     puts @trips
     puts @trips.count
     render :pdf => "ture_oversigt",

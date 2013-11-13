@@ -6,7 +6,7 @@
           <th>Nummer Plade</th>
           <th>Last</th>
           <th>Start Adresse</th>
-          <th>Slut Adresse'</th>
+          <th>Slut Adresse</th>
           <th>Tur Start</th>
           <th>Tur Slut</th>
           <th>Tid</th>
@@ -24,8 +24,8 @@
       			<td><%= trip.end_address %></td>
   			    <td><%= format_date(trip.start_timestamp) %></td>
   			    <td><%= format_date(trip.end_timestamp) %></td>
-  			    <td><%= trip.end_timestamp - trip.start_timestamp %></td>
-  			    <td><%= trip.distance %></td>
+  			    <td><%= diff_timestamps_in_secs(trip.start_timestamp,trip.end_timestamp) %></td>
+  			    <td><%= trip.distance %>km</td>
   		      <td><%= trip.costumer %></td>
 					</tr>
         <% end %>

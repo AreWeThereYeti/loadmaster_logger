@@ -92,12 +92,4 @@ class ApplicationController < ActionController::Base
       current_user.role? :admin, current_user.role_id
     end
     
-    def get_ids_from_obj(obj)
-      ids=[]
-      obj.each do |item|
-        ids.push(item.id.to_s)
-      end
-      return ids
-    end
-    
 end

@@ -29,7 +29,7 @@ class Trip
   field :chauffeur, type: String
   field :distance, type: Float
   
-  validates_presence_of :license_plate, :cargo, :start_timestamp, :end_timestamp
+  validates_presence_of :cargo, :start_timestamp, :end_timestamp
     
   search_in :start_address, :end_address, :cargo, :license_plate, :costumer, :weight
   

@@ -50,15 +50,17 @@ gem 'cancan', '~> 1.6.10'
 gem 'kaminari'
 
 #pdf generation
+gem 'time_diff'
 
-group :production do
-  gem "wkhtmltopdf-heroku"
-end
+# group :production do
+#   gem "wkhtmltopdf-heroku"
+# end
+# 
+# group :development do
+#   gem 'wkhtmltopdf-binary'
+# end
 
-group :development do
-  gem 'wkhtmltopdf-binary'
-end
-
+gem "wkhtmltopdf"
 gem 'wicked_pdf'
 
 #gem 'loadmaster_assets', :path => "../loadmasterlogger_Tablet/www/src/loadmaster_assets"
