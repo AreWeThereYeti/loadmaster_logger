@@ -5,6 +5,7 @@
   <div class="row">
     <%= render :partial => 'shared/search', :locals => {:placeholder => 'Søg efter en tur'} %>
     <div class="col-md-6 col-sm-6 col-xs-6">
+      <%= link_to 'Print', trips_tripstable_pdf_path(:trips_ids=>@trip_ids), :class =>"btn btn-success", :target => '_blank' %>
       <%= link_to 'Ny Tur', new_trip_path, :class =>"btn btn-success float-right" %>
     </div>
   </div>
