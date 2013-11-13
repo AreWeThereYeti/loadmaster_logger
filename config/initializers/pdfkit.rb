@@ -1,3 +1,3 @@
-WickedPdf.configure do |config|
+WickedPdf.config do |config|
   config.wkhtmltopdf = '/usr/local/bin/wkhtmltopdf' if Rails.env.production?
 end
