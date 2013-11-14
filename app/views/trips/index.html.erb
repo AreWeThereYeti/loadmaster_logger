@@ -1,20 +1,20 @@
 <div ng-trips>
   <div class="row">
-    <div class="col-md-3 col-sm-3 col-xs-3">
+    <div class="col-md-2 col-sm-2 col-xs-2">
       <h1 class="no-margin">Ture</h1>
     </div>
     
-    <%= form_tag('/trips/time_search', :method => :get, :id=>'trips_time_search') do %>
-      <div class="col-md-4 col-sm-4 col-xs-4">
+    <%= form_tag('/trips/time_search', :method => :get, :id=>'trips_time_search', :class=> 'col-md-10 col-sm-10 col-xs-10') do %>
+      <div class="col-md-5 col-sm-5 col-xs-5">
         <label for="from_time">Fra:</label>
         <%= text_field :from_time, '', :class=>"datepicker form-control inline", :placeholder => params[:from_time]%>
       </div>
-      <div class="col-md-4 col-sm-4 col-xs-4">
+      <div class="col-md-5 col-sm-5 col-xs-5">
         <label for="to_time">Til:</label>
         <%= text_field :to_time, '', :class=>"datepicker form-control inline", :placeholder => params[:to_time] %>
       </div>
-      <div class="col-md-1 col-sm-1 col-xs-1 no-padding">
-        <%= submit_tag "Go", :class => 'btn btn-info' %>
+      <div class="col-md-2 col-sm-2 col-xs-2 no-padding">
+        <%= submit_tag "Go", :class => 'btn btn-info float-right' %>
       </div>
     <% end %>
   </div>
