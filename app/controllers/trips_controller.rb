@@ -9,7 +9,7 @@ class TripsController < ApplicationController
   # GET /trips.json
   def index
     puts 'index rendered...'
-    @trips = Trip.where(:user_id => current_user.user_id).order_by([[sort_column, sort_direction]]).page(params[:page]).per(2) 
+    @trips = Trip.where(:user_id => current_user.user_id).order_by([[sort_column, sort_direction]]).page(params[:page]).per(25) 
   end
 
   # GET /trips/1
