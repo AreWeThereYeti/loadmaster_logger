@@ -56,3 +56,14 @@
 	background-color: #F5F5F5;
 	padding: 15px;
 }
+
+/* Print rows function in table view */
+
+.printrows{
+	font-size: 9px;
+}
+
+.printrows th{
+	font-size: 11px;
+	font-weight: bold;
+}
