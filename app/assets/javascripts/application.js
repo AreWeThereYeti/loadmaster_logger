@@ -15,6 +15,7 @@
 //= require jquery.turbolinks
 //= require_tree ./bootstrap
 //= require_tree ./libs
+//= require loadmaster_assets/libs/markerwithlabel
 //= require loadmaster_assets/angular/controller_web
 //= require loadmaster_assets/angular/services/services
 //= require loadmaster_assets/angular/directives_web
