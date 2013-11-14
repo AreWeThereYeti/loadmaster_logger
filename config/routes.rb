@@ -3,11 +3,16 @@ LoadmasterLogger::Application.routes.draw do
   # You can have the root of your site routed with "root"
   root :to => 'home#index'
 
+  #map.root :controller => 'trips', :action => :index
+  #get "/" => 'trips#index'
+ 
   get "users/index"
   
   get "trips/search" => 'trips#search'
   delete "/trips/destroy_multiple" => 'trips#destroy_multiple'
   get "/trips/tripstable_pdf" =>  "trips#render_tripstable_pdf"
+  get "/trips/time_search" => 'trips#time_search'
+  
   resources :trips
   
   devise_for :users

@@ -75,9 +75,20 @@ module ApplicationHelper
   
   def diff_timestamps_in_secs(time1,time2)
     diff=Time.diff(time1,time2, '%y, %d and %h:%m:%s')
-    #direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
-    mins = diff[:minute]==0 && diff[:second]>0 ? 1 : 0
-    return diff[:hour].to_s + 't' + mins.to_s + 'm'
+    
+    d = diff[:day]==0 ? '' : diff[:day].to_s+'d'
+  
+    h = diff[:hour]==0 ? '' : diff[:hour].to_s+'t'
+    
+    if diff[:minute]==0 && diff[:second]>0
+      m = '1m'
+    elsif diff[:minute]==0 && diff[:second]==0
+      m = ''
+    else
+      m=diff[:minute].to_s+'m'
+    end
+    
+    return d + ' ' + h + ' ' + m
   end
   
 end

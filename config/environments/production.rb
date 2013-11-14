@@ -17,7 +17,7 @@ LoadmasterLogger::Application.configure do
   config.action_controller.perform_caching = true
   
   #OBS remember to set to mailer host!!
-  #config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.default_url_options = { :host => 'localhost:80' }
 
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
   # Add `rack-cache` to your Gemfile before enabling this.

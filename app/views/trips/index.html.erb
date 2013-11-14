@@ -1,11 +1,30 @@
 <div ng-trips>
-  <h1>Ture</h1>
+  <div class="row">
+    <div class="col-md-3 col-sm-3 col-xs-3">
+      <h1 class="no-margin">Ture</h1>
+    </div>
+    
+    <%= form_tag('/trips/time_search', :method => :get, :id=>'trips_time_search') do %>
+      <div class="col-md-4 col-sm-4 col-xs-4">
+        <label for="from_time">Fra:</label>
+        <%= text_field :from_time, '', :class=>"datepicker form-control inline", :placeholder => params[:from_time]%>
+      </div>
+      <div class="col-md-4 col-sm-4 col-xs-4">
+        <label for="to_time">Til:</label>
+        <%= text_field :to_time, '', :class=>"datepicker form-control inline", :placeholder => params[:to_time] %>
+      </div>
+      <div class="col-md-1 col-sm-1 col-xs-1 no-padding">
+        <%= submit_tag "Go", :class => 'btn btn-info' %>
+      </div>
+    <% end %>
+  </div>
 
   
   <div class="row">
     <%= render :partial => 'shared/search', :locals => {:placeholder => 'Søg efter en tur'} %>
     <div class="col-md-6 col-sm-6 col-xs-6">
       <%= link_to '', trips_tripstable_pdf_path(:trips_ids=>get_ids_from_obj(@trips)), :class =>"btn icon-print", :target => '_blank' %>
+      
       <%= link_to 'Ny Tur', new_trip_path, :class =>"btn btn-success float-right" %>
     </div>
   </div>
@@ -26,6 +45,7 @@
     <div ng-trips-list>
       <div class="row" >
     	  <div class="col-md-12 col-sm-12 col-xs-12">
+    	    <a href="/trips" class="float-right">Vis alle</a>
           <table id="trips-table" class="table table-hover table-bordered" ng-trip-list>
             <thead>
               <tr>

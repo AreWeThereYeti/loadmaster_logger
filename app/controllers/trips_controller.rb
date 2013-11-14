@@ -9,7 +9,7 @@ class TripsController < ApplicationController
   # GET /trips.json
   def index
     puts 'index rendered...'
-    @trips = Trip.where(:user_id => current_user.user_id).order_by([[sort_column, sort_direction]]).page(params[:page]).per(25) 
+    @trips = Trip.where(:user_id => current_user.user_id).order_by([[sort_column, sort_direction]]).page(params[:page]).per(2) 
   end
 
   # GET /trips/1
@@ -34,23 +34,23 @@ class TripsController < ApplicationController
     @trip.end_location=[@trip.end_lat,@trip.end_lon]
     
     @trip.user_id=current_user.id
-	if !@trip.start_location.empty? && !@trip.end_location.empty? && !@trip.start_address.empty? && !@trip.end_address.empty?
-	    respond_to do |format|
-	      if @trip.save
-	        format.html { redirect_to @trip, notice: 'Vi har oprettet og gemt din tur' }
-	        format.json { render action: 'show', status: :created, location: @trip }
-	      else
-	        format.html { render action: 'new' }
-	        format.json { render json: @trip.errors, status: :unprocessable_entity }
-	      end
-	    end
-	else
-		@errors='Du glemte at vælge en start og/eller slut adresse'
-		respond_to do |format|
-			format.html { render action: 'new' }
-	        format.json { render json: @errors , status: :unprocessable_entity }
-	    end
-	end
+  	if !@trip.start_location.empty? && !@trip.end_location.empty? && !@trip.start_address.empty? && !@trip.end_address.empty?
+  	    respond_to do |format|
+  	      if @trip.save
+  	        format.html { redirect_to @trip, notice: 'Vi har oprettet og gemt din tur' }
+  	        format.json { render action: 'show', status: :created, location: @trip }
+  	      else
+  	        format.html { render action: 'new' }
+  	        format.json { render json: @trip.errors, status: :unprocessable_entity }
+  	      end
+  	    end
+  	else
+  		@errors='Du glemte at vælge en start og/eller slut adresse'
+  		respond_to do |format|
+  			format.html { render action: 'new' }
+  	        format.json { render json: @errors , status: :unprocessable_entity }
+  	    end
+  	end
   end
 
   # PATCH/PUT /trips/1
@@ -99,7 +99,7 @@ class TripsController < ApplicationController
   end
   
   def render_tripstable_pdf                             #pdf over trips table
-    puts '---------- render_tripstable_pdf  --------------'
+    puts '---------- render_tripstable_pdf --------------'
     @trips=Trip.find(params[:trips_ids])
     puts @trips
     puts @trips.count
@@ -107,6 +107,15 @@ class TripsController < ApplicationController
            :template => 'trips/index.pdf.html.erb',
            :layout => 'pdf.html.erb',
            :show_as_html => params[:debug].present?      # allow debuging bas
+  end
+  
+  def time_search
+    if params[:from_time][0].empty? || params[:to_time][0].empty?
+      redirect_to trips_path, :notice => 'Du har ikke valgt nogen start og/eller slut tid. Prøv igen'
+    else
+      @trips=Trip.where(:user_id => current_user.user_id, :start_timestamp.gt => params[:from_time][0], :end_timestamp.lte => params[:to_time][0]).page(params[:page]).per(25)  
+      render 'index'
+    end 
   end
 
 
