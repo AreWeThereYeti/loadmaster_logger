@@ -32,8 +32,6 @@ class InvoicesController < ApplicationController
   # POST /invoices.json
   def create
     @invoice = Invoice.new(invoice_params)
-    @invoice.timestamp=get_timestamp(params[:timestamp])
-    @invoice.due_date=get_timestamp(params[:due_date])
     @invoice.user_id=current_user.id
     @invoice.trips=format_trips(params[:trips])
     @invoice.brutto_price=params[:brutto_price]
@@ -61,7 +59,7 @@ class InvoicesController < ApplicationController
   def update
     respond_to do |format|
       if @invoice.update(invoice_params)
-        format.html { redirect_to @invoice, notice: 'Invoice was successfully updated.' }
+        format.html { redirect_to @invoice, notice: 'Din tur blevet opdateret og gemt' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

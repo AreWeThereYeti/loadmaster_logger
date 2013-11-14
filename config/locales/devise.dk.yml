@@ -9,7 +9,7 @@ dk:
   devise:
     confirmations:
       confirmed: "success! Du er nu logget in."
-      send_instructions: "Din modtager en mail med instruktioner om hvordan du aktivere din konto indenfor få minutter."
+      send_instructions: "Du modtager en mail med instruktioner om hvordan du aktiverer din konto indenfor få minutter."
       send_paranoid_instructions: "Hvis din email adresse allerede eksistere i vores database, vil du modtage en mail med instruktioner om hvordan du aktivere din konto indenfor få minutter."
     failure:
       already_authenticated: "Du er allerede logget ind."
@@ -33,15 +33,15 @@ dk:
       success: "Successfully authenticated from %{kind} account."
     passwords:
       no_token: "Du kan ikke tilgå denne side uden at komme fra en 'password reset email'. Hvis du kommer fra en 'password reset email' skal du sikre dig at den fulde URL er til stede."
-      send_instructions: "Din modtager en mail med instruktioner om hvordan du aktivere din konto indenfor få minutter."
+      send_instructions: "Du modtager en mail med instruktioner om hvordan du aktiverer din konto indenfor få minutter."
       send_paranoid_instructions: "Hvis din email adresse allerede eksistere i vores database, vil du modtage en mail med instruktioner om hvordan du aktivere din konto indenfor få minutter."
-      updated: "Success! Dit kodeord er ændret. Du er nu logget ind."
-      updated_not_active: "Success! Dit kodeord er ændret."
+      updated: "Dit kodeord er blevet ændret. Du er nu logget ind."
+      updated_not_active: "Dit kodeord er blevet ændret."
     registrations:
       destroyed: "Farvel! Din konto blev annulleret med success."
       signed_up: "Velkommen! Du er nu tilmeldt."
-      signed_up_but_inactive: "Du er tilmeldt men success. Men din konto er ikke aktiveret så du kunne ikke logges ind."
-      signed_up_but_locked: "Du er tilmeldt men success. Men din konto er låst, så du kunne ikke logges ind."
+      signed_up_but_inactive: "Du er tilmeldt med success. Men din konto er ikke aktiveret så du kunne ikke logges ind."
+      signed_up_but_locked: "Du er tilmeldt med success. Men din konto er låst, så du kunne ikke logges ind."
       signed_up_but_unconfirmed: "En mail med aktiveringslink er sendt til din mail-adresse. Åbn linket i mailen for at aktivere din konto."
       update_needs_confirmation: "Du opdaterede din konto med success. Vi mangler stadig at verificere din nye mail adresse. Check din mail og tryk på aktiveringslunket for at bekræfte din nye mailadresse."
       updated: "Du opdaterede din konto med success!"
@@ -49,7 +49,7 @@ dk:
       signed_in: "Du er nu logget ind."
       signed_out: "Du er nu logget ud."
     unlocks:
-      send_instructions: "Din modtager en mail med instruktioner om hvordan du aktivere din konto indenfor få minutter."
+      send_instructions: "Du modtager en mail med instruktioner om hvordan du aktiverer din konto indenfor få minutter."
       send_paranoid_instructions: "Hvis din konto eksisterer, vil du modtage en email med instruktioner om hvordan du aktivere den."
       unlocked: "Din konto er blevet låst op med success! Log ind for at fortsætte."
   errors:
@@ -61,4 +61,15 @@ dk:
       not_locked: "var ikke låst"
       not_saved:
         one: "en fejl gjorde at %{resource} ikke blev gemt :"
-        other: "%{count} fejæ gjorde at denne %{resource} ikke blev gemt:"
+        other: "%{count} fejl gjorde at denne %{resource} ikke blev gemt:"
+        
+  mongoid:
+    errors:
+      models:
+        user:
+          attributes:
+            password:
+              too_short: "er for kort"
+              blank: "For at kunne gemme dine ændringer skal du indtaste dit password"
+            password_confirmation: 
+              confirmation: "matcher ikke dit password"

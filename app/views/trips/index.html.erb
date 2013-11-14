@@ -5,21 +5,27 @@
   <div class="row">
     <%= render :partial => 'shared/search', :locals => {:placeholder => 'Søg efter en tur'} %>
     <div class="col-md-6 col-sm-6 col-xs-6">
+      <%= link_to '', trips_tripstable_pdf_path(:trips_ids=>get_ids_from_obj(@trips)), :class =>"btn icon-print", :target => '_blank' %>
       <%= link_to 'Ny Tur', new_trip_path, :class =>"btn btn-success float-right" %>
     </div>
   </div>
   
-  <% if @trips.count == 0 %>
+  <% if @trips.count == 0 && !params.has_key?(:search) %>
     <div class="row">
       <div class="col-md-12 col-sm-12 col-xs-12">
-        <h4> Du har ingen gemte ture endnu. For at registrere en afholdt tur, klik <%= link_to 'her', new_trip_path %> 
+        <h4> Du har ingen gemte ture endnu. For at registrere en afholdt tur, klik <%= link_to 'her', new_trip_path %> </h4>
       </div>
     </div>
-  
+  <% elsif @trips.count == 0 && params.has_key?(:search) %>
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <h4> Din søgning "<%= params[:search].first %>" matchede desværre ingen af dine ture </h4>
+      </div>
+    </div>
   <% else %>
     <div ng-trips-list>
       <div class="row" >
-    	  <div class="col-md-12">
+    	  <div class="col-md-12 col-sm-12 col-xs-12">
           <table id="trips-table" class="table table-hover table-bordered" ng-trip-list>
             <thead>
               <tr>
@@ -29,7 +35,7 @@
                 <th><%= sortable 'Slut Adresse', 'end_address' %></th>
                 <th><%= sortable 'Tur Start','start_timestamp' %></th>
                 <th><%= sortable 'Tur Slut', 'end_timestamp' %></th>
-                <!-- <th><%= sortable 'Vægt', 'weight' %></th> -->
+                <th>Tid</th>
                 <th colspan="2"><%= sortable 'Kunde', 'costumer' %></th>
                 <th>Vælg <input type="checkbox" name="trip_all_checkbox" ng-click="checkOrUncheckAllTrips($event)"></th>
               </tr>
@@ -52,7 +58,7 @@
 					  <% end %>
 						<td><%= format_date(trip.start_timestamp) %></td>
 						<td><%= format_date(trip.end_timestamp) %></td>
-                  <!-- <td><%= trip.weight %></td> -->
+            <td><%= diff_timestamps_in_secs(trip.start_timestamp,trip.end_timestamp) %></td>
     			  <td colspan="2"><%= trip.costumer %></td>
             <td><input type="checkbox" name="trip_checkbox" value="<%=trip.id%>"></td>
     						</tr>
@@ -70,17 +76,17 @@
                   	    <span class="no-bold"><%= trip.distance %> km</span>
                   	  <% end %>
                   	</div>
-                	  <div class="more-margin top double bold large-font weight">Vægt : 
+                	  <!--<div class="more-margin top double bold large-font weight">Vægt : 
                 	    <span class="no-bold">
                 	      <% if !param_undefined(trip.weight)%>
                 	        <%= trip.weight %> kg
                 	      <% end %>
                 	    </span>
-                	  </div>
+                	  </div>-->
                 	  <div class="more-margin top double bold large-font comments">Kommentarer skrevet i starten af turen : 
                 	    <div class="no-bold more-margin left quadruple">
                 	      <% if !param_undefined(trip.start_comments)%>
-                	        <%= trip.start_comments %>
+                	        <p class="ellipsis"><%= trip.start_comments %></p>
                 	      <% end %>
                 	    </div>
                 	  </div>
@@ -88,14 +94,13 @@
                 	  <div class="more-margin top double bold large-font comments">Kommentarer skrevet i slutningen af turen : 
                 	    <div class="no-bold more-margin left quadruple">
                 	      <% if !param_undefined(trip.end_comments) %>
-                	        <%= trip.end_comments %>
+                	        <p class="ellipsis"><%= trip.end_comments %></p>
                 	      <% end %>
                 	    </div>
                 	  </div>
         					</td>
         					<td colspan="2" class="force-bottom-align">
-                            	<%= link_to 'Rediger', 'trips/'+trip.id, :class => 'btn btn-info float-right'%>
-        <!-- 						<%= link_to 'Slet', trip, method: :delete, data: { confirm: 'Are you sure?' }, :class =>"btn btn-danger btn-xs" %> -->
+                    <%= link_to 'Rediger', 'trips/'+trip.id, :class => 'btn btn-info float-right'%>
         					</td>
           			</tr>
               <% end %>
@@ -113,7 +118,7 @@
         </div> -->
       </div>
     
-    </div><!-- ng-trips-list -- >
+    </div>
   
 
   

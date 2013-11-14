@@ -1,0 +1,35 @@
+<div class="row" >
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <table id="trips-table" class="table table-hover table-bordered">
+      <thead>
+        <tr>
+          <th>Nummer Plade</th>
+          <th>Last</th>
+          <th>Start Adresse</th>
+          <th>Slut Adresse</th>
+          <th>Tur Start</th>
+          <th>Tur Slut</th>
+          <th>Tid</th>
+          <th>Afstand</th>
+          <th>Kunde</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @trips.each do |trip| %>
+          <tr>
+    				<td><%= trip.license_plate %></td>
+  			    <td><%= trip.cargo %></td>
+      			<td><%= trip.start_address %></td>
+      			<td><%= trip.end_address %></td>
+  			    <td><%= format_date(trip.start_timestamp) %></td>
+  			    <td><%= format_date(trip.end_timestamp) %></td>
+  			    <td><%= diff_timestamps_in_secs(trip.start_timestamp,trip.end_timestamp) %></td>
+  			    <td><%= trip.distance %>km</td>
+  		      <td><%= trip.costumer %></td>
+					</tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

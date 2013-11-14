@@ -65,4 +65,19 @@ module ApplicationHelper
     param.nil? || param.class==NilClass || param=="undefined" || param=="null" || (param.class==String && param.empty?) ? true : false
   end
   
+  def get_ids_from_obj(obj)
+    ids=[]
+    obj.each do |item|
+      ids.push(item.id.to_s)
+    end
+    return ids
+  end
+  
+  def diff_timestamps_in_secs(time1,time2)
+    diff=Time.diff(time1,time2, '%y, %d and %h:%m:%s')
+    #direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
+    mins = diff[:minute]==0 && diff[:second]>0 ? 1 : 0
+    return diff[:hour].to_s + 't' + mins.to_s + 'm'
+  end
+  
 end

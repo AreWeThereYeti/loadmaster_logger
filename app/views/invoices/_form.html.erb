@@ -84,14 +84,16 @@
           <span class="col-md-2 col-sm-4 no-padding">Dato 
           </span>
           <span class="col-md-10 col-sm-8 no-padding">
-            <%= select_date Date.today, :prefix => :timestamp, :class=>"form-control"  %>
+            <!-- <%= select_date Date.today, :prefix => :timestamp, :class=>"form-control"  %> -->
+            <%= f.text_field :timestamp, :class=>"datepicker form-control", :placeholder => "Dato" %>
           </span>
         </div>
         <div class="bold">
           <span class="col-md-2 col-sm-4 no-padding">Forf.:
           </span>
           <span class="col-md-10 col-sm-8 no-padding">
-            <%= select_date Date.today, :prefix => :due_date%>
+            <!-- <%= select_date Date.today, :prefix => :due_date%> -->
+            <%= f.text_field :due_date, :class=>"datepicker form-control", :placeholder => "Forfalds Dato" %>
           </span>
         </div>
       </div>

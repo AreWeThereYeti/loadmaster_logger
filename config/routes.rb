@@ -7,6 +7,7 @@ LoadmasterLogger::Application.routes.draw do
   
   get "trips/search" => 'trips#search'
   delete "/trips/destroy_multiple" => 'trips#destroy_multiple'
+  get "/trips/tripstable_pdf" =>  "trips#render_tripstable_pdf"
   resources :trips
   
   devise_for :users

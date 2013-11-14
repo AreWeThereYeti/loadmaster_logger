@@ -33,8 +33,11 @@ class ApplicationController < ActionController::Base
       redirect_to root_url, :alert => "You are not authorized to access this ressource" unless current_user.role? :admin, current_user.role_id
     end
     
-    def get_timestamp(hash)
-        return Time.new(hash[:year],hash[:month],hash[:day],hash[:hour],hash[:minute])
+    def get_timestamp(str)
+      puts 'get_timestamp(str) ran'
+      puts str
+      #return Time.new(hash[:year],hash[:month],hash[:day],hash[:hour],hash[:minute])
+      return Time.parse(str)
     end
     
     # def string_search(search_str,the_model,max_results)
@@ -72,7 +75,13 @@ class ApplicationController < ActionController::Base
     end
     
     def after_sign_in_path_for(resource_or_scope)
-      respond_to?('/trips', true) ? send(root_path) : '/trips'
+      if resource_or_scope.sign_in_count == 1
+        puts 'first login'
+        respond_to?(edit_user_path(resource_or_scope), true) ? send(root_path) : edit_user_path(resource_or_scope)
+      else
+        puts 'NOT first login'
+        respond_to?('/trips', true) ? send(root_path) : '/trips'
+      end
     end
     
     def has_key_and_not_empty(obj,param)
