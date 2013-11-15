@@ -1,0 +1,33 @@
+dk:
+  hello: "Hello world"
+  views:
+    pagination:
+      previous: "&lt; forrige"
+      next: "næste &gt;"
+      truncate: "..."
+      last: "sidste »"
+      first: "« første"
+      
+  errors:
+    messages:
+      already_confirmed: "Er allerede aktiveret. Prøv at logge ind."
+      confirmation_period_expired: "skal aktiveres indenfor %{period}, bed venligst om en ny."
+      expired: "er udløbet, bed venligst om en ny."
+      not_found: "ikke fundet"
+      not_locked: "var ikke låst"
+      not_saved:
+        one: "en fejl gjorde at %{resource} ikke blev gemt :"
+        other: "%{count} fejl gjorde at denne %{resource} ikke blev gemt:"
+
+  mongoid:
+    errors:
+      models:
+        user:
+          attributes:
+            password:
+              too_short: "er for kort"
+              blank: "For at kunne gemme dine ændringer skal du indtaste dit password"
+            password_confirmation: 
+              confirmation: "matcher ikke dit password"
+
+

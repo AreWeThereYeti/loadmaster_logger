@@ -1,31 +1,47 @@
 <div ng-trips>
-  <h1>Ture</h1>
+  <div class="row">
+    <div class="col-md-2 col-sm-2 col-xs-2">
+      <h1 class="no-margin">Ture</h1>
+    </div>
+    
+    <%= form_tag('/trips/time_search', :method => :get, :id=>'trips_time_search', :class=> 'col-md-10 col-sm-10 col-xs-10') do %>
+      <div class="col-md-5 col-sm-5 col-xs-5">
+        <label for="from_time">Fra:</label>
+        <%= text_field :from_time, '', :class=>"datepicker form-control inline", :placeholder => params[:from_time]%>
+      </div>
+      <div class="col-md-5 col-sm-5 col-xs-5">
+        <label for="to_time">Til:</label>
+        <%= text_field :to_time, '', :class=>"datepicker form-control inline", :placeholder => params[:to_time] %>
+      </div>
+      <div class="col-md-2 col-sm-2 col-xs-2 no-padding">
+        <%= submit_tag "Go", :class => 'btn btn-info float-right' %>
+      </div>
+    <% end %>
+  </div>
 
   
   <div class="row">
     <%= render :partial => 'shared/search', :locals => {:placeholder => 'Søg efter en tur'} %>
     <div class="col-md-6 col-sm-6 col-xs-6">
       <%= link_to '', trips_tripstable_pdf_path(:trips_ids=>get_ids_from_obj(@trips)), :class =>"btn icon-print", :target => '_blank' %>
+      
       <%= link_to 'Ny Tur', new_trip_path, :class =>"btn btn-success float-right" %>
     </div>
   </div>
-  
-  <% if @trips.count == 0 && !params.has_key?(:search) %>
-    <div class="row">
-      <div class="col-md-12 col-sm-12 col-xs-12">
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <% if @trips.count == 0 && !params.has_key?(:search) && !params.has_key?(:from_time) %>
         <h4> Du har ingen gemte ture endnu. For at registrere en afholdt tur, klik <%= link_to 'her', new_trip_path %> </h4>
-      </div>
-    </div>
-  <% elsif @trips.count == 0 && params.has_key?(:search) %>
-    <div class="row">
-      <div class="col-md-12 col-sm-12 col-xs-12">
+        <a href="/trips" class="float-right">Vis alle</a>
+      <% elsif @trips.count == 0 && params.has_key?(:search) %>
         <h4> Din søgning "<%= params[:search].first %>" matchede desværre ingen af dine ture </h4>
-      </div>
-    </div>
-  <% else %>
-    <div ng-trips-list>
-      <div class="row" >
-    	  <div class="col-md-12 col-sm-12 col-xs-12">
+        <a href="/trips" class="float-right">Vis alle</a>
+      <% elsif @trips.count == 0 && params.has_key?(:from_time) %>
+        <h4> Du har ingen registrede ture i det valgte tidsinterval. Prøv igen </h4>
+        <a href="/trips" class="float-right">Vis alle</a>
+      <% else %>
+        <div ng-trips-list>
+    	    <a href="/trips" class="float-right">Vis alle</a>
           <table id="trips-table" class="table table-hover table-bordered" ng-trip-list>
             <thead>
               <tr>
@@ -45,19 +61,19 @@
               <% @trips.each do |trip| %>
                 <tr id="<%= trip.id %>" ng-click="selectTableRow($event,'<%= trip.id %>')" class="hand-cursor" ng-class="{true:'active', false:'nottrue'}[selectedTripId==<%= trip.id.to_s.to_json %>]">
         				<td><%= trip.license_plate %></td>
-						<td><%= trip.cargo %></td>
-						<% if param_undefined(trip.start_address) %>
-						  <td ng-get-address lat="<%= trip.start_location[0] %>" lon="<%= trip.start_location[1] %>" startorend="'start'">{{formatted_address}}</td>
-						<% else %>
-						  <td><%= trip.start_address %></td>
-					  <% end %>
-						<% if param_undefined(trip.end_address) %>
-						  <td ng-get-address lat="<%= trip.end_location[0] %>" lon="<%= trip.end_location[1] %>" startorend="'end'">{{formatted_address}}</td>
-						<% else %>
-						  <td><%= trip.end_address %></td>
-					  <% end %>
-						<td><%= format_date(trip.start_timestamp) %></td>
-						<td><%= format_date(trip.end_timestamp) %></td>
+    				<td><%= trip.cargo %></td>
+    				<% if param_undefined(trip.start_address) %>
+    				  <td ng-get-address lat="<%= trip.start_location[0] %>" lon="<%= trip.start_location[1] %>" startorend="'start'">{{formatted_address}}</td>
+    				<% else %>
+    				  <td><%= trip.start_address %></td>
+    			  <% end %>
+    				<% if param_undefined(trip.end_address) %>
+    				  <td ng-get-address lat="<%= trip.end_location[0] %>" lon="<%= trip.end_location[1] %>" startorend="'end'">{{formatted_address}}</td>
+    				<% else %>
+    				  <td><%= trip.end_address %></td>
+    			  <% end %>
+    				<td><%= format_date(trip.start_timestamp) %></td>
+    				<td><%= format_date(trip.end_timestamp) %></td>
             <td><%= diff_timestamps_in_secs(trip.start_timestamp,trip.end_timestamp) %></td>
     			  <td colspan="2"><%= trip.costumer %></td>
             <td><input type="checkbox" name="trip_checkbox" value="<%=trip.id%>"></td>
@@ -90,7 +106,7 @@
                 	      <% end %>
                 	    </div>
                 	  </div>
-                  	
+              	
                 	  <div class="more-margin top double bold large-font comments">Kommentarer skrevet i slutningen af turen : 
                 	    <div class="no-bold more-margin left quadruple">
                 	      <% if !param_undefined(trip.end_comments) %>
@@ -102,33 +118,32 @@
                 	   <%= link_to 'Rediger', 'trips/'+trip.id, :class => 'btn btn-info float-right'%>
                 	  </div>
         					</td>
-  
+
           			</tr>
               <% end %>
             </tbody>
           </table>
+          <div class="row">
+        	  <div class="col-md-2 col-sm-4 col-xs-6 float-right">
+        	    <button class="btn btn-danger float-right" ng-click="deleteSelectedTrips()">Slet valgte ture</button>
+        	  </div>
+            <!-- <div class="col-md-2 col-sm-4 col-xs-6 float-right">
+              <button class="btn btn-success float-right" ng-click="printSelectedTrips()">Print faktura af valgte ture</button>
+            </div> -->
+          </div>
         </div>
-      </div>
-    
-      <div class="row">
-    	  <div class="col-md-2 col-sm-4 col-xs-6 float-right">
-    	    <button class="btn btn-danger float-right" ng-click="deleteSelectedTrips()">Slet valgte ture</button>
-    	  </div>
-        <!-- <div class="col-md-2 col-sm-4 col-xs-6 float-right">
-          <button class="btn btn-success float-right" ng-click="printSelectedTrips()">Print faktura af valgte ture</button>
-        </div> -->
-      </div>
-    
-    </div>
   
 
   
-    <div class="row">
-  	  <div class="col-md-12">
-  	    <div class="center">
-          <%= paginate @trips %>
-  	    </div>
-  	  </div>
-  	</div>
-  <% end %>	
+        <div class="row">
+      	  <div class="col-md-12">
+      	    <div class="center">
+              <%= paginate @trips %>
+      	    </div>
+      	  </div>
+      	</div>
+
+      <% end %>
+    </div>
+  </div>
 </div>
