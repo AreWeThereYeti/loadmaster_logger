@@ -13,9 +13,12 @@
         <label for="to_time">Til:</label>
         <%= text_field :to_time, '', :class=>"datepicker form-control inline", :placeholder => params[:to_time] %>
       </div>
-      <div class="col-md-2 col-sm-2 col-xs-2 no-padding">
-        <%= submit_tag "Go", :class => 'btn btn-info float-right' %>
+      <div class="col-md-1 col-sm-2 col-xs-2 no-padding">
+        <%= submit_tag "Søg", :class => 'btn btn-info float-left' %>
       </div>
+            <div class="col-md-1 col-sm-2 col-xs-2">
+                  <a href="/trips" class="btn btn-info btn-sm ">Vis alle</a>
+            </div>
     <% end %>
   </div>
 
@@ -38,20 +41,19 @@
         <a href="/trips" class="float-right">Vis alle</a>
       <% elsif @trips.count == 0 && params.has_key?(:from_time) %>
         <h4> Du har ingen registrede ture i det valgte tidsinterval. Prøv igen </h4>
-        <a href="/trips" class="float-right">Vis alle</a>
       <% else %>
         <div ng-trips-list>
-    	    <a href="/trips" class="float-right">Vis alle</a>
           <table id="trips-table" class="table table-hover table-bordered" ng-trip-list>
             <thead>
               <tr>
+              	<th><%= sortable 'Start Adresse', 'start_address' %></th>
+                <th><%= sortable 'Slut Adresse', 'end_address' %></th>
                 <th><%= sortable 'Nummer Plade', 'license_plate' %></th>
                 <th><%= sortable 'Last', 'cargo' %></th>
-                <th><%= sortable 'Start Adresse', 'start_address' %></th>
-                <th><%= sortable 'Slut Adresse', 'end_address' %></th>
                 <th><%= sortable 'Tur Start','start_timestamp' %></th>
                 <th><%= sortable 'Tur Slut', 'end_timestamp' %></th>
-                <th>Tid</th>
+                <th>Distance</th>
+                <th>Tidsforbrug</th>
                 <th> <%= sortable 'Kunde', 'costumer' %></th>
                 <th colspan="2">Vælg <input type="checkbox" name="trip_all_checkbox" ng-click="checkOrUncheckAllTrips($event)"></th>
               </tr>
@@ -60,9 +62,7 @@
             <tbody>
               <% @trips.each do |trip| %>
                 <tr id="<%= trip.id %>" ng-click="selectTableRow($event,'<%= trip.id %>')" class="hand-cursor" ng-class="{true:'active', false:'nottrue'}[selectedTripId==<%= trip.id.to_s.to_json %>]">
-        				<td><%= trip.license_plate %></td>
-    				<td><%= trip.cargo %></td>
-    				<% if param_undefined(trip.start_address) %>
+                  <% if param_undefined(trip.start_address) %>
     				  <td ng-get-address lat="<%= trip.start_location[0] %>" lon="<%= trip.start_location[1] %>" startorend="'start'">{{formatted_address}}</td>
     				<% else %>
     				  <td><%= trip.start_address %></td>
@@ -72,8 +72,11 @@
     				<% else %>
     				  <td><%= trip.end_address %></td>
     			  <% end %>
+        			<td><%= trip.license_plate %></td>
+    				<td><%= trip.cargo %></td>
     				<td><%= format_date(trip.start_timestamp) %></td>
     				<td><%= format_date(trip.end_timestamp) %></td>
+    				<td><%= trip.distance %> km</td>
             <td><%= diff_timestamps_in_secs(trip.start_timestamp,trip.end_timestamp) %></td>
     			  <td colspan="2"><%= trip.costumer %></td>
             <td><input type="checkbox" name="trip_checkbox" value="<%=trip.id%>"></td>
@@ -83,7 +86,10 @@
                     <div class='trip-table-map' ng-static-map startlat="<%= trip.start_location[0] %>" startlon="<%= trip.start_location[1] %>" endlat="<%= trip.end_location[0] %>" endlon="<%= trip.end_location[1]  %>" startlabel="<%= trip.start_address.to_json  %>" endlabel="<%= trip.end_address.to_json %>" >
                       <div class="map-container" width="400px" height="250px"></div></div> 
                   </td>
-                  <td colspan="7">
+                  <td colspan="8">
+                  	<div class="">
+	                  	<h4 class="inline float-right">Tur detaljer</h4>
+                  	</div>
                   	<div class="more-margin top double bold large-font driver">Nummerplade : <span class="no-bold"><%= trip.license_plate %></span></div> 
                   	<div class="more-margin top double bold large-font distance">Distance : 
                   	  <% if param_undefined(trip.distance) %>
@@ -99,6 +105,11 @@
                 	      <% end %>
                 	    </span>
                 	  </div>-->
+                	  <div class="more-margin top double bold large-font time">Tidsforbrug : 
+                	    <span class="no-bold">
+                	      <%= diff_timestamps_in_secs(trip.start_timestamp,trip.end_timestamp) %>
+                	    </span>
+                	  </div>
                 	  <div class="more-margin top double bold large-font comments">Kommentarer skrevet i starten af turen : 
                 	    <div class="no-bold more-margin left quadruple">
                 	      <% if !param_undefined(trip.start_comments)%>
