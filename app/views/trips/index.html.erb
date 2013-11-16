@@ -5,20 +5,18 @@
     </div>
     
     <%= form_tag('/trips/time_search', :method => :get, :id=>'trips_time_search', :class=> 'col-md-10 col-sm-10 col-xs-10') do %>
-      <div class="col-md-5 col-sm-5 col-xs-5">
+      <div class="col-md-5 col-sm-5 col-xs-4">
         <label for="from_time">Fra:</label>
         <%= text_field :from_time, '', :class=>"datepicker form-control inline", :placeholder => params[:from_time]%>
       </div>
-      <div class="col-md-5 col-sm-5 col-xs-5">
+      <div class="col-md-5 col-sm-5 col-xs-4">
         <label for="to_time">Til:</label>
         <%= text_field :to_time, '', :class=>"datepicker form-control inline", :placeholder => params[:to_time] %>
       </div>
-      <div class="col-md-1 col-sm-2 col-xs-2 no-padding">
-        <%= submit_tag "Søg", :class => 'btn btn-info float-left' %>
+      <div class="col-md-2 col-sm-2 col-xs-4 no-padding">
+        <%= submit_tag "Søg", :class => 'btn btn-info' %>
+        <a href="/trips" class="btn btn-info float-right">Vis alle</a>
       </div>
-            <div class="col-md-1 col-sm-2 col-xs-2">
-                  <a href="/trips" class="btn btn-info btn-sm ">Vis alle</a>
-            </div>
     <% end %>
   </div>
 
