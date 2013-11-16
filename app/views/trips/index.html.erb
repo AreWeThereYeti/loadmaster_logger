@@ -44,12 +44,12 @@
           <table id="trips-table" class="table table-hover table-bordered" ng-trip-list>
             <thead>
               <tr>
+              <th><%= sortable 'Tur Start','start_timestamp' %></th>
+                <th><%= sortable 'Tur Slut', 'end_timestamp' %></th>
               	<th><%= sortable 'Start Adresse', 'start_address' %></th>
                 <th><%= sortable 'Slut Adresse', 'end_address' %></th>
                 <th><%= sortable 'Nummer Plade', 'license_plate' %></th>
                 <th><%= sortable 'Last', 'cargo' %></th>
-                <th><%= sortable 'Tur Start','start_timestamp' %></th>
-                <th><%= sortable 'Tur Slut', 'end_timestamp' %></th>
                 <th>Distance</th>
                 <th>Tidsforbrug</th>
                 <th> <%= sortable 'Kunde', 'costumer' %></th>
@@ -60,6 +60,8 @@
             <tbody>
               <% @trips.each do |trip| %>
                 <tr id="<%= trip.id %>" ng-click="selectTableRow($event,'<%= trip.id %>')" class="hand-cursor" ng-class="{true:'active', false:'nottrue'}[selectedTripId==<%= trip.id.to_s.to_json %>]">
+    				<td><%= format_date(trip.start_timestamp) %></td>
+    				<td><%= format_date(trip.end_timestamp) %></td>
                   <% if param_undefined(trip.start_address) %>
     				  <td ng-get-address lat="<%= trip.start_location[0] %>" lon="<%= trip.start_location[1] %>" startorend="'start'">{{formatted_address}}</td>
     				<% else %>
@@ -72,8 +74,6 @@
     			  <% end %>
         			<td><%= trip.license_plate %></td>
     				<td><%= trip.cargo %></td>
-    				<td><%= format_date(trip.start_timestamp) %></td>
-    				<td><%= format_date(trip.end_timestamp) %></td>
     				<td><%= trip.distance %> km</td>
             <td><%= diff_timestamps_in_secs(trip.start_timestamp,trip.end_timestamp) %></td>
     			  <td colspan="2"><%= trip.costumer %></td>
