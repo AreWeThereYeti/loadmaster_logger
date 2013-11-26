@@ -1,5 +1,5 @@
 <div class="container">
-	<h1>Users</h1>
+	<h1>Brugere</h1>
 	<div class="row">
 	  <%= render :partial => 'shared/search', :locals => {:placeholder => 'Søg efter en bruger'} %>
 	</div>
@@ -17,13 +17,13 @@
     	  </thead>
     	  <tbody>
     	  <% @users.each do |user| -%>
-    	   <tr id="<%= user.id %>" ng-click="selectTableRow('admin/users','<%= user.id %>')" class="hand-cursor">
+    	   <tr id="<%= user.id %>" ng-click="selectTableRow('admin/users','<%= user.id %>',$event)" class="hand-cursor">
     	    <td><%= user.username %></td>
     	    <td>
     	      <%= link_to user.email, admin_user_path(user) %>
     	    </td>
     	    <td>
-    	      <%= link_to "Slet", admin_user_path(user), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}", :class =>"btn btn-danger btn-xs" %>
+    	      <%= button_to "Slet", admin_user_path(user), :method => "delete", :confirm => "Er du sikker?", :class =>"btn btn-danger btn-xs" %>
     	    </td>
     	    </tr>
     	    <% end -%>

@@ -35,7 +35,7 @@
               <td><%= mobile_device.username %></td>
               <td><%= mobile_device.device_id%></td>
               <td><%= mobile_device.access_token%></td>
-              <td><%= link_to 'Slet', mobile_device, method: :delete, data: { confirm: 'Are you sure?' }, :class =>"btn btn-danger btn-xs" %></td>
+              <td><%= button_to 'Slet', mobile_device, method: :delete, data: { confirm: 'Are you sure?' }, :class =>"btn btn-danger btn-xs" %></td>
             </tr>
           <% end %>
         </tbody>
