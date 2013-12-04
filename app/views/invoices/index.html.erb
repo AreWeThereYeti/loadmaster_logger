@@ -36,7 +36,7 @@
 
         <tbody>
           <% @invoices.each do |invoice| %>
-            <tr id="<%= invoice.id %>" ng-click="selectTableRow('invoices','<%= invoice.id %>')" class="hand-cursor">
+            <tr id="<%= invoice.id %>" ng-click="selectTableRow('invoices','<%= invoice.id %>',$event)" class="hand-cursor">
               <td><%= invoice.timestamp %></td>
               <td><%= invoice.price %></td>
               <td><%= invoice.costumer %></td>
