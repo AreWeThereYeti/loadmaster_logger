@@ -1,16 +1,16 @@
 GIT
   remote: git://github.com/mongoid/mongoid.git
-  revision: 32a9ced358ff2f279ccefe0afaa9e0878628b7ff
+  revision: f8b439dd9a59b769389aff81a42502cd857cf7fa
   specs:
-    mongoid (4.0.0)
+    mongoid (4.0.0.alpha1)
       activemodel (~> 4.0.0)
-      moped (~> 2.0.beta3)
+      moped (~> 2.0.beta4)
       origin (~> 1.0)
       tzinfo (~> 0.3.37)
 
 GIT
   remote: git@github.com:AreWeThereYeti/loadmaster_assets.git
-  revision: 1b5e43eb2ed2a3a669d6368b21afaa106503208d
+  revision: d79c2411db48c23c6b2c741ffb458b5175d9f8a2
   specs:
     loadmaster_assets (0.0.14)
       rails (~> 4.0.0)
@@ -47,7 +47,7 @@ GEM
     bcrypt-ruby (3.1.2)
     bootstrap-rails-engine (3.0.0.4)
       railties (>= 3.0)
-    bson (2.0.0.rc3)
+    bson (2.0.0)
     builder (3.1.4)
     cancan (1.6.10)
     coffee-rails (4.0.1)
@@ -58,6 +58,7 @@ GEM
       execjs
     coffee-script-source (1.6.3)
     commonjs (0.2.7)
+    connection_pool (1.2.0)
     devise (3.0.0.rc)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -67,7 +68,7 @@ GEM
     execjs (2.0.2)
     fast-stemmer (1.0.2)
     hike (1.2.3)
-    i18n (0.6.5)
+    i18n (0.6.9)
     jbuilder (1.0.2)
       activesupport (>= 3.0.0)
     jquery-rails (3.0.4)
@@ -77,7 +78,7 @@ GEM
       railties (>= 3.1.0)
       turbolinks
     json (1.8.1)
-    kaminari (0.14.1)
+    kaminari (0.15.0)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     less (2.4.0)
@@ -89,16 +90,17 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    mime-types (1.25)
+    mime-types (1.25.1)
     minitest (4.7.5)
     mongoid_search (0.3.2)
       fast-stemmer (~> 1.0.0)
       mongoid (>= 3.0.0)
-    moped (2.0.0.beta3)
-      bson (~> 2.0.0.rc3)
-      optionable (~> 0.1.1)
+    moped (2.0.0.beta4)
+      bson (~> 2.0)
+      connection_pool (~> 1.2)
+      optionable (~> 0.2.0)
     multi_json (1.8.2)
-    optionable (0.1.1)
+    optionable (0.2.0)
     origin (1.1.0)
     orm_adapter (0.5.0)
     polyglot (0.3.3)
@@ -130,7 +132,7 @@ GEM
     sdoc (0.3.20)
       json (>= 1.1.3)
       rdoc (~> 3.10)
-    sprockets (2.10.0)
+    sprockets (2.10.1)
       hike (~> 1.2)
       multi_json (~> 1.0)
       rack (~> 1.0)
@@ -152,10 +154,10 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
-    turbolinks (1.3.0)
+    turbolinks (1.3.1)
       coffee-rails
     tzinfo (0.3.38)
-    uglifier (2.3.1)
+    uglifier (2.3.2)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
     warden (1.2.3)
