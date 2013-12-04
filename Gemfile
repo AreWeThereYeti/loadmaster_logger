@@ -64,8 +64,8 @@ gem 'time_diff'
 gem 'wicked_pdf'
 gem "wkhtmltopdf-binary"
 
-gem 'loadmaster_assets', :path => "../loadmasterlogger_Tablet/www/src/loadmaster_assets"
-#gem 'loadmaster_assets', :git => 'git@github.com:AreWeThereYeti/loadmaster_assets.git'
+#gem 'loadmaster_assets', :path => "../loadmasterlogger_Tablet/www/src/loadmaster_assets"
+gem 'loadmaster_assets', :git => 'git@github.com:AreWeThereYeti/loadmaster_assets.git'
 
 group :assets do
   gem 'less'
