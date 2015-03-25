@@ -20,7 +20,7 @@ production:
       default:
         database: loadmaster_logger_production
         hosts:
-          - 195.231.85.192:27017
+          - 83.136.91.58:27017
         options:
         consistency: :strong
 
